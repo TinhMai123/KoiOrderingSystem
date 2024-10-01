@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\KoiOrderingSystem_DAO\KoiOrderingSystem_DAO.csproj" />
+  </ItemGroup>
+
 </Project>
