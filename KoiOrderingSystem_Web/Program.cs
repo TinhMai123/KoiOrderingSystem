@@ -1,9 +1,16 @@
+using KoiOrderingSystem_BusinessObject.Data;
+using Microsoft.EntityFrameworkCore;
+using System;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-
+builder.Services.AddDbContext<KoiOrderingSystemContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnect"));
+});
 
 var app = builder.Build();
 
