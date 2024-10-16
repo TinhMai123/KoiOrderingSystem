@@ -12,10 +12,11 @@ namespace KoiOrderingSystem_BusinessObject
         public string? ShippingAddress { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
-        public int OrderKoiId { get; set; }
+        public int? OrderKoiId { get; set; }
         public User? Customer { get; set; }
         public ICollection<OrderKoi>? OrderKois { get; set; }
         public  ICollection<OrderTrip>? Trips { get; set; }
         public  ICollection<Payment>? Payments { get; set; }
+        public ICollection<Quote>? Quotes { get; set; }
     }
 }
