@@ -17,7 +17,7 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.33")
+                .HasAnnotation("ProductVersion", "6.0.35")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -637,7 +637,7 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
 
                     b.HasIndex("SalesStaffId");
 
-                    b.ToTable("Quote");
+                    b.ToTable("Quotes");
                 });
 
             modelBuilder.Entity("KoiOrderingSystem_BusinessObject.User", b =>
@@ -649,6 +649,11 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
 
                     b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Avatar")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreateAt")
@@ -658,12 +663,14 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FarmId")
                         .HasColumnType("int");
 
                     b.Property<string>("FullName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
@@ -673,12 +680,11 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Picture")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdateAt")
