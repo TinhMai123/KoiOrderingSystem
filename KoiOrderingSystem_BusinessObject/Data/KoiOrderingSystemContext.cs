@@ -15,22 +15,21 @@ namespace KoiOrderingSystem_BusinessObject.Data
         {
 
         }
-
-        DbSet<Currency> Currencies { get; set; }
-        DbSet<Farm> Farms { get; set; }
-        DbSet<Koi> Kois { get; set; }
-        DbSet<KoiByBatch> KoiByBatches { get; set; }
-        DbSet<KoiType> KoiTypes { get; set; }
-        DbSet<FarmKoiType> FarmKoiTypes { get; set; }
-        DbSet<Feedback> Feedbacks { get; set; }
-        DbSet<Insurance> Insurances { get; set;}
-        DbSet<User> Users { get; set; }
-        DbSet<Payment> Payments { get; set; }
-        DbSet<Order> Orders { get; set; }
-        DbSet<OrderDetailKoi> OrderDetails { get; set; }
-        DbSet<OrderKoi> OrderKois { get; set; }
-        DbSet<OrderTrip> OrderTrips { get; set; }
-        DbSet<Quote> Quotes { get; set; }
+        public DbSet<Currency> Currencies { get; set; }
+        public DbSet<Farm> Farms { get; set; }
+        public DbSet<Koi> Kois { get; set; }
+        public DbSet<KoiByBatch> KoiByBatches { get; set; }
+        public DbSet<KoiType> KoiTypes { get; set; }
+        public DbSet<FarmKoiType> FarmKoiTypes { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Insurance> Insurances { get; set;}
+        public DbSet<User> Users { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetailKoi> OrderDetails { get; set; }
+        public DbSet<OrderKoi> OrderKois { get; set; }
+        public DbSet<OrderTrip> OrderTrips { get; set; }
+        public DbSet<Quote> Quotes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
