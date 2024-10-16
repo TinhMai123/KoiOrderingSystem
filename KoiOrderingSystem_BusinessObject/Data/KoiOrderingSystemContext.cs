@@ -30,6 +30,7 @@ namespace KoiOrderingSystem_BusinessObject.Data
         DbSet<OrderDetailKoi> OrderDetails { get; set; }
         DbSet<OrderKoi> OrderKois { get; set; }
         DbSet<OrderTrip> OrderTrips { get; set; }
+        DbSet<Quote> Quotes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
