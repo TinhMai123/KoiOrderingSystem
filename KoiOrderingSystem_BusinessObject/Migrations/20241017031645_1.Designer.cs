@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KoiOrderingSystem_BusinessObject.Migrations
 {
     [DbContext(typeof(KoiOrderingSystemContext))]
-    [Migration("20241016123406_3")]
-    partial class _3
+    [Migration("20241017031645_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
