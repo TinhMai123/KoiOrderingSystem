@@ -1,14 +1,14 @@
 ﻿using KoiOrderingSystem_BusinessObject;
-using KoiOrderingSystem_DAO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KoiOrderingSystem_Repository
+namespace KoiOrderingSystem_Service.IService
 {
-    public interface IUserRepo
+    public interface IUserService
     {
         public User? GetUserByEmail(string email);
         public List<User> GetUsers();
