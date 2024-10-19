@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +16,24 @@ namespace KoiOrderingSystem_BusinessObject.Data
         {
 
         }
+        private readonly IConfiguration _configuration;
+
+        public KoiOrderingSystemContext(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DbConnect"));
+        }
 
         DbSet<Currency> Currencies { get; set; }
-        DbSet<Farm> Farms { get; set; }
-        DbSet<Koi> Kois { get; set; }
+       public DbSet<Farm> Farms { get; set; }
+       public DbSet<Koi> Kois { get; set; }
         DbSet<KoiByBatch> KoiByBatches { get; set; }
-        DbSet<KoiType> KoiTypes { get; set; }
-        DbSet<FarmKoiType> FarmKoiTypes { get; set; }
+       public DbSet<KoiType> KoiTypes { get; set; }
+       public DbSet<FarmKoiType> FarmKoiTypes { get; set; }
         DbSet<Feedback> Feedbacks { get; set; }
         DbSet<Insurance> Insurances { get; set;}
         DbSet<User> Users { get; set; }
