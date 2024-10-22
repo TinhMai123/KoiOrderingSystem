@@ -1,12 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.ComponentModel.DataAnnotations;
 
 namespace KoiOrderingSystem_Web.Pages
 {
     public class LoginModel : PageModel
     {
         [BindProperty]
-        public string Username { get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
 
         [BindProperty]
         public string Password { get; set; }
@@ -15,23 +17,19 @@ namespace KoiOrderingSystem_Web.Pages
 
         public void OnGet()
         {
-            // Method to handle GET requests (e.g., when the page is first loaded)
         }
 
         public IActionResult OnPost()
         {
-            // Hardcoded username and password for demo purposes
-            const string hardcodedUsername = "admin";
-            const string hardcodedPassword = "password";
+            const string hardcodedUsername = "admin@gmail.com";
+            const string hardcodedPassword = "123456";
 
-            if (Username == hardcodedUsername && Password == hardcodedPassword)
+            if (Email == hardcodedUsername && Password == hardcodedPassword)
             {
-                // If login is successful, redirect to the index page (or another page)
-                return RedirectToPage("/KoiOrderingSystemPage");
+                return RedirectToPage("Index");
             }
             else
             {
-                // Show error message on invalid login
                 Message = "Invalid username or password";
                 return Page();
             }

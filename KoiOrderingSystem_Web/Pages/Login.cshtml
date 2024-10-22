@@ -1,26 +1,32 @@
-﻿@page "/"
+﻿@page "/Login"
 @model KoiOrderingSystem_Web.Pages.LoginModel
 @{
 }
-<h2>Login</h2>
+<div class="d-flex flex-column justify-content-center align-items-center mt-5">
+    <h2 class="fw-bold">Login</h2>
 
-<form method="post">
-    <div class="form-group">
-        <label asp-for="Username"></label>
-        <input asp-for="Username" class="form-control" />
-        <span asp-validation-for="Username" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Password"></label>
-        <input asp-for="Password" class="form-control" type="password" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="Email" class="fw-normal"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" class="fw-normal"></label>
+            <input asp-for="Password" class="form-control" type="password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="d-flex align-items-center flex-column">
+            <button type="submit" class="btn btn-primary mt-2 w-100">Login</button>
+        </div>
+        @if (Model.Message != null)
+        {
+            <div class="alert alert-danger mt-5">
+                @Model.Message
+            </div>
+        }
 
-@if (Model.Message != null)
-{
-    <div class="alert alert-danger">
-        @Model.Message
-    </div>
-}
+    </form>
+</div>
+
+
