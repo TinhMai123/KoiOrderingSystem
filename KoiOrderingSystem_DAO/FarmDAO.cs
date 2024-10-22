@@ -3,95 +3,87 @@ using KoiOrderingSystem_BusinessObject.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_DAO
 {
-    public class UserDAO
+    public class FarmDAO
     {
         private KoiOrderingSystemContext _context;
-        private static UserDAO? instance = null;
+        private static FarmDAO? instance = null;
 
-        public static UserDAO Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-
-                    instance = new UserDAO();
-                }
-                return instance;
-            }
-        }
-        public UserDAO()
+        public FarmDAO()
         {
             _context = new KoiOrderingSystemContext();
         }
 
-        public User? GetUserByEmail(string email)
+        public static FarmDAO Instance
         {
-            return _context.Users.SingleOrDefault(x => x.Email.Equals(email));
+            get
+            {
+                // Double-check locking for thread safety
+                if (instance == null)
+                {
+                   instance = new FarmDAO();
+                }
+                return instance;
+            }
         }
-
-        public List<User> GetUsers()
+        public Farm? GetById(int id)
         {
-            return _context.Users.ToList();
+            return _context.Farms.SingleOrDefault(x => x.Id == id);
         }
-        public User? GetById(int id)
+        public List<Farm> GetAll()
         {
-            return _context.Users.SingleOrDefault(x => x.Id == id);
+            return _context.Farms.ToList();
         }
-        public List<User> GetAll()
-        {
-            return _context.Users.ToList();
-        }
-        public bool Add(User model)
+        public bool Add(Farm model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Users.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = _context.Farms.SingleOrDefault(x => x.FarmName == model.FarmName);
                 if (existingModel == null)
                 {
-                    _context.Users.Add(model);
+                    _context.Farms.Add(model);
                     _context.SaveChanges();
                     isSuccess = true;
                 }
-            } catch (Exception)
+            }
+            catch (Exception)
             {
 
                 throw;
             }
             return isSuccess;
         }
-        public bool Remove(User model)
+        public bool Remove(Farm model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Users.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = _context.Farms.SingleOrDefault(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
-                    _context.Users.Remove(existingModel);
+                    _context.Farms.Remove(existingModel);
                     _context.SaveChanges();
                     isSuccess = true;
                 }
-            } catch (Exception)
+            }
+            catch (Exception)
             {
 
                 throw;
             }
             return isSuccess;
         }
-        public bool Update(User model)
+        public bool Update(Farm model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Users.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = _context.Farms.SingleOrDefault(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
@@ -99,12 +91,13 @@ namespace KoiOrderingSystem_DAO
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
                     isSuccess = true;
                 }
-            } catch (Exception)
+            }
+            catch (Exception)
             {
+
                 throw;
             }
             return isSuccess;
         }
     }
 }
-

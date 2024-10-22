@@ -5,7 +5,7 @@ namespace KoiOrderingSystem_BusinessObject
 {
     public class Payment : BaseModel
     {
-        public int PaymentId { get; set; }
+        public int Id { get; set; }
         public DateTime? PaymentDate { get; set; }
         public decimal? PaymentAmount { get; set; }
         public string? PaymentMethod { get; set; }

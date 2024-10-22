@@ -3,60 +3,50 @@ using KoiOrderingSystem_BusinessObject.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_DAO
 {
-    public class UserDAO
+    public class OrderDetailKoiDAO
     {
         private KoiOrderingSystemContext _context;
-        private static UserDAO? instance = null;
+        private static OrderDetailKoiDAO? instance = null;
 
-        public static UserDAO Instance
+        public OrderDetailKoiDAO()
+        {
+            _context = new KoiOrderingSystemContext();
+        }
+
+        public static OrderDetailKoiDAO Instance
         {
             get
             {
                 if (instance == null)
                 {
 
-                    instance = new UserDAO();
+                    instance = new OrderDetailKoiDAO();
                 }
                 return instance;
             }
         }
-        public UserDAO()
+        public OrderDetailKoi? GetById(int id)
         {
-            _context = new KoiOrderingSystemContext();
+            return _context.OrderDetailKois.SingleOrDefault(x => x.Id == id);
         }
-
-        public User? GetUserByEmail(string email)
+        public List<OrderDetailKoi> GetAll()
         {
-            return _context.Users.SingleOrDefault(x => x.Email.Equals(email));
+            return _context.OrderDetailKois.ToList();
         }
-
-        public List<User> GetUsers()
-        {
-            return _context.Users.ToList();
-        }
-        public User? GetById(int id)
-        {
-            return _context.Users.SingleOrDefault(x => x.Id == id);
-        }
-        public List<User> GetAll()
-        {
-            return _context.Users.ToList();
-        }
-        public bool Add(User model)
+        public bool Add(OrderDetailKoi model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Users.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = _context.OrderDetailKois.SingleOrDefault(x => x.Id == model.Id);
                 if (existingModel == null)
                 {
-                    _context.Users.Add(model);
+                    _context.OrderDetailKois.Add(model);
                     _context.SaveChanges();
                     isSuccess = true;
                 }
@@ -67,15 +57,15 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Remove(User model)
+        public bool Remove(OrderDetailKoi model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Users.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = _context.OrderDetailKois.SingleOrDefault(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
-                    _context.Users.Remove(existingModel);
+                    _context.OrderDetailKois.Remove(existingModel);
                     _context.SaveChanges();
                     isSuccess = true;
                 }
@@ -86,12 +76,12 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Update(User model)
+        public bool Update(OrderDetailKoi model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Users.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = _context.OrderDetailKois.SingleOrDefault(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
@@ -101,10 +91,10 @@ namespace KoiOrderingSystem_DAO
                 }
             } catch (Exception)
             {
+
                 throw;
             }
             return isSuccess;
         }
     }
 }
-

@@ -3,95 +3,87 @@ using KoiOrderingSystem_BusinessObject.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_DAO
 {
-    public class UserDAO
+    public class KoiByBatchDAO
     {
         private KoiOrderingSystemContext _context;
-        private static UserDAO? instance = null;
+        private static KoiByBatchDAO? instance = null;
 
-        public static UserDAO Instance
+        public KoiByBatchDAO()
+        {
+            _context = new KoiOrderingSystemContext();
+        }
+
+        public static KoiByBatchDAO Instance
         {
             get
             {
                 if (instance == null)
                 {
 
-                    instance = new UserDAO();
+                    instance = new KoiByBatchDAO();
                 }
                 return instance;
             }
         }
-        public UserDAO()
+        public KoiByBatch? GetById(int id)
         {
-            _context = new KoiOrderingSystemContext();
+            return _context.KoiByBatches.SingleOrDefault(x => x.Id == id);
         }
-
-        public User? GetUserByEmail(string email)
+        public List<KoiByBatch> GetAll()
         {
-            return _context.Users.SingleOrDefault(x => x.Email.Equals(email));
+            return _context.KoiByBatches.ToList();
         }
-
-        public List<User> GetUsers()
-        {
-            return _context.Users.ToList();
-        }
-        public User? GetById(int id)
-        {
-            return _context.Users.SingleOrDefault(x => x.Id == id);
-        }
-        public List<User> GetAll()
-        {
-            return _context.Users.ToList();
-        }
-        public bool Add(User model)
+        public bool Add(KoiByBatch model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Users.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = _context.KoiByBatches.SingleOrDefault(x => x.Id == model.Id);
                 if (existingModel == null)
                 {
-                    _context.Users.Add(model);
+                    _context.KoiByBatches.Add(model);
                     _context.SaveChanges();
                     isSuccess = true;
                 }
-            } catch (Exception)
+            }
+            catch (Exception)
             {
 
                 throw;
             }
             return isSuccess;
         }
-        public bool Remove(User model)
+        public bool Remove(KoiByBatch model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Users.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = _context.KoiByBatches.SingleOrDefault(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
-                    _context.Users.Remove(existingModel);
+                    _context.KoiByBatches.Remove(existingModel);
                     _context.SaveChanges();
                     isSuccess = true;
                 }
-            } catch (Exception)
+            }
+            catch (Exception)
             {
 
                 throw;
             }
             return isSuccess;
         }
-        public bool Update(User model)
+        public bool Update(KoiByBatch model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Users.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = _context.KoiByBatches.SingleOrDefault(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
@@ -99,12 +91,13 @@ namespace KoiOrderingSystem_DAO
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
                     isSuccess = true;
                 }
-            } catch (Exception)
+            }
+            catch (Exception)
             {
+
                 throw;
             }
             return isSuccess;
         }
     }
 }
-

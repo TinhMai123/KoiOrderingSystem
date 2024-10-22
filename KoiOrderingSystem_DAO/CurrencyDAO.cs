@@ -3,95 +3,88 @@ using KoiOrderingSystem_BusinessObject.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_DAO
 {
-    public class UserDAO
+    public class CurrencyDAO
     {
         private KoiOrderingSystemContext _context;
-        private static UserDAO? instance = null;
+        private static CurrencyDAO? instance = null;
 
-        public static UserDAO Instance
+        public CurrencyDAO()
+        {
+            _context = new KoiOrderingSystemContext();
+        }
+
+        public static CurrencyDAO Instance
         {
             get
             {
                 if (instance == null)
                 {
 
-                    instance = new UserDAO();
+                    instance = new CurrencyDAO();
                 }
                 return instance;
             }
         }
-        public UserDAO()
-        {
-            _context = new KoiOrderingSystemContext();
-        }
 
-        public User? GetUserByEmail(string email)
+        public Currency? GetById(int id)
         {
-            return _context.Users.SingleOrDefault(x => x.Email.Equals(email));
+            return _context.Currencies.SingleOrDefault(x => x.Id == id);
         }
-
-        public List<User> GetUsers()
+        public List<Currency> GetAll()
         {
-            return _context.Users.ToList();
+            return _context.Currencies.ToList();
         }
-        public User? GetById(int id)
-        {
-            return _context.Users.SingleOrDefault(x => x.Id == id);
-        }
-        public List<User> GetAll()
-        {
-            return _context.Users.ToList();
-        }
-        public bool Add(User model)
+        public bool Add(Currency model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Users.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = _context.Currencies.SingleOrDefault(x => x.Name == model.Name);
                 if (existingModel == null)
                 {
-                    _context.Users.Add(model);
+                    _context.Currencies.Add(model);
                     _context.SaveChanges();
                     isSuccess = true;
                 }
-            } catch (Exception)
+            }
+            catch (Exception)
             {
 
                 throw;
             }
             return isSuccess;
         }
-        public bool Remove(User model)
+        public bool Remove(Currency model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Users.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = _context.Currencies.SingleOrDefault(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
-                    _context.Users.Remove(existingModel);
+                    _context.Currencies.Remove(existingModel);
                     _context.SaveChanges();
                     isSuccess = true;
                 }
-            } catch (Exception)
+            }
+            catch (Exception)
             {
 
                 throw;
             }
             return isSuccess;
         }
-        public bool Update(User model)
+        public bool Update(Currency model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Users.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = _context.Currencies.SingleOrDefault(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
@@ -99,12 +92,13 @@ namespace KoiOrderingSystem_DAO
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
                     isSuccess = true;
                 }
-            } catch (Exception)
+            }
+            catch (Exception)
             {
+
                 throw;
             }
             return isSuccess;
         }
     }
 }
-
