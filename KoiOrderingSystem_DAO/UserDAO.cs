@@ -40,7 +40,71 @@ namespace KoiOrderingSystem_DAO
         {
             return _context.Users.ToList();
         }
+        public User? GetById(int id)
+        {
+            return _context.Users.SingleOrDefault(x => x.Id == id);
+        }
+        public List<User> GetAll()
+        {
+            return _context.Users.ToList();
+        }
+        public bool Add(User model)
+        {
+            var isSuccess = false;
+            try
+            {
+                var existingModel = _context.Users.SingleOrDefault(x => x.Id == model.Id);
+                if (existingModel == null)
+                {
+                    _context.Users.Add(model);
+                    _context.SaveChanges();
+                    isSuccess = true;
+                }
+            } catch (Exception)
+            {
 
+                throw;
+            }
+            return isSuccess;
+        }
+        public bool Remove(User model)
+        {
+            var isSuccess = false;
+            try
+            {
+                var existingModel = _context.Users.SingleOrDefault(x => x.Id == model.Id);
+                if (existingModel != null)
+                {
+                    _context.Users.Remove(existingModel);
+                    _context.SaveChanges();
+                    isSuccess = true;
+                }
+            } catch (Exception)
+            {
+
+                throw;
+            }
+            return isSuccess;
+        }
+        public bool Update(User model)
+        {
+            var isSuccess = false;
+            try
+            {
+                var existingModel = _context.Users.SingleOrDefault(x => x.Id == model.Id);
+                if (existingModel != null)
+                {
+                    _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    _context.SaveChanges();
+                    _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+                    isSuccess = true;
+                }
+            } catch (Exception)
+            {
+                throw;
+            }
+            return isSuccess;
+        }
     }
 }
 
