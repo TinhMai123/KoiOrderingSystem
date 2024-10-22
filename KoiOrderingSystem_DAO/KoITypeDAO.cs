@@ -8,82 +8,80 @@ using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_DAO
 {
-    public class FarmDAO
+    public class KoiTypeDAO
     {
         private KoiOrderingSystemContext _context;
-        private static FarmDAO? instance = null;
+        private static KoiTypeDAO? instance = null;
 
-        public FarmDAO()
+        public KoiTypeDAO()
         {
             _context = new KoiOrderingSystemContext();
         }
 
-        public static FarmDAO Instance
+        public static KoiTypeDAO Instance
         {
             get
             {
-                // Double-check locking for thread safety
                 if (instance == null)
                 {
-                   instance = new FarmDAO();
+
+                    instance = new KoiTypeDAO();
                 }
                 return instance;
             }
         }
-        public Farm? GetById(int id)
+        public KoiType? GetById(int id)
         {
-            return _context.Farms.SingleOrDefault(x => x.Id == id);
+            return _context.KoiTypes.SingleOrDefault(x => x.Id == id);
         }
-        public List<Farm> GetAll()
+        public List<KoiType> GetAll()
         {
-            return _context.Farms.ToList();
+            return _context.KoiTypes.ToList();
         }
-        public bool Add(Farm model)
+        public bool Add(KoiType model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Farms.SingleOrDefault(x => x.FarmName == model.FarmName);
+                var existingModel = _context.KoiTypes.SingleOrDefault(x => x.Name == model.Name);
                 if (existingModel == null)
                 {
-                    _context.Farms.Add(model);
+                    _context.KoiTypes.Add(model);
                     _context.SaveChanges();
                     isSuccess = true;
                 }
-            }
-            catch (Exception)
+            } catch (Exception)
             {
 
                 throw;
             }
             return isSuccess;
         }
-        public bool Remove(Farm model)
+        public bool Remove(KoiType model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Farms.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = _context.KoiTypes.SingleOrDefault(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
-                    _context.Farms.Remove(existingModel);
+                    _context.KoiTypes.Remove(existingModel);
                     _context.SaveChanges();
                     isSuccess = true;
                 }
-            }
-            catch (Exception)
+            } catch (Exception)
             {
 
                 throw;
             }
             return isSuccess;
         }
-        public bool Update(Farm model)
+        public bool Update(KoiType model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Farms.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = _context.KoiTypes.SingleOrDefault(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
@@ -91,8 +89,7 @@ namespace KoiOrderingSystem_DAO
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
                     isSuccess = true;
                 }
-            }
-            catch (Exception)
+            } catch (Exception)
             {
 
                 throw;

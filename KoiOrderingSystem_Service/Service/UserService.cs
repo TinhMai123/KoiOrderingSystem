@@ -1,6 +1,7 @@
 ﻿using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_Repository;
 using KoiOrderingSystem_Repository.IRepo;
+using KoiOrderingSystem_Repository.Repo;
 using KoiOrderingSystem_Service.IService;
 using System;
 using System.Collections.Generic;

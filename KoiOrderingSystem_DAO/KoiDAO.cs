@@ -24,7 +24,6 @@ namespace KoiOrderingSystem_DAO
             {
                 if (instance == null)
                 {
-
                     instance = new KoiDAO();
                 }
                 return instance;
