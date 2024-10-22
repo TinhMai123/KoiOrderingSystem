@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace KoiOrderingSystem_BusinessObject.Migrations
 {
-    public partial class migration_1 : Migration
+    public partial class _1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -183,12 +183,13 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                 {
                     UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Picture = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Role = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Avatar = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FarmId = table.Column<int>(type: "int", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -218,7 +219,7 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     ShippingAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    OrderKoiId = table.Column<int>(type: "int", nullable: false),
+                    OrderKoiId = table.Column<int>(type: "int", nullable: true),
                     InsuranceId = table.Column<int>(type: "int", nullable: true),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeleteAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -367,6 +368,36 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Quotes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderId = table.Column<int>(type: "int", nullable: true),
+                    SalesStaffId = table.Column<int>(type: "int", nullable: true),
+                    QuoteAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ApprovalStatus = table.Column<bool>(type: "bit", nullable: false),
+                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeleteAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Quotes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Quotes_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Quotes_Users_SalesStaffId",
+                        column: x => x.SalesStaffId,
+                        principalTable: "Users",
+                        principalColumn: "UserId");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OrderDetails",
                 columns: table => new
                 {
@@ -500,6 +531,16 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                 column: "OrderId1");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Quotes_OrderId",
+                table: "Quotes",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Quotes_SalesStaffId",
+                table: "Quotes",
+                column: "SalesStaffId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_FarmId",
                 table: "Users",
                 column: "FarmId");
@@ -540,6 +581,9 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
 
             migrationBuilder.DropTable(
                 name: "Payments");
+
+            migrationBuilder.DropTable(
+                name: "Quotes");
 
             migrationBuilder.DropTable(
                 name: "KoiByBatches");

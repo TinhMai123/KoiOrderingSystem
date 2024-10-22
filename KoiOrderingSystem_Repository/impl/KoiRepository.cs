@@ -7,14 +7,14 @@ namespace KoiOrderingSystem_Repository
     public class KoiRepository : IKoiRepository
     {
         private readonly KoiDAO koiDAO;
-        public void addKoi(Koi koi)=>KoiDAO.Instance.AddKoi(koi);
+        public void addKoi(Koi koi) => KoiDAO.Instance.Add(koi);
 
-        public void removeKoi(Koi koiId) => KoiDAO.Instance.RemoveKoi(koiId);
+        public void removeKoi(Koi koiId) => KoiDAO.Instance.Remove(koiId);
 
-        public Koi getKoiById(int koiId)=>KoiDAO.Instance.GetKoiById(koiId);
-        public void updateKoi(Koi koi)=>KoiDAO.Instance.UpdateKoi(koi);
-        public List<Koi> getall()=> KoiDAO.Instance.GetAllKoi();
+        public Koi getKoiById(int koiId) => KoiDAO.Instance.GetById(koiId);
+        public void updateKoi(Koi koi) => KoiDAO.Instance.Update(koi);
+        public List<Koi> getall() => KoiDAO.Instance.GetAll();
         // Singleton instance of KoiDAO
-        
+
     }
 }

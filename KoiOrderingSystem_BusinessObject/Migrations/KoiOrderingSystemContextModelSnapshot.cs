@@ -17,7 +17,7 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.33")
+                .HasAnnotation("ProductVersion", "6.0.35")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -374,7 +374,7 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("OrderKoiId")
+                    b.Property<int?>("OrderKoiId")
                         .HasColumnType("int");
 
                     b.Property<string>("ShippingAddress")
@@ -599,6 +599,47 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     b.ToTable("Payments");
                 });
 
+            modelBuilder.Entity("KoiOrderingSystem_BusinessObject.Quote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("ApprovalStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeleteAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("QuoteAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("SalesStaffId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdateAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("SalesStaffId");
+
+                    b.ToTable("Quotes");
+                });
+
             modelBuilder.Entity("KoiOrderingSystem_BusinessObject.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -608,6 +649,11 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
 
                     b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Avatar")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreateAt")
@@ -617,24 +663,28 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FarmId")
                         .HasColumnType("int");
 
                     b.Property<string>("FullName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("PhoneNumber")
+                    b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Picture")
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Role")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdateAt")
@@ -799,6 +849,21 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     b.Navigation("Order");
                 });
 
+            modelBuilder.Entity("KoiOrderingSystem_BusinessObject.Quote", b =>
+                {
+                    b.HasOne("KoiOrderingSystem_BusinessObject.Order", "Order")
+                        .WithMany("Quotes")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("KoiOrderingSystem_BusinessObject.User", "SalesStaff")
+                        .WithMany()
+                        .HasForeignKey("SalesStaffId");
+
+                    b.Navigation("Order");
+
+                    b.Navigation("SalesStaff");
+                });
+
             modelBuilder.Entity("KoiOrderingSystem_BusinessObject.User", b =>
                 {
                     b.HasOne("KoiOrderingSystem_BusinessObject.Farm", "Farm")
@@ -851,6 +916,8 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     b.Navigation("OrderKois");
 
                     b.Navigation("Payments");
+
+                    b.Navigation("Quotes");
 
                     b.Navigation("Trips");
                 });

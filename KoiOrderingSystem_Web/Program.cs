@@ -9,7 +9,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<KoiOrderingSystemContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnect"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 var app = builder.Build();

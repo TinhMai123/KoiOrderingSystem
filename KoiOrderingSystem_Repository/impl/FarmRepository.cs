@@ -8,22 +8,22 @@ namespace KoiOrderingSystem_Repository
     {
         public void AddFarm(Farm newFarm)
         {
-            FarmDAO.Instance.AddFarm(newFarm);
+            FarmDAO.Instance.Add(newFarm);
         }
 
         public List<Farm> GetAllFarms()
         {
-            return FarmDAO.Instance.GetAllFarms();
+            return FarmDAO.Instance.GetAll();
         }
 
         public Farm GetFarmById(int id)
         {
-            return FarmDAO.Instance.GetFarmById(id);
+            return FarmDAO.Instance.GetById(id);
         }
 
-        public void UpdateFarm(Farm farmToUpdate)=>FarmDAO.Instance.UpdateFarm(farmToUpdate);
-        
+        public void UpdateFarm(Farm farmToUpdate) => FarmDAO.Instance.Update(farmToUpdate);
 
-        public void DeleteFarm(Farm farm)=>FarmDAO.Instance.DeleteFarm(farm);
+
+        public void DeleteFarm(Farm farm) => FarmDAO.Instance.Remove(farm);
     }
 }

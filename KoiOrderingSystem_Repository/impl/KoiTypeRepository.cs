@@ -15,16 +15,16 @@ namespace KoiOrderingSystem_Repository.impl
         }
 
         // Add a new KoiType
-        public void AddKoiType(KoiType koiType)=> KoiTypeDAO.Instance.AddKoiType(koiType);
+        public void AddKoiType(KoiType koiType) => KoiTypeDAO.Instance.Add(koiType);
 
         // Retrieve all KoiType records
-        public List<KoiType> GetAllKoiTypes()=>KoiTypeDAO.Instance.GetAllKoiTypes();
+        public List<KoiType> GetAllKoiTypes() => KoiTypeDAO.Instance.GetAll();
         // Retrieve a KoiType by ID
-        public KoiType GetKoiTypeById(int id)=>KoiTypeDAO.Instance.GetKoiTypeById(id);
+        public KoiType GetKoiTypeById(int id) => KoiTypeDAO.Instance.GetById(id);
         // Update an existing KoiType
-        public void UpdateKoiType(KoiType koiType)=>KoiTypeDAO.Instance.UpdateKoiType(koiType);
+        public void UpdateKoiType(KoiType koiType) => KoiTypeDAO.Instance.Update(koiType);
 
         // Delete a KoiType by ID
-        public void DeleteKoiType(KoiType koiType)=>KoiTypeDAO.Instance.DeleteKoiType(koiType);
+        public void DeleteKoiType(KoiType koiType) => KoiTypeDAO.Instance.Remove(koiType);
     }
 }

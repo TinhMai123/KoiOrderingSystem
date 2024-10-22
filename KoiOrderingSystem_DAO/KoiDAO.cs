@@ -3,22 +3,21 @@ using KoiOrderingSystem_BusinessObject.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_DAO
 {
     public class KoiDAO
     {
-        
-        private static KoiDAO instance;
-        private static KoiOrderingSystemContext dbcontext;
+        private KoiOrderingSystemContext _context;
+        private static KoiDAO? instance = null;
 
-        // Private constructor to prevent direct instantiation
-        private KoiDAO()
+        public KoiDAO()
         {
-            dbcontext = new KoiOrderingSystemContext();
+            _context = new KoiOrderingSystemContext();
         }
 
-        // Public property to access the singleton instance
         public static KoiDAO Instance
         {
             get
@@ -30,96 +29,74 @@ namespace KoiOrderingSystem_DAO
                 return instance;
             }
         }
-
-        // Method to get all Koi records
-        public List<Koi> GetAllKoi()
+        public Koi? GetById(int id)
         {
-            try
-            {
-                return dbcontext.Kois.ToList();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error fetching Koi list: {ex.Message}");
-                return new List<Koi>();
-            }
+            return _context.Kois.SingleOrDefault(x => x.Id == id);
         }
-
-        // Method to get a Koi by its ID
-        public Koi GetKoiById(int koiId)
+        public List<Koi> GetAll()
         {
-            try
-            {
-                return dbcontext.Kois.SingleOrDefault(e => e.Id == koiId);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error fetching Koi by ID: {ex.Message}");
-                return null;
-            }
+            return _context.Kois.ToList();
         }
-
-        // Method to add a new Koi
-        public bool AddKoi(Koi newKoi)
+        public bool Add(Koi model)
         {
-            bool added = false;
+            var isSuccess = false;
             try
             {
-                if (GetKoiById(newKoi.Id) == null)
+                var existingModel = _context.Kois.SingleOrDefault(x => x.Id == model.Id);
+                if (existingModel == null)
                 {
-                    dbcontext.Kois.Add(newKoi);
-                    dbcontext.SaveChanges();
-                    added = true;
+                    _context.Kois.Add(model);
+                    _context.SaveChanges();
+                    isSuccess = true;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"Error adding new Koi: {ex.Message}");
-                throw new Exception(ex.Message);
-            }
-            return added;
-        }
 
-        // Method to remove a Koi
-        public bool RemoveKoi(Koi koi)
+                throw;
+            }
+            return isSuccess;
+        }
+        public bool Remove(Koi model)
         {
-            bool removed = false;
+            var isSuccess = false;
             try
             {
-                if (koi != null)
+                var existingModel = _context.Kois.SingleOrDefault(x => x.Id == model.Id);
+                if (existingModel != null)
                 {
-                    dbcontext.Kois.Remove(koi);
-                    dbcontext.SaveChanges();
-                    removed = true;
+                    _context.Kois.Remove(existingModel);
+                    _context.SaveChanges();
+                    isSuccess = true;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"Error removing Koi: {ex.Message}");
-                throw new Exception(ex.Message);
-            }
-            return removed;
-        }
 
-        // Method to update a Koi
-        public bool UpdateKoi(Koi koi)
+                throw;
+            }
+            return isSuccess;
+        }
+        public bool Update(Koi model)
         {
-            bool updated = false;
+            var isSuccess = false;
             try
             {
-                if (koi != null)
+                var existingModel = _context.Kois.SingleOrDefault(x => x.Id == model.Id);
+                if (existingModel != null)
                 {
-                    dbcontext.Kois.Update(koi);
-                    dbcontext.SaveChanges();
-                    updated = true;
+                    _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    _context.SaveChanges();
+                    _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+                    isSuccess = true;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"Error updating Koi: {ex.Message}");
-                throw new Exception(ex.Message);
+
+                throw;
             }
-            return updated;
+            return isSuccess;
         }
     }
 }
