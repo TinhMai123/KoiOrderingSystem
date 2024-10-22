@@ -3,92 +3,98 @@ using KoiOrderingSystem_BusinessObject.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_DAO
 {
     public class KoiTypeDAO
     {
-        // Singleton instance
-        private static KoiTypeDAO instance;
-        private static readonly object lockObj = new object(); // For thread-safety
-        private readonly KoiOrderingSystemContext _context;
+        private KoiOrderingSystemContext _context;
+        private static KoiTypeDAO? instance = null;
 
-        // Private constructor to prevent direct instantiation
-        private KoiTypeDAO()
+        public KoiTypeDAO()
         {
             _context = new KoiOrderingSystemContext();
         }
 
-        // Public property to access the singleton instance
         public static KoiTypeDAO Instance
         {
             get
             {
-                // Double-check locking for thread safety
                 if (instance == null)
                 {
-                   instance = new KoiTypeDAO();
+
+                    instance = new KoiTypeDAO();
                 }
                 return instance;
             }
         }
-
-        // CREATE a new KoiType record
-        public void AddKoiType(KoiType newKoiType)
+        public KoiType? GetById(int id)
         {
-            try
-            {
-                _context.KoiTypes.Add(newKoiType); // Make sure KoiTypes is a valid DbSet
-                _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error adding KoiType: {ex.Message}");
-            }
+            return _context.KoiTypes.SingleOrDefault(x => x.Id == id);
         }
-
-        // READ all KoiType records
-        public List<KoiType> GetAllKoiTypes()
+        public List<KoiType> GetAll()
         {
             return _context.KoiTypes.ToList();
         }
-
-        // READ a KoiType by its ID
-        public KoiType GetKoiTypeById(int id)
+        public bool Add(KoiType model)
         {
-            return _context.KoiTypes.Find(id); // Use Find for primary key
-        }
-
-        // UPDATE a KoiType record
-        public void UpdateKoiType(KoiType koiTypeToUpdate)
-        {
+            var isSuccess = false;
             try
             {
-                _context.KoiTypes.Update(koiTypeToUpdate); // Update method to modify the existing record
-                _context.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error updating KoiType: {ex.Message}");
-            }
-        }
-
-        // DELETE a KoiType by its ID
-        public void DeleteKoiType(KoiType koiTypeToDelete)
-        {
-            try
-            {
-           
-                if (koiTypeToDelete != null)
+                var existingModel = _context.KoiTypes.SingleOrDefault(x => x.Name == model.Name);
+                if (existingModel == null)
                 {
-                    _context.KoiTypes.Remove(koiTypeToDelete);
+                    _context.KoiTypes.Add(model);
                     _context.SaveChanges();
+                    isSuccess = true;
                 }
-            }
-            catch (Exception ex)
+            } catch (Exception)
             {
-                Console.WriteLine($"Error deleting KoiType: {ex.Message}");
+
+                throw;
             }
+            return isSuccess;
+        }
+        public bool Remove(KoiType model)
+        {
+            var isSuccess = false;
+            try
+            {
+                var existingModel = _context.KoiTypes.SingleOrDefault(x => x.Id == model.Id);
+                if (existingModel != null)
+                {
+                    _context.KoiTypes.Remove(existingModel);
+                    _context.SaveChanges();
+                    isSuccess = true;
+                }
+            } catch (Exception)
+            {
+
+                throw;
+            }
+            return isSuccess;
+        }
+        public bool Update(KoiType model)
+        {
+            var isSuccess = false;
+            try
+            {
+                var existingModel = _context.KoiTypes.SingleOrDefault(x => x.Id == model.Id);
+                if (existingModel != null)
+                {
+                    _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    _context.SaveChanges();
+                    _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+                    isSuccess = true;
+                }
+            } catch (Exception)
+            {
+
+                throw;
+            }
+            return isSuccess;
         }
     }
 }
