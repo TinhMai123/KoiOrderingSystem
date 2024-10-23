@@ -10,7 +10,7 @@ namespace KoiOrderingSystem_Service.IService
 {
     public interface IUserService
     {
-        public User? GetUserByEmail(string email);
-        public List<User> GetUsers();
+        public User?  GetUserByEmail(string email);
+        public List<User>  GetUsers();
     }
 }

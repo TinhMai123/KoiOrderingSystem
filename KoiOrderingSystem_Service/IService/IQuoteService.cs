@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KoiOrderingSystem_BusinessObject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,12 @@ using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_Service.IService
 {
-    internal interface IQuoteService
+    public interface IQuoteService
     {
+        Task<bool> AddAsync(Quote add);
+        Task<List<Quote>> GetAlls();
+        Task<Quote> GetById(int id);
+        Task<bool> UpdateAsync(Quote update);
+        Task<bool> DeleteAsync(int id);
     }
 }
