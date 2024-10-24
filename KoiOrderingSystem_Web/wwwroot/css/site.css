@@ -16,3 +16,24 @@ html {
 body {
   margin-bottom: 60px;
 }
+/* Sidebar toggle styles */
+#wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#sidebar-wrapper {
+    width: 250px;
+    transition: margin 0.25s ease-in-out;
+    background-color: #f8f9fa;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    margin-left: -250px;
+}
+
+#page-content-wrapper {
+    flex: 1;
+    padding: 20px;
+}

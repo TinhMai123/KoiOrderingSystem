@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Admin.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\KoiOrderingSystem_BusinessObject\KoiOrderingSystem_BusinessObject.csproj" />
     <ProjectReference Include="..\KoiOrderingSystem_Service\KoiOrderingSystem_Service.csproj" />
   </ItemGroup>
@@ -29,6 +33,18 @@
 
   <ItemGroup>
     <Folder Include="Pages\KoiOrderingSystemPage\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Admin.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Admin.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Admin.cshtml" />
   </ItemGroup>
 
 </Project>
