@@ -26,7 +26,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapRazorPages();
+});
 app.UseAuthorization();
 app.UseSession();
 app.MapRazorPages();
