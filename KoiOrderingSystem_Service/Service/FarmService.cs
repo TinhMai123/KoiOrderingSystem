@@ -16,9 +16,10 @@ namespace KoiOrderingSystem_Service.Service
 
 
         // Constructor to initialize the repository
-        public FarmService(IBaseRepository<Farm> farmRepository)
+        public FarmService(IBaseRepository<Farm> farmRepository, IFarmRepo repo)
         {
             _farmRepository = farmRepository ?? throw new ArgumentNullException(nameof(farmRepository));
+            _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
         // Add a new Farm

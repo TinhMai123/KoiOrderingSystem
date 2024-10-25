@@ -18,9 +18,10 @@ namespace KoiOrderingSystem_Service.Service
 
 
         // Constructor to initialize the repository
-        public KoiByBatchService(IBaseRepository<KoiByBatch> koiByBatchRepository)
+        public KoiByBatchService(IBaseRepository<KoiByBatch> koiByBatchRepository, IKoiByBatchRepo repo)
         {
             _koiByBatchRepository = koiByBatchRepository ?? throw new ArgumentNullException(nameof(koiByBatchRepository));
+            _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
         // Add a new KoiByBatch

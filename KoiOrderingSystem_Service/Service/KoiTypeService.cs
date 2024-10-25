@@ -18,9 +18,10 @@ namespace KoiOrderingSystem_Service.Service
 
 
         // Constructor to initialize the repository
-        public KoiTypeService(IBaseRepository<KoiType> koiTypeRepository)
+        public KoiTypeService(IBaseRepository<KoiType> koiTypeRepository, IKoiTypeRepo repo)
         {
             _koiTypeRepository = koiTypeRepository;
+            _repo = repo;
         }
 
         // Add a new KoiType

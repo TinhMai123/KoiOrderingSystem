@@ -19,9 +19,10 @@ namespace KoiOrderingSystem_Service.Service
 
 
         // Constructor to initialize the repository
-        public OrderTripService(IBaseRepository<OrderTrip> orderTripRepository)
+        public OrderTripService(IBaseRepository<OrderTrip> orderTripRepository, IOrderTripRepo repo)
         {
             _orderTripRepository = orderTripRepository ?? throw new ArgumentNullException(nameof(orderTripRepository));
+            _repo = repo ?? throw new ArgumentNullException(nameof(repo));  
         }
 
         // Add a new OrderTrip

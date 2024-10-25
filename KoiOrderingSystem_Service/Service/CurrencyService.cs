@@ -18,9 +18,10 @@ namespace KoiOrderingSystem_Service.Service
 
 
         // Constructor to initialize the repository
-        public CurrencyService(IBaseRepository<Currency> currencyRepository)
+        public CurrencyService(IBaseRepository<Currency> currencyRepository, ICurrencyRepo repo)
         {
             _currencyRepository = currencyRepository ?? throw new ArgumentNullException(nameof(currencyRepository));
+            _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
         // Add a new Currency

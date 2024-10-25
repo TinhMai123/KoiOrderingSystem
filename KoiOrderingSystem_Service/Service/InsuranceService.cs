@@ -18,9 +18,10 @@ namespace KoiOrderingSystem_Service.Service
 
 
         // Constructor to initialize the repository
-        public InsuranceService(IBaseRepository<Insurance> insuaranceRepository)
+        public InsuranceService(IBaseRepository<Insurance> insuaranceRepository, IInsuranceRepo repo)
         {
             _insuranceRepository = insuaranceRepository ?? throw new ArgumentNullException(nameof(insuaranceRepository));
+            _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
         // Add a new InsuaranceService

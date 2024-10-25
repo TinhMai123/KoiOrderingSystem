@@ -17,9 +17,10 @@ namespace KoiOrderingSystem_Service.Service
         private readonly IQuoteRepo _repo;
 
         // Constructor to initialize the repository
-        public QuoteService(IBaseRepository<Quote> quoteRepository)
+        public QuoteService(IBaseRepository<Quote> quoteRepository, IQuoteRepo repo)
         {
             _quoteRepository = quoteRepository ?? throw new ArgumentNullException(nameof(quoteRepository));
+            _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
         // Add a new Quote

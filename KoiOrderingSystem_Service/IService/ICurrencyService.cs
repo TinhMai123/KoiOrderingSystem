@@ -11,7 +11,7 @@ namespace KoiOrderingSystem_Service.IService
     {
         Task<bool> AddAsync(Currency add);
         Task<List<Currency>> GetAlls();
-        Task<Currency> GetById(int id);
+        Task<Currency?> GetById(int id);
         Task<bool> UpdateAsync(Currency update);
         Task<bool> DeleteAsync(int id);
     }

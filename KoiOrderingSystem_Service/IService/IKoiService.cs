@@ -11,7 +11,7 @@ namespace KoiOrderingSystem_Service.IService
     {
         Task<bool> AddAsync(Koi add);
         Task<List<Koi>> GetAlls();
-        Task<Koi> GetById(int id);
+        Task<Koi?> GetById(int id);
         Task<bool> UpdateAsync(Koi update);
         Task<bool> DeleteAsync(int id);
     }

@@ -18,9 +18,10 @@ namespace KoiOrderingSystem_Service.Service
 
 
         // Constructor to initialize the repository
-        public FeedbackService(IBaseRepository<Feedback> feebackRepository)
+        public FeedbackService(IBaseRepository<Feedback> feebackRepository, IFeedbackRepo repo)
         {
             _feebackRepository = feebackRepository ?? throw new ArgumentNullException(nameof(feebackRepository));
+            _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
         // Add a new Feedback

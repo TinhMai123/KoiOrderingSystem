@@ -19,9 +19,10 @@ namespace KoiOrderingSystem_Service.Service
 
 
         // Constructor to initialize the repository
-        public OrderDetailKoiService(IBaseRepository<OrderDetailKoi> orderDetailKoiRepository)
+        public OrderDetailKoiService(IBaseRepository<OrderDetailKoi> orderDetailKoiRepository, IOrderDetailKoiRepo repo)
         {
             _orderDetailKoiRepository = orderDetailKoiRepository ?? throw new ArgumentNullException(nameof(orderDetailKoiRepository));
+            _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
         // Add a new OrderDetailKoi

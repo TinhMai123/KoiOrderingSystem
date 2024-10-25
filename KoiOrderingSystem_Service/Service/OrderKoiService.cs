@@ -13,14 +13,15 @@ namespace KoiOrderingSystem_Service.Service
         public class OrderKoiService : IOrderKoiService
         {
             private readonly IBaseRepository<OrderKoi> _orderKoiRepository;
-        private readonly IOrderKoiRepo _repo;
+            private readonly IOrderKoiRepo _repo;
 
 
 
         // Constructor to initialize the repository
-        public OrderKoiService(IBaseRepository<OrderKoi> orderKoiRepository)
+        public OrderKoiService(IBaseRepository<OrderKoi> orderKoiRepository, IOrderKoiRepo repo)
             {
                 _orderKoiRepository = orderKoiRepository ?? throw new ArgumentNullException(nameof(orderKoiRepository));
+                _repo = repo ?? throw new ArgumentNullException(nameof(repo));
             }
 
             // Add a new OrderKoi

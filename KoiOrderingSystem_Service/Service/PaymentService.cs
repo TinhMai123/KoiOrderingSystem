@@ -17,9 +17,10 @@ namespace KoiOrderingSystem_Service.Service
         private readonly IPaymentRepo _repo;
 
         // Constructor to initialize the repository
-        public PaymentService(IBaseRepository<Payment> paymentRepository)
+        public PaymentService(IBaseRepository<Payment> paymentRepository, IPaymentRepo repo)
         {
             _paymentRepository = paymentRepository ?? throw new ArgumentNullException(nameof(paymentRepository));
+            _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
         // Add a new Payment

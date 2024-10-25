@@ -11,7 +11,7 @@ namespace KoiOrderingSystem_Service.IService
     {
         Task<bool> AddAsync(KoiByBatch add);
         Task<List<KoiByBatch>> GetAlls();
-        Task<KoiByBatch> GetById(int id);
+        Task<KoiByBatch?> GetById(int id);
         Task<bool> UpdateAsync(KoiByBatch update);
         Task<bool> DeleteAsync(int id);
     }

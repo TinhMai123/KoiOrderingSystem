@@ -11,15 +11,14 @@ namespace KoiOrderingSystem_DAO
     public class FarmKoiTypeDAO
     {
         private readonly KoiOrderingSystemContext _context;
-
+        // Singleton instance with thread safety
+        private static FarmKoiTypeDAO? _instance = null;
         // Constructor to initialize the database context
         public FarmKoiTypeDAO()
         {
             _context = new KoiOrderingSystemContext();
         }
 
-        // Singleton instance with thread safety
-        private static FarmKoiTypeDAO _instance;
 
         public static FarmKoiTypeDAO Instance
         {
