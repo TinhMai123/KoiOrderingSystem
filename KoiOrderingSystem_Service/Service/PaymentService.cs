@@ -1,5 +1,6 @@
 ﻿using ClassBookingRoom_Repository;
 using KoiOrderingSystem_BusinessObject;
+using KoiOrderingSystem_Repository.IRepo;
 using KoiOrderingSystem_Service.IService;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace KoiOrderingSystem_Service.Service
     public class PaymentService : IPaymentService
     {
         private readonly IBaseRepository<Payment> _paymentRepository;
-
+        private readonly IPaymentRepo _repo;
 
         // Constructor to initialize the repository
         public PaymentService(IBaseRepository<Payment> paymentRepository)

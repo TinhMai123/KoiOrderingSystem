@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_Repository.IRepo
 {
-    internal interface IFeedbackRepo
+    public interface IFeedbackRepo
     {
     }
 }

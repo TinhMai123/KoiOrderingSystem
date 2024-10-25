@@ -1,5 +1,6 @@
 ﻿using ClassBookingRoom_Repository;
 using KoiOrderingSystem_BusinessObject;
+using KoiOrderingSystem_Repository.IRepo;
 using KoiOrderingSystem_Service.IService;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,8 @@ namespace KoiOrderingSystem_Service.Service
     public class OrderDetailKoiService : IOrderDetailKoiService
     {
         private readonly IBaseRepository<OrderDetailKoi> _orderDetailKoiRepository;
+        private readonly IOrderDetailKoiRepo _repo;
+
 
 
         // Constructor to initialize the repository

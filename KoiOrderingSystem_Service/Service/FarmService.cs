@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using ClassBookingRoom_Repository;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_Repository;
+using KoiOrderingSystem_Repository.IRepo;
 using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Service.Service
 {
     public class FarmService : IFarmService
     {
-        private readonly IBaseRepository<Farm> _farmRepository; 
+        private readonly IBaseRepository<Farm> _farmRepository;
+        private readonly IFarmRepo _repo;
+
 
 
         // Constructor to initialize the repository

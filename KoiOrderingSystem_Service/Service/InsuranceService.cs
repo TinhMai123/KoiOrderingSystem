@@ -13,6 +13,8 @@ namespace KoiOrderingSystem_Service.Service
     public class InsuranceService : IInsuranceRepo
     {
         private readonly IBaseRepository<Insurance> _insuranceRepository;
+        private readonly IInsuranceRepo _repo;
+
 
 
         // Constructor to initialize the repository

@@ -1,5 +1,6 @@
 ﻿using ClassBookingRoom_Repository;
 using KoiOrderingSystem_BusinessObject;
+using KoiOrderingSystem_Repository.IRepo;
 using KoiOrderingSystem_Service.IService;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace KoiOrderingSystem_Service.Service
     public class CurrencyService : ICurrencyService
     {
         private readonly IBaseRepository<Currency> _currencyRepository;
+        private readonly ICurrencyRepo _repo;
+
 
 
         // Constructor to initialize the repository

@@ -13,6 +13,8 @@ namespace KoiOrderingSystem_Service.Service
     {
         
         private readonly IBaseRepository<KoiType> _koiTypeRepository;
+        private readonly IKoiTypeRepo _repo;
+
 
 
         // Constructor to initialize the repository

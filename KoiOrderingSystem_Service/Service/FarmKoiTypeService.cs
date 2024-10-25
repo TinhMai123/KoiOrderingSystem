@@ -11,6 +11,8 @@ namespace KoiOrderingSystem_Service.Service
     public class FarmKoiTypeService : IFarmKoiTypeService
     {
         private readonly IBaseRepository<FarmKoiType> _farmKoiTypeRepository;
+        private readonly IFarmKoiTypeRepo _repo;
+
 
 
         // Constructor to initialize the repository
