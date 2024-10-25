@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_Service.Service
 {
-    public class InsuranceService : IInsuranceRepo
+    public class InsuranceService : IInsuranceService
     {
         private readonly IBaseRepository<Insurance> _insuranceRepository;
         private readonly IInsuranceRepo _repo;
