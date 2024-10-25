@@ -1,62 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
+using ClassBookingRoom_Repository;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_Repository;
-using KoiOrderingSystem_Repository.impl;
+using KoiOrderingSystem_Repository.IRepo;
+using KoiOrderingSystem_Repository.Repo;
 using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Service.Service
 {
     public class KoiTypeService : IKoiTypeService
     {
-        private readonly IKoiTypeRepository _koiTypeRepository;
+        
+        private readonly IBaseRepository<KoiType> _koiTypeRepository;
+
 
         // Constructor to initialize the repository
-        public KoiTypeService(IKoiTypeRepository koiTypeRepository)
+        public KoiTypeService(IBaseRepository<KoiType> koiTypeRepository)
         {
             _koiTypeRepository = koiTypeRepository;
         }
 
         // Add a new KoiType
-        public void AddKoiType(KoiType koiType)
+        public async Task<bool> AddAsync(KoiType koiType)
         {
             if (koiType == null)
             {
                 throw new ArgumentNullException(nameof(koiType), "KoiType cannot be null.");
             }
-            _koiTypeRepository.AddKoiType(koiType);
+            return await _koiTypeRepository.AddAsync(koiType);
         }
 
         // Retrieve all KoiType records
-        public List<KoiType> GetAllKoiTypes()
+        public async Task<List<KoiType>> GetAlls()
         {
-            return _koiTypeRepository.GetAllKoiTypes();
+            return await _koiTypeRepository.GetAllAsync();
         }
 
         // Retrieve a KoiType by ID
-        public KoiType GetKoiTypeById(int id)
+        public async Task<KoiType?> GetById(int id)
         {
-            return _koiTypeRepository.GetKoiTypeById(id);
+            return await _koiTypeRepository.GetByIdAsync(id);
         }
 
         // Update an existing KoiType
-        public void UpdateKoiType(KoiType koiType)
+        public async Task<bool> UpdateAsync(KoiType koiType)
         {
             if (koiType == null)
             {
                 throw new ArgumentNullException(nameof(koiType), "KoiType cannot be null.");
             }
-            _koiTypeRepository.UpdateKoiType(koiType);
+            return await _koiTypeRepository.UpdateAsync(koiType);
         }
 
         // Delete a KoiType by ID
-        public void DeleteKoiType(KoiType koiType)
+        public async Task<bool> DeleteAsync(int id)
         {
-            if (koiType == null)
-            {
-                throw new ArgumentNullException(nameof(koiType), "KoiType cannot be null.");
-            }
-            _koiTypeRepository.DeleteKoiType(koiType);
+            return await _koiTypeRepository.DeleteAsync(id);
         }
+
+        
+
+        
+
+       
+
+        
     }
 }

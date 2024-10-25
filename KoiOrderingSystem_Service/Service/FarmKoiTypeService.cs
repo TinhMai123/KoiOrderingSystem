@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ClassBookingRoom_Repository;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_Repository;
 using KoiOrderingSystem_Repository.IRepo;
@@ -9,54 +10,51 @@ namespace KoiOrderingSystem_Service.Service
 {
     public class FarmKoiTypeService : IFarmKoiTypeService
     {
-        private readonly IFarmKoiTypeRepo _farmKoiTypeRepository;
-        
+        private readonly IBaseRepository<FarmKoiType> _farmKoiTypeRepository;
+
+
         // Constructor to initialize the repository
-        public FarmKoiTypeService(IFarmKoiTypeRepo farmKoiTypeRepository)
+        public FarmKoiTypeService(IBaseRepository<FarmKoiType> farmKoiTypeRepository)
         {
             _farmKoiTypeRepository = farmKoiTypeRepository ?? throw new ArgumentNullException(nameof(farmKoiTypeRepository));
         }
 
         // Add a new FarmKoiType
-        public void AddAsync(FarmKoiType newFarm)
+        public async Task<bool> AddAsync(FarmKoiType newFarm)
         {
             if (newFarm == null)
             {
                 throw new ArgumentNullException(nameof(newFarm), "FarmKoiType cannot be null.");
             }
-            _farmKoiTypeRepository.AddFarmKoiType(newFarm);
+            return await _farmKoiTypeRepository.AddAsync(newFarm);
         }
 
         // Retrieve all FarmKoiType records
-        public List<FarmKoiType> GetAllFarms()
+        public async Task<List<FarmKoiType>> GetAlls()
         {
-            return _farmKoiTypeRepository.GetAllFarms();
+            return await _farmKoiTypeRepository.GetAllAsync();
         }
 
         // Retrieve a FarmKoiType by ID
-        public FarmKoiType GetFarmById(int id)
+        public async Task<FarmKoiType?> GetById(int id)
         {
-            return _farmKoiTypeRepository.GetFarmById(id);
+            return await _farmKoiTypeRepository.GetByIdAsync(id);
         }
 
         // Update an existing FarmKoiType
-        public void UpdateAsync(FarmKoiType farmKoiType)
+        public async Task<bool> UpdateAsync(FarmKoiType farmKoiType)
         {
             if (farmKoiType == null)
             {
                 throw new ArgumentNullException(nameof(farmKoiType), "FarmKoiType cannot be null.");
             }
-            _farmKoiTypeRepository.UpdateFarm(farmKoiType);
+            return await _farmKoiTypeRepository.UpdateAsync(farmKoiType);
         }
 
         // Delete a FarmKoiType
-        public void DeleteAsync(int id)
+        public  async Task<bool> DeleteAsync(int id)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id), "FarmKoiType cannot be null.");
-            }
-            _farmKoiTypeRepository.DeleteFarm(id);
+            return await _farmKoiTypeRepository.DeleteAsync(id);
         }
     }
 }

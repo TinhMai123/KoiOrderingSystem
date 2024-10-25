@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ClassBookingRoom_Repository;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_Repository;
 using KoiOrderingSystem_Service.IService;
@@ -8,54 +9,51 @@ namespace KoiOrderingSystem_Service.Service
 {
     public class FarmService : IFarmService
     {
-        private readonly IFarmRepository _farmRepository;
+        private readonly IBaseRepository<Farm> _farmRepository; 
+
 
         // Constructor to initialize the repository
-        public FarmService(IFarmRepository farmRepository)
+        public FarmService(IBaseRepository<Farm> farmRepository)
         {
             _farmRepository = farmRepository ?? throw new ArgumentNullException(nameof(farmRepository));
         }
 
         // Add a new Farm
-        public void AddFarm(Farm newFarm)
+        public async Task<bool> AddAsync(Farm newFarm)
         {
             if (newFarm == null)
             {
                 throw new ArgumentNullException(nameof(newFarm), "Farm cannot be null.");
             }
-            _farmRepository.AddFarm(newFarm);
+            return await _farmRepository.AddAsync(newFarm);
         }
 
         // Retrieve all Farms
-        public List<Farm> GetAllFarms()
+        public async Task<List<Farm>> GetAlls()
         {
-            return _farmRepository.GetAllFarms();
+            return await _farmRepository.GetAllAsync();
         }
 
         // Retrieve a Farm by ID
-        public Farm GetFarmById(int id)
+        public async Task<Farm?> GetById(int id)
         {
-            return _farmRepository.GetFarmById(id);
+            return await _farmRepository.GetByIdAsync(id);
         }
 
         // Update an existing Farm
-        public void UpdateFarm(Farm farmToUpdate)
+        public async Task<bool> UpdateAsync(Farm update)
         {
-            if (farmToUpdate == null)
+            if (update == null)
             {
-                throw new ArgumentNullException(nameof(farmToUpdate), "Farm cannot be null.");
+                throw new ArgumentNullException(nameof(update), "Farm cannot be null.");
             }
-            _farmRepository.UpdateFarm(farmToUpdate);
+            return await _farmRepository.UpdateAsync(update);
         }
 
         // Delete a Farm
-        public void DeleteFarm(Farm farm)
+        public async Task<bool> DeleteAsync(int id)
         {
-            if (farm == null)
-            {
-                throw new ArgumentNullException(nameof(farm), "Farm cannot be null.");
-            }
-            _farmRepository.DeleteFarm(farm);
+           return await _farmRepository.DeleteAsync(id);
         }
     }
 }

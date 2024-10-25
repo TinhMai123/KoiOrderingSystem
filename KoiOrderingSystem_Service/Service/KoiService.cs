@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ClassBookingRoom_Repository;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_Repository;
 using KoiOrderingSystem_Service.IService;
@@ -8,54 +9,50 @@ namespace KoiOrderingSystem_Service.Service
 {
     public class KoiService : IKoiService
     {
-        private readonly IKoiRepository _koiRepository;
+        private readonly IBaseRepository<Koi> _koiRepository;
+
 
         // Constructor to initialize the repository
-        public KoiService(IKoiRepository koiRepository)
+        public KoiService(IBaseRepository<Koi> koiRepository)
         {
             _koiRepository = koiRepository;
         }
 
         // Add a new Koi
-        public void addKoi(Koi koi)
+        public async Task<bool> AddAsync(Koi koi)
         {
-            if (koi == null)
-            {
-                throw new ArgumentNullException(nameof(koi), "Koi cannot be null.");
-            }
-            _koiRepository.addKoi(koi);
+            return await _koiRepository.AddAsync(koi);
         }
 
         // Remove an existing Koi
-        public void removeKoi(Koi koi)
+        public async Task<bool> DeleteAsync(int id)
         {
-            if (koi == null)
-            {
-                throw new ArgumentNullException(nameof(koi), "Koi cannot be null.");
-            }
-            _koiRepository.removeKoi(koi);
+            
+            return await _koiRepository.DeleteAsync(id);
         }
 
         // Get a Koi by its ID
-        public Koi getKoiById(int koiId)
+        public async Task<Koi?> GetById(int id)
         {
-            return _koiRepository.getKoiById(koiId);
+            return await _koiRepository.GetByIdAsync(id);
         }
 
         // Update an existing Koi
-        public void updateKoi(Koi koi)
+        public async Task<bool> UpdateAsync(Koi update)
         {
-            if (koi == null)
+            if (update == null)
             {
-                throw new ArgumentNullException(nameof(koi), "Koi cannot be null.");
+                throw new ArgumentNullException(nameof(update), "Koi cannot be null.");
             }
-            _koiRepository.updateKoi(koi);
+            return await _koiRepository.UpdateAsync(update);
         }
 
         // Get all Koi
-        public List<Koi> getall()
+        public async Task<List<Koi>> GetAlls()
         {
-            return _koiRepository.getall();
+            return await _koiRepository.GetAllAsync();
         }
+
+       
     }
 }
