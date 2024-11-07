@@ -1,5 +1,6 @@
 ﻿using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,24 +31,33 @@ namespace KoiOrderingSystem_DAO
                 return instance;
             }
         }
-        public Payment? GetById(int id)
+        public async Task<Payment?> GetById(int id)
         {
-            return _context.Payments.SingleOrDefault(x => x.Id == id);
+            return await _context.Payments.SingleOrDefaultAsync(x => x.Id == id);
         }
-        public List<Payment> GetAll()
+        public async Task<List<Payment>> GetAll()
         {
-            return _context.Payments.ToList();
+            return await _context.Payments.ToListAsync();
         }
-        public bool Add(Payment model)
+        public async Task<List<Payment>> ReadAll()
+        {
+            return await _context.Payments.AsNoTracking().ToListAsync();
+        }
+        public async Task<Payment?> ReadById(int id)
+        {
+            return await _context.Payments.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+        }
+        public async Task<bool> Add(Payment model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Payments.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.Payments.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel == null)
                 {
                     _context.Payments.Add(model);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
+                    _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
                 }
             } catch (Exception)
@@ -57,16 +67,17 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Remove(Payment model)
+        public async Task<bool> Remove(Payment model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Payments.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.Payments.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.Payments.Remove(existingModel);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
+                    _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
                 }
             } catch (Exception)
@@ -76,16 +87,16 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Update(Payment model)
+        public async Task<bool> Update(Payment model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Payments.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.Payments.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
                     isSuccess = true;
                 }
