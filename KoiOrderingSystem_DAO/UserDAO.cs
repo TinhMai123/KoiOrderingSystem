@@ -1,5 +1,6 @@
 ﻿using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,33 +32,38 @@ namespace KoiOrderingSystem_DAO
             _context = new KoiOrderingSystemContext();
         }
 
-        public User? GetUserByEmail(string email)
+        public async Task<User?> GetUserByEmail(string email)
         {
-            return _context.Users.SingleOrDefault(x => x.Email.Equals(email));
+            return await _context.Users.SingleOrDefaultAsync(x => x.Email.Equals(email));
         }
 
-        public List<User> GetUsers()
+        public async Task<List<User>> GetUsers()
         {
-            return _context.Users.ToList();
+            return await _context.Users.ToListAsync();
         }
-        public User? GetById(int id)
+        public async Task<User?> GetById(int id)
         {
-            return _context.Users.SingleOrDefault(x => x.Id == id);
+            return await _context.Users.SingleOrDefaultAsync(x => x.Id == id);
         }
-        public List<User> GetAll()
+        public async Task<List<User>> ReadUsers()
         {
-            return _context.Users.ToList();
+            return await _context.Users.AsNoTracking().ToListAsync();
         }
-        public bool Add(User model)
+        public async Task<User?> ReadById(int id)
+        {
+            return await _context.Users.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+        }
+        public async Task<bool> Add(User model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Users.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.Users.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel == null)
                 {
                     _context.Users.Add(model);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
+                    _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
                 }
             } catch (Exception)
@@ -67,16 +73,17 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Remove(User model)
+        public async Task<bool> Remove(User model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Users.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.Users.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.Users.Remove(existingModel);
                     _context.SaveChanges();
+                    _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
                 }
             } catch (Exception)
@@ -86,16 +93,16 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Update(User model)
+        public async Task<bool> Update(User model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Users.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.Users.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
                     isSuccess = true;
                 }
