@@ -36,7 +36,11 @@ namespace KoiOrderingSystem_DAO
         }
         public async Task<List<Koi>> GetAll()
         {
-            return await _context.Kois.ToListAsync();
+            return await _context.Kois.AsNoTracking().ToListAsync();
+        }
+        public async Task<Koi?> GetByIdNoTracking(int id)
+        {
+            return await _context.Kois.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
         }
         public async Task<bool> Add(Koi model)
         {
@@ -48,6 +52,7 @@ namespace KoiOrderingSystem_DAO
                 {
                     _context.Kois.Add(model);
                     _context.SaveChanges();
+                    _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
                 }
             }
@@ -68,6 +73,7 @@ namespace KoiOrderingSystem_DAO
                 {
                     _context.Kois.Remove(existingModel);
                     _context.SaveChanges();
+                    _context.Remove(existingModel).State = EntityState.Deleted;
                     isSuccess = true;
                 }
             }
