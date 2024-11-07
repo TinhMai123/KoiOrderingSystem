@@ -1,0 +1,47 @@
+﻿@page
+@model KoiOrderingSystem_Web.Pages.Customer.OrderTrips.IndexModel
+
+@{
+    ViewData["Title"] = "Your Trip Orders";
+}
+
+<h1>Your Trip Orders</h1>
+
+<p>
+    <a asp-page="Create">Create New Trip Order</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.OrderTrip[0].TripStartDate)</th>
+            <th>@Html.DisplayNameFor(model => model.OrderTrip[0].TripEndDate)</th>
+            <th>@Html.DisplayNameFor(model => model.OrderTrip[0].MaxParticipants)</th>
+            <th>Order ID</th>
+            <th>Farm Name</th>
+            <th>Consultant</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderTrip)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.TripStartDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.TripEndDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.MaxParticipants)</td>
+                <td>@Html.DisplayFor(modelItem => item.Order.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.Farm.FarmName)</td> <!-- Assuming Farm has a Name property -->
+                <td>@Html.DisplayFor(modelItem => item.Consultant.FullName)</td> <!-- Assuming Consultant has a Name property -->
+                <td>
+                    <a asp-page="./Details" asp-route-id="@item.Id">View Details</a> |
+                    @if (item.IsActive)
+                    {
+                     < a asp - page = "./Delete" asp - route - id = "@item.Id" > Cancel </ a >
+                    }
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

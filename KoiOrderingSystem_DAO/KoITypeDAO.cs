@@ -1,5 +1,6 @@
 ﻿using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,20 +31,20 @@ namespace KoiOrderingSystem_DAO
                 return instance;
             }
         }
-        public KoiType? GetById(int id)
+        public async Task<KoiType?> GetById(int id)
         {
-            return _context.KoiTypes.SingleOrDefault(x => x.Id == id);
+            return await _context.KoiTypes.SingleOrDefaultAsync(x => x.Id == id);
         }
-        public List<KoiType> GetAll()
+        public async Task<List<KoiType>> GetAll()
         {
-            return _context.KoiTypes.ToList();
+            return await _context.KoiTypes.ToListAsync();
         }
-        public bool Add(KoiType model)
+        public async Task<bool> Add(KoiType model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.KoiTypes.SingleOrDefault(x => x.Name == model.Name);
+                var existingModel = await _context.KoiTypes.SingleOrDefaultAsync(x => x.Name == model.Name);
                 if (existingModel == null)
                 {
                     _context.KoiTypes.Add(model);
@@ -57,12 +58,12 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Remove(KoiType model)
+        public async Task<bool> Remove(int id)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.KoiTypes.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.KoiTypes.SingleOrDefaultAsync(x => x.Id == id);
                 if (existingModel != null)
                 {
                     _context.KoiTypes.Remove(existingModel);
@@ -76,12 +77,12 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Update(KoiType model)
+        public async Task<bool> Update(KoiType model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.KoiTypes.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.KoiTypes.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;

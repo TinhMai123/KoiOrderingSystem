@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KoiOrderingSystem_BusinessObject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,10 @@ namespace KoiOrderingSystem_Repository.IRepo
 {
     public interface IOrderRepo
     {
+        Task<Order?> GetById(int id);
+        Task<List<Order>> GetAll();
+        Task<bool> Add(Order model);
+        Task<bool> Remove(int id);
+        Task<bool> Update(Order model);
     }
 }

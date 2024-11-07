@@ -9,6 +9,10 @@ namespace KoiOrderingSystem_Repository.IRepo
 {
     public interface IKoiRepo
     {
-       
+        Task<Koi?> GetById(int id);
+        Task<List<Koi>> GetAll();
+        Task<bool> Add(Koi model);
+        Task<bool> Remove(int id);
+        Task<bool> Update(Koi model);
     }
 }

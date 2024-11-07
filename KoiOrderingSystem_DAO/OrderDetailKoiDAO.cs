@@ -32,7 +32,7 @@ namespace KoiOrderingSystem_DAO
         }
         public OrderDetailKoi? GetById(int id)
         {
-            return _context.OrderDetailKois.SingleOrDefault(x => x.Id == id);
+            return _context.OrderDetailKois.SingleOrDefaultAsync(x => x.Id == id);
         }
         public List<OrderDetailKoi> GetAll()
         {
@@ -43,7 +43,7 @@ namespace KoiOrderingSystem_DAO
             var isSuccess = false;
             try
             {
-                var existingModel = _context.OrderDetailKois.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = _context.OrderDetailKois.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel == null)
                 {
                     _context.OrderDetailKois.Add(model);
@@ -62,7 +62,7 @@ namespace KoiOrderingSystem_DAO
             var isSuccess = false;
             try
             {
-                var existingModel = _context.OrderDetailKois.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = _context.OrderDetailKois.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.OrderDetailKois.Remove(existingModel);
@@ -81,7 +81,7 @@ namespace KoiOrderingSystem_DAO
             var isSuccess = false;
             try
             {
-                var existingModel = _context.OrderDetailKois.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = _context.OrderDetailKois.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;

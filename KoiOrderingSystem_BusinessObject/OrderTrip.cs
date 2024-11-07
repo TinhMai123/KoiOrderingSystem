@@ -10,7 +10,7 @@ namespace KoiOrderingSystem_BusinessObject
         public DateTime? TripStartDate { get; set; }
         public DateTime? TripEndDate { get; set; }
         public int? MaxParticipants { get; set; }
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
         public int OrderId { get; set; }
         public int FarmId { get; set; }
         public int? ConsultantId { get; set; }

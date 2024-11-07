@@ -26,7 +26,10 @@ namespace KoiOrderingSystem_Service.Service
         {
             return await _koiRepository.AddAsync(koi);
         }
-
+        public List<Koi> GetAllKois()
+        {
+            return _repo.GetAllKois();
+        }
         // Remove an existing Koi
         public async Task<bool> DeleteAsync(int id)
         {

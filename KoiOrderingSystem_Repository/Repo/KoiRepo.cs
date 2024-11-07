@@ -8,10 +8,13 @@ using System.Collections.Generic;
 namespace KoiOrderingSystem_Repository.Repo
 
 {
-    public class KoiRepo : BaseRepository<Koi>, IKoiRepo
+    public class KoiRepo : IKoiRepo
     {
-        public KoiRepo(KoiOrderingSystemContext context) : base(context)
+       
+        public List<Koi> GetAllKois()
         {
+            return KoiDAO.Instance.GetAll();
         }
+        
     }
 }

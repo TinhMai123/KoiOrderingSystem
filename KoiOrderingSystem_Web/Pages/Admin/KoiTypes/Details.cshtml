@@ -1,0 +1,67 @@
+﻿@page
+@model KoiOrderingSystem_Web.Pages.Admin.KoiTypes.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>KoiType</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiType.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiType.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiType.IsEndangered)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiType.IsEndangered)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiType.IsBatch)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiType.IsBatch)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiType.Picture)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiType.Picture)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiType.CreatedAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiType.CreatedAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiType.DeletedAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiType.DeletedAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiType.UpdatedAt)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiType.UpdatedAt)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.KoiType.IsDeleted)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KoiType.IsDeleted)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.KoiType?.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

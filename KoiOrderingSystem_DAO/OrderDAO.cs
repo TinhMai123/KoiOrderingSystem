@@ -1,6 +1,8 @@
 ﻿using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,20 +32,24 @@ namespace KoiOrderingSystem_DAO
                 return instance;
             }
         }
-        public Order? GetById(int id)
+        public async Task<Order?> GetById(int id)
         {
-            return _context.Orders.SingleOrDefault(x => x.Id == id);
+            return await _context.Orders.SingleOrDefaultAsync(x => x.Id == id);
         }
-        public List<Order> GetAll()
+        public async Task<Order?> GetByIdNoTracking(int id)
         {
-            return _context.Orders.ToList();
+            return await _context.Orders.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
         }
-        public bool Add(Order model)
+        public async Task<List<Order>> GetAll()
+        {
+            return await _context.Orders.AsNoTracking().ToListAsync();
+        }
+        public async Task<bool> Add(Order model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Orders.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.Orders.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel == null)
                 {
                     _context.Orders.Add(model);
@@ -57,31 +63,34 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Remove(Order model)
+        public async Task<bool> Remove(Order model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Orders.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.Orders.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.Orders.Remove(existingModel);
                     _context.SaveChanges();
                     isSuccess = true;
+                    _context.Entry(existingModel) = 
                 }
+                
             } catch (Exception)
             {
 
                 throw;
             }
+            
             return isSuccess;
         }
-        public bool Update(Order model)
+        public async Task<bool> Update(Order model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Orders.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.Orders.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
