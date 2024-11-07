@@ -39,6 +39,10 @@ namespace KoiOrderingSystem_DAO
         {
             return await _context.OrderKois.AsNoTracking().ToListAsync();
         }
+        public async Task<OrderKoi?> ReadById(int id)
+        {
+            return await _context.OrderKois.AsNoTracking().SingleOrDefaultAsync(x=>x.Id == id);
+        }
         public async Task<bool> Add(OrderKoi model)
         {
             var isSuccess = false;

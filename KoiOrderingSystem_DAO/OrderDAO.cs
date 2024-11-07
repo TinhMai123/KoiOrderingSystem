@@ -36,7 +36,7 @@ namespace KoiOrderingSystem_DAO
         {
             return await _context.Orders.SingleOrDefaultAsync(x => x.Id == id);
         }
-        public async Task<Order?> GetByIdNoTracking(int id)
+        public async Task<Order?> ReadById(int id)
         {
             return await _context.Orders.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
         }
