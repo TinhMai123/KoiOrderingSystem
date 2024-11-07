@@ -53,8 +53,9 @@ namespace KoiOrderingSystem_DAO
                 if (existingModel == null)
                 {
                     _context.Orders.Add(model);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     isSuccess = true;
+                    _context.Entry(model).State = EntityState.Detached;
                 }
             } catch (Exception)
             {
@@ -72,9 +73,9 @@ namespace KoiOrderingSystem_DAO
                 if (existingModel != null)
                 {
                     _context.Orders.Remove(existingModel);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     isSuccess = true;
-                    _context.Entry(existingModel) = 
+                    _context.Entry(existingModel).State = EntityState.Detached;
                 }
                 
             } catch (Exception)
@@ -94,7 +95,7 @@ namespace KoiOrderingSystem_DAO
                 if (existingModel != null)
                 {
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
                     isSuccess = true;
                 }
