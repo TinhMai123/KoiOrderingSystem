@@ -1,5 +1,6 @@
 ﻿using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,13 +31,17 @@ namespace KoiOrderingSystem_DAO
                 return instance;
             }
         }
-        public OrderTrip? GetById(int id)
+        public async Task<OrderTrip?> GetById(int id)
         {
-            return _context.OrderTrips.SingleOrDefault(x => x.Id == id);
+            return await _context.OrderTrips.SingleOrDefaultAsync(x => x.Id == id);
         }
-        public List<OrderTrip> GetAll()
+        public async Task<List<OrderTrip>> ReadAll()
         {
-            return _context.OrderTrips.ToList();
+            return await _context.OrderTrips.AsNoTracking().ToListAsync();
+        }
+        public async Task<OrderTrip?> ReadById(int id)
+        {
+            return await _context.OrderTrips.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
         }
         public bool Add(OrderTrip model)
         {

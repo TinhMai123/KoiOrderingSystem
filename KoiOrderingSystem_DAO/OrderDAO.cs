@@ -40,7 +40,7 @@ namespace KoiOrderingSystem_DAO
         {
             return await _context.Orders.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
         }
-        public async Task<List<Order>> GetAll()
+        public async Task<List<Order>> ReadAll()
         {
             return await _context.Orders.AsNoTracking().ToListAsync();
         }

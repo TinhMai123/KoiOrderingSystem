@@ -35,7 +35,7 @@ namespace KoiOrderingSystem_DAO
         {
             return await _context.OrderDetailKois.SingleOrDefaultAsync(x => x.Id == id);
         }
-        public async Task<List<OrderDetailKoi>> GetAll()
+        public async Task<List<OrderDetailKoi>> ReadAll()
         {
             return await _context.OrderDetailKois.ToListAsync();
         }
