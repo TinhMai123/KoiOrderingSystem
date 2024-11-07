@@ -47,16 +47,17 @@ namespace KoiOrderingSystem_DAO
         {
             return await _context.OrderTrips.ToListAsync();
         }
-        public bool Add(OrderTrip model)
+        public async Task<bool> Add(OrderTrip model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.OrderTrips.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.OrderTrips.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel == null)
                 {
                     _context.OrderTrips.Add(model);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
+                    _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
                 }
             } catch (Exception)
@@ -66,16 +67,17 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Remove(OrderTrip model)
+        public async Task<bool> Remove(OrderTrip model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.OrderTrips.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.OrderTrips.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.OrderTrips.Remove(existingModel);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
+                    _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
                 }
             } catch (Exception)
@@ -85,12 +87,12 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Update(OrderTrip model)
+        public async Task<bool> Update(OrderTrip model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.OrderTrips.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.OrderTrips.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
