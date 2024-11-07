@@ -44,6 +44,10 @@ namespace KoiOrderingSystem_DAO
         {
             return await _context.Orders.AsNoTracking().ToListAsync();
         }
+        public async Task<List<Order>> GetAll()
+        {
+            return await _context.Orders.ToListAsync();
+        }
         public async Task<bool> Add(Order model)
         {
             var isSuccess = false;

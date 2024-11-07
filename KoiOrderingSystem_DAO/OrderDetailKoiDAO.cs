@@ -37,11 +37,15 @@ namespace KoiOrderingSystem_DAO
         }
         public async Task<List<OrderDetailKoi>> ReadAll()
         {
-            return await _context.OrderDetailKois.ToListAsync();
+            return await _context.OrderDetailKois.AsNoTracking().ToListAsync();
         }
         public async Task<OrderDetailKoi?> ReadById(int id)
         {
             return await _context.OrderDetailKois.SingleOrDefaultAsync(x => x.Id == id);
+        }
+        public async Task<List<OrderDetailKoi>> GetAll()
+        {
+            return await _context.OrderDetailKois.ToListAsync();
         }
         public async Task<bool> Add(OrderDetailKoi model)
         {

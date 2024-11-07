@@ -43,6 +43,10 @@ namespace KoiOrderingSystem_DAO
         {
             return await _context.OrderTrips.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
         }
+        public async Task<List<OrderTrip>> GetAll()
+        {
+            return await _context.OrderTrips.ToListAsync();
+        }
         public bool Add(OrderTrip model)
         {
             var isSuccess = false;
