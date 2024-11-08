@@ -73,17 +73,17 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public async Task<bool> Remove(User model)
+        public async Task<bool> Remove(int id)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = await _context.Users.SingleOrDefaultAsync(x => x.Id == model.Id);
+                var existingModel = await _context.Users.SingleOrDefaultAsync(x => x.Id == id);
                 if (existingModel != null)
                 {
                     _context.Users.Remove(existingModel);
                     _context.SaveChanges();
-                    _context.Entry(model).State = EntityState.Detached;
+                    _context.Entry(existingModel).State = EntityState.Detached;
                     isSuccess = true;
                 }
             } catch (Exception)

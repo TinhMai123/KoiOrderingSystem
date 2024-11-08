@@ -14,24 +14,24 @@ namespace KoiOrderingSystem_Repository.Repo
 {
     public class CurrencyRepo : ICurrencyRepo
     {
-        public Task<bool> Add(Currency model)
+        public async Task<bool> Add(Currency model)
         {
-            return CurrencyDAO.Instance.Add(model);
+            return await CurrencyDAO.Instance.Add(model);
         }
 
-        public Task<List<Currency>> GetAll()
+        public async Task<List<Currency>> GetAll()
         {
-            throw new NotImplementedException();
+            return await CurrencyDAO.Instance.GetAll();
+        }
+        
+        public async Task<Currency?> GetById(int id)
+        {
+            return await CurrencyDAO.Instance.GetById(id);
         }
 
-        public Task<Currency?> GetById(int id)
+        public async Task<bool> Remove(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> Remove(int id)
-        {
-            throw new NotImplementedException();
+            return await CurrencyDAO.Instance.Remove(id);
         }
 
         public Task<bool> Update(Currency model)
