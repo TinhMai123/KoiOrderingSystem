@@ -57,6 +57,7 @@ namespace KoiOrderingSystem_DAO
                 {
                     _context.Feedbacks.Add(model);
                     await _context.SaveChangesAsync();
+                    _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
                 }
             }
@@ -77,6 +78,7 @@ namespace KoiOrderingSystem_DAO
                 {
                     _context.Feedbacks.Remove(existingModel);
                     await _context.SaveChangesAsync();
+                    _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
                 }
             }
