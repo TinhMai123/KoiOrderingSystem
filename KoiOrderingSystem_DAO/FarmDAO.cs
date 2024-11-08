@@ -78,6 +78,7 @@ namespace KoiOrderingSystem_DAO
                 {
                     _context.Farms.Remove(existingModel);
                     await _context.SaveChangesAsync();
+                    _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
                 }
             }
