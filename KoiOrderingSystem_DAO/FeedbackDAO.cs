@@ -39,6 +39,14 @@ namespace KoiOrderingSystem_DAO
         {
             return await _context.Feedbacks.ToListAsync();
         }
+        public async Task<Feedback?> ReadById(int id)
+        {
+            return await _context.Feedbacks.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+        }
+        public async Task<List<Feedback>> ReadAll()
+        {
+            return await _context.Feedbacks.AsNoTracking().ToListAsync();
+        }
         public async Task<bool> Add(Feedback model)
         {
             var isSuccess = false;
