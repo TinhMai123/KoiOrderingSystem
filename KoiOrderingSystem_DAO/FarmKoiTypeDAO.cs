@@ -76,7 +76,7 @@ namespace KoiOrderingSystem_DAO
         }
 
         // UPDATE a FarmKoiType record
-        public async Task<bool> UpdateFarmKoiType(FarmKoiType model)
+        public async Task<bool> Update(FarmKoiType model)
         {
             var isSuccess = false;
             try
@@ -99,17 +99,17 @@ namespace KoiOrderingSystem_DAO
         }
 
         // DELETE a FarmKoiType by its ID
-        public async Task<bool> DeleteFarmKoiType(FarmKoiType model)
+        public async Task<bool> Remove(int id)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = await _context.Feedbacks.SingleOrDefaultAsync(x => x.Id == model.Id);
+                var existingModel = await _context.FarmKoiTypes.SingleOrDefaultAsync(x => x.Id == id);
                 if (existingModel != null)
                 {
-                    _context.FarmKoiTypes.Remove(model);
+                    _context.FarmKoiTypes.Remove(existingModel);
                     await _context.SaveChangesAsync();
-                    _context.Entry(model).State = EntityState.Detached;
+                    _context.Entry(existingModel).State = EntityState.Detached;
                     isSuccess = true;
                 }
             }
