@@ -68,12 +68,12 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public async Task<bool> Remove(Order model)
+        public async Task<bool> Remove(int id)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = await _context.Orders.SingleOrDefaultAsync(x => x.Id == model.Id);
+                var existingModel = await _context.Orders.SingleOrDefaultAsync(x => x.Id == id);
                 if (existingModel != null)
                 {
                     _context.Orders.Remove(existingModel);
