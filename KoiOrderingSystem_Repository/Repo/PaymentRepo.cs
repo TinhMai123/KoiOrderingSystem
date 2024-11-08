@@ -10,10 +10,8 @@ using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_Repository.Repo
 {
-    public class PaymentRepo : BaseRepository<Payment>, IPaymentRepo
+    public class PaymentRepo : IPaymentRepo
     {
-        public PaymentRepo(KoiOrderingSystemContext context) : base(context)
-        {
-        }
+
     }
 }

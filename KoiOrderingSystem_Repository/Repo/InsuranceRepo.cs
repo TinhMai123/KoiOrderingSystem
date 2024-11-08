@@ -10,10 +10,8 @@ using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_Repository.Repo
 {
-    public class InsuranceRepo : BaseRepository<Insurance>, IInsuranceRepo
+    public class InsuranceRepo :  IInsuranceRepo
     {
-        public InsuranceRepo(KoiOrderingSystemContext context) : base(context)
-        {
-        }
+
     }
 }

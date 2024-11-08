@@ -11,10 +11,7 @@ using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_Repository.Repo
 {
-    public class FarmKoiTypeRepo : BaseRepository<FarmKoiType>, IFarmKoiTypeRepo
+    public class FarmKoiTypeRepo : IFarmKoiTypeRepo
     {
-        public FarmKoiTypeRepo(KoiOrderingSystemContext context) : base(context)
-        {
-        }
     }
 }

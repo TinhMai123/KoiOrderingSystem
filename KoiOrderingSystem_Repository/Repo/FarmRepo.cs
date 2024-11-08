@@ -8,10 +8,7 @@ using System.Collections.Generic;
 namespace KoiOrderingSystem_Repository.Repo
 
 {
-    public class FarmRepo : BaseRepository<Farm>, IFarmRepo
+    public class FarmRepo : IFarmRepo
     {
-        public FarmRepo(KoiOrderingSystemContext context) : base(context)
-        {
-        }
     }
 }

@@ -10,10 +10,7 @@ using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_Repository.Repo
 {
-    public class OrderRepo : BaseRepository<Order>, IOrderRepo
+    public class OrderRepo : IOrderRepo
     {
-        public OrderRepo(KoiOrderingSystemContext context) : base(context)
-        {
-        }
     }
 }

@@ -34,9 +34,9 @@ namespace KoiOrderingSystem_Repository.Repo
             return await CurrencyDAO.Instance.Remove(id);
         }
 
-        public Task<bool> Update(Currency model)
+        public async Task<bool> Update(Currency model)
         {
-            throw new NotImplementedException();
+            return await CurrencyDAO.Instance.Update(model);
         }
     }
 }

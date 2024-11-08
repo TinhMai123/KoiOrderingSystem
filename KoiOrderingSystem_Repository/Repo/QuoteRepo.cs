@@ -10,10 +10,7 @@ using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_Repository.Repo
 {
-    public class QuoteRepo : BaseRepository<Quote>, IQuoteRepo
+    public class QuoteRepo : IQuoteRepo
     {
-        public QuoteRepo(KoiOrderingSystemContext context) : base(context)
-        {
-        }
     }
 }

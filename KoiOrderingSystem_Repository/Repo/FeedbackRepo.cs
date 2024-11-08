@@ -10,10 +10,7 @@ using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_Repository.Repo
 {
-    public class FeedbackRepo : BaseRepository<Feedback>, IFeedbackRepo
+    public class FeedbackRepo : IFeedbackRepo
     {
-        public FeedbackRepo(KoiOrderingSystemContext context) : base(context)
-        {
-        }
     }
 }

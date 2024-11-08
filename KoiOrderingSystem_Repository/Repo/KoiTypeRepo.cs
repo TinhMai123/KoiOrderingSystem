@@ -7,10 +7,8 @@ using System.Collections.Generic;
 
 namespace KoiOrderingSystem_Repository.Repo
 {
-    public class KoiTypeRepo : BaseRepository<KoiType>, IKoiTypeRepo
+    public class KoiTypeRepo :  IKoiTypeRepo
     {
-        public KoiTypeRepo(KoiOrderingSystemContext context) : base(context)
-        {
-        }
+
     }
 }

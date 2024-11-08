@@ -10,10 +10,8 @@ using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_Repository.Repo
 {
-    public class KoiByBatchRepo : BaseRepository<KoiByBatch>, IKoiByBatchRepo
+    public class KoiByBatchRepo : IKoiByBatchRepo
     {
-        public KoiByBatchRepo(KoiOrderingSystemContext context) : base(context)
-        {
-        }
+
     }
 }

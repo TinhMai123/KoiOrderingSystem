@@ -10,10 +10,8 @@ using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_Repository.Repo
 {
-    public class OrderTripRepo : BaseRepository<OrderTrip>, IOrderTripRepo
+    public class OrderTripRepo : IOrderTripRepo
     {
-        public OrderTripRepo(KoiOrderingSystemContext context) : base(context)
-        {
-        }
+
     }
 }
