@@ -1,5 +1,6 @@
 ﻿using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,26 @@ namespace KoiOrderingSystem_DAO
                 }
                 return _instance;
             }
-        } 
+        }
+        public async Task<List<FarmKoiType>> GetAll()
+        {
+            return await _context.FarmKoiTypes.ToListAsync();
+        }
+
+        public async Task<FarmKoiType?> GetById(int id)
+        {
+            return await  _context.FarmKoiTypes.SingleOrDefaultAsync(x => x.Id == id) ;
+
+        }
+        public async Task<List<FarmKoiType>> ReadAll()
+        {
+            return await _context.FarmKoiTypes.AsNoTracking().ToListAsync();
+        }
+
+        public async Task<FarmKoiType?> ReadById(int id)
+        {
+            return await _context.FarmKoiTypes.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+        }
 
         // CREATE a new FarmKoiType record
         public void AddFarmKoiType(FarmKoiType newFarmKoiType)
@@ -44,18 +64,6 @@ namespace KoiOrderingSystem_DAO
             {
                 LogError($"Error adding FarmKoiType: {ex.Message}");
             }
-        }
-
-        // READ all FarmKoiType records
-        public List<FarmKoiType> GetAllFarmKoiTypes()
-        {
-            return _context.FarmKoiTypes.ToList();
-        }
-
-        // READ a FarmKoiType by its ID
-        public FarmKoiType GetFarmKoiTypeById(int id)
-        {
-            return _context.FarmKoiTypes.Find(id);
         }
 
         // UPDATE a FarmKoiType record
