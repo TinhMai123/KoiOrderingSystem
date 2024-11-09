@@ -1,4 +1,4 @@
-﻿using ClassBookingRoom_Repository;
+﻿
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_Repository.IRepo;
 using KoiOrderingSystem_Service.IService;
@@ -13,13 +13,11 @@ namespace KoiOrderingSystem_Service.Service
 
     public class PaymentService : IPaymentService
     {
-        private readonly IBaseRepository<Payment> _paymentRepository;
         private readonly IPaymentRepo _repo;
 
         // Constructor to initialize the repository
-        public PaymentService(IBaseRepository<Payment> paymentRepository, IPaymentRepo repo)
+        public PaymentService( IPaymentRepo repo)
         {
-            _paymentRepository = paymentRepository ?? throw new ArgumentNullException(nameof(paymentRepository));
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
@@ -30,19 +28,19 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(add), "Payment cannot be null.");
             }
-            return await _paymentRepository.AddAsync(add);
+            return await _repo.Add(add);
         }
 
         // Retrieve all Payment records
         public async Task<List<Payment>> GetAlls()
         {
-            return await _paymentRepository.GetAllAsync();
+            return await _repo.GetAll();
         }
 
         // Retrieve a Payment by ID
         public async Task<Payment?> GetById(int id)
         {
-            return await _paymentRepository.GetByIdAsync(id);
+            return await _repo.GetById(id);
         }
 
         // Update an existing Payment
@@ -52,13 +50,13 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(payment), "Payment cannot be null.");
             }
-            return await _paymentRepository.UpdateAsync(payment);
+            return await _repo.Update(payment);
         }
 
         // Delete a Payment
         public async Task<bool> DeleteAsync(int id)
         {
-            return await _paymentRepository.DeleteAsync(id);
+            return await _repo.Remove(id);
         }
     }
 }
