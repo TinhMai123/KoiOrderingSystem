@@ -13,15 +13,13 @@ namespace KoiOrderingSystem_Service.Service
 
     public class OrderService : IOrderService
     {
-        private readonly IBaseRepository<Order> _orderRepository;
         private readonly IOrderRepo _repo;
 
 
 
         // Constructor to initialize the repository
-        public OrderService(IBaseRepository<Order> orderRepository, IOrderRepo repo)
+        public OrderService( IOrderRepo repo)
         {
-            _orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));  
         }
 
@@ -32,19 +30,23 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(add), "Order cannot be null.");
             }
-            return await _orderRepository.AddAsync(add);
+            if(add.TotalAmount < 0)
+            {
+                throw new Exception("Amount cannot be smaller than 0");
+            }
+            return await _repo.Add(add);
         }
 
         // Retrieve all Order records
         public async Task<List<Order>> GetAlls()
         {
-            return await _orderRepository.GetAllAsync();
+            return await _repo.GetAll();
         }
 
         // Retrieve a Order by ID
         public async Task<Order?> GetById(int id)
         {
-            return await _orderRepository.GetByIdAsync(id);
+            return await _repo.GetById(id);
         }
 
         // Update an existing Order
@@ -54,13 +56,17 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(order), "Order cannot be null.");
             }
-            return await _orderRepository.UpdateAsync(order);
+            if (order.TotalAmount < 0)
+            {
+                throw new Exception("Amount cannot be smaller than 0");
+            }
+            return await _repo.Update(order);
         }
 
         // Delete a Order
         public async Task<bool> DeleteAsync(int id)
         {
-            return await _orderRepository.DeleteAsync(id);
+            return await _repo.Remove(id);
         }
     }
 }
