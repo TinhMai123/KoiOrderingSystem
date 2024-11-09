@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace KoiOrderingSystem_Service.Service
 {
@@ -21,6 +22,10 @@ namespace KoiOrderingSystem_Service.Service
 
         public async Task<bool> AddAsync(Currency add)
         {
+            if (add == null)
+            {
+                throw new ArgumentNullException(nameof(add), "Currency cannot be null.");
+            }
             var check = await _repo.ReadAll();
             check = check.Where(c=>c.Name == add.Name).ToList();
             if (check != null)
@@ -51,6 +56,10 @@ namespace KoiOrderingSystem_Service.Service
 
         public async Task<bool> UpdateAsync(Currency update)
         {
+            if (update == null)
+            {
+                throw new ArgumentNullException(nameof(update), "Currency cannot be null.");
+            }
             var check = await _repo.ReadAll();
             check = check.Where(c=>c.Name == update.Name).ToList();
             if (check == null)
