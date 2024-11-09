@@ -10,15 +10,14 @@ namespace KoiOrderingSystem_Service.Service
 {
     public class FarmService : IFarmService
     {
-        private readonly IBaseRepository<Farm> _farmRepository;
+
         private readonly IFarmRepo _repo;
 
 
 
         // Constructor to initialize the repository
-        public FarmService(IBaseRepository<Farm> farmRepository, IFarmRepo repo)
+        public FarmService( IFarmRepo repo)
         {
-            _farmRepository = farmRepository ?? throw new ArgumentNullException(nameof(farmRepository));
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
@@ -29,19 +28,30 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(newFarm), "Farm cannot be null.");
             }
-            return await _farmRepository.AddAsync(newFarm);
+            var check = await _repo.ReadAll();
+            check = check.Where(c=>c.FarmName == newFarm.FarmName).ToList();
+            if(check.Any()) 
+            { 
+                throw new Exception($"The name {newFarm.FarmName} had already been taken"); 
+            }
+            if(newFarm.EstablishedYear<1500 || newFarm.EstablishedYear > DateTime.UtcNow.Year)
+            {
+                throw new Exception($"The Established Year: {newFarm.EstablishedYear} is impossible to happen");
+            }
+            
+            return await _repo.Add(newFarm);
         }
 
         // Retrieve all Farms
         public async Task<List<Farm>> GetAlls()
         {
-            return await _farmRepository.GetAllAsync();
+            return await _repo.GetAll();
         }
 
         // Retrieve a Farm by ID
         public async Task<Farm?> GetById(int id)
         {
-            return await _farmRepository.GetByIdAsync(id);
+            return await _repo.GetById(id);
         }
 
         // Update an existing Farm
@@ -51,13 +61,22 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(update), "Farm cannot be null.");
             }
-            return await _farmRepository.UpdateAsync(update);
+            var check = await _repo.ReadAll();
+            if (check.Any(c=>update.FarmName != c.FarmName && c.FarmName.ToLower().Equals(update.FarmName.ToLower())))
+            {
+                throw new Exception($"The name {update.FarmName} had already been taken");
+            }
+            if (update.EstablishedYear < 1700 || update.EstablishedYear > DateTime.UtcNow.Year)
+            {
+                throw new Exception($"The Established Year: {update.EstablishedYear} is impossible to happen");
+            }
+            return await _repo.Update(update);
         }
 
         // Delete a Farm
         public async Task<bool> DeleteAsync(int id)
         {
-           return await _farmRepository.DeleteAsync(id);
+            return await _repo.Remove(id);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace KoiOrderingSystem_Service.Service
             }
             var check = await _repo.ReadAll();
             check = check.Where(c=>c.Name == add.Name).ToList();
-            if (check != null)
+            if (check.Any())
             {
                 throw new Exception($"Currency {add.Name} had already been added");
             }
