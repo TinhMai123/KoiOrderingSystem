@@ -14,5 +14,7 @@ namespace KoiOrderingSystem_Repository.IRepo
         Task<bool> Add(Payment model);
         Task<bool> Remove(int id);
         Task<bool> Update(Payment model);
+        Task<Payment?> ReadById(int id);
+        Task<List<Payment>> ReadAll();
     }
 }

@@ -14,5 +14,7 @@ namespace KoiOrderingSystem_Repository.IRepo
         Task<bool> Add(OrderTrip model);
         Task<bool> Remove(int id);
         Task<bool> Update(OrderTrip model);
+        Task<OrderTrip?> ReadById(int id);
+        Task<List<OrderTrip>> ReadAll();
     }
 }

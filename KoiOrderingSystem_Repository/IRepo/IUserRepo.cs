@@ -16,6 +16,8 @@ namespace KoiOrderingSystem_Repository.IRepo
         Task<bool> Add(User model);
         Task<bool> Remove(int id);
         Task<bool> Update(User model);
+        Task<User?> ReadById(int id);
+        Task<List<User>> ReadAll();
 
     }
 }

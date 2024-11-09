@@ -14,5 +14,7 @@ namespace KoiOrderingSystem_Repository.IRepo
         Task<bool> Add(KoiByBatch model);
         Task<bool> Remove(int id);
         Task<bool> Update(KoiByBatch model);
+        Task<KoiByBatch?> ReadById(int id);
+        Task<List<KoiByBatch>> ReadAll();
     }
 }

@@ -14,5 +14,7 @@ namespace KoiOrderingSystem_Repository.IRepo
         Task<bool> Add(Insurance model);
         Task<bool> Remove(int id);
         Task<bool> Update(Insurance model);
+        Task<Insurance?> ReadById(int id);
+        Task<List<Insurance>> ReadAll();
     }
 }

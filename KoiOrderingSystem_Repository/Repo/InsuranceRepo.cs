@@ -28,6 +28,16 @@ namespace KoiOrderingSystem_Repository.Repo
             return await InsuranceDAO.Instance.GetById(id);
         }
 
+        public async Task<List<Insurance>> ReadAll()
+        {
+            return await InsuranceDAO.Instance.ReadAll();
+        }
+
+        public async Task<Insurance?> ReadById(int id)
+        {
+            return await InsuranceDAO.Instance.ReadById(id);
+        }
+
         public async Task<bool> Remove(int id)
         {
             return await InsuranceDAO.Instance.Remove(id);
