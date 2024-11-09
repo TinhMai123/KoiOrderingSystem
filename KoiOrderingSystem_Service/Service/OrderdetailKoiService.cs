@@ -13,15 +13,13 @@ namespace KoiOrderingSystem_Service.Service
 
     public class OrderDetailKoiService : IOrderDetailKoiService
     {
-        private readonly IBaseRepository<OrderDetailKoi> _orderDetailKoiRepository;
         private readonly IOrderDetailKoiRepo _repo;
 
 
 
         // Constructor to initialize the repository
-        public OrderDetailKoiService(IBaseRepository<OrderDetailKoi> orderDetailKoiRepository, IOrderDetailKoiRepo repo)
+        public OrderDetailKoiService(IOrderDetailKoiRepo repo)
         {
-            _orderDetailKoiRepository = orderDetailKoiRepository ?? throw new ArgumentNullException(nameof(orderDetailKoiRepository));
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
@@ -32,19 +30,23 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(add), "OrderDetailKoi cannot be null.");
             }
-            return await _orderDetailKoiRepository.AddAsync(add);
+            if (add.Price < 0)
+            {
+                throw new Exception("Price cannot be smaller than 0");
+            }
+            return await _repo.Add(add);
         }
 
         // Retrieve all OrderDetailKoi records
         public async Task<List<OrderDetailKoi>> GetAlls()
         {
-            return await _orderDetailKoiRepository.GetAllAsync();
+            return await _repo.GetAll();
         }
 
         // Retrieve a OrderDetailKoi by ID
         public async Task<OrderDetailKoi?> GetById(int id)
         {
-            return await _orderDetailKoiRepository.GetByIdAsync(id);
+            return await _repo.GetById(id);
         }
 
         // Update an existing OrderDetailKoi
@@ -54,13 +56,17 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(orderDetailKoi), "OrderDetailKoi cannot be null.");
             }
-            return await _orderDetailKoiRepository.UpdateAsync(orderDetailKoi);
+            if (add.Price < 0)
+            {
+                throw new Exception("Price cannot be smaller than 0");
+            }
+            return await _repo.Update(orderDetailKoi);  
         }
 
         // Delete a OrderDetailKoi
         public async Task<bool> DeleteAsync(int id)
         {
-            return await _orderDetailKoiRepository.DeleteAsync(id);
+            return await _repo.Remove(id);
         }
     }
 }
