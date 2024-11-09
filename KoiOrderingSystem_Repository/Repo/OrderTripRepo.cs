@@ -28,6 +28,16 @@ namespace KoiOrderingSystem_Repository.Repo
             return await OrderTripDAO.Instance.GetById(id);
         }
 
+        public async Task<List<OrderTrip>> ReadAll()
+        {
+            return await OrderTripDAO.Instance.ReadAll();
+        }
+
+        public async Task<OrderTrip?> ReadById(int id)
+        {
+            return await OrderTripDAO.Instance.ReadById(id);
+        }
+
         public async Task<bool> Remove(int id)
         {
             return await OrderTripDAO.Instance.Remove(id);

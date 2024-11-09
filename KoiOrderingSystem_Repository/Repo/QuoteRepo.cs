@@ -28,6 +28,16 @@ namespace KoiOrderingSystem_Repository.Repo
             return await QuoteDAO.Instance.GetById(id);
         }
 
+        public async Task<List<Quote>> ReadAll()
+        {
+            return await QuoteDAO.Instance.ReadAll();
+        }
+
+        public async Task<Quote?> ReadById(int id)
+        {
+            return await QuoteDAO.Instance.ReadById(id);
+        }
+
         public async Task<bool> Remove(int id)
         {
             return await QuoteDAO.Instance.Remove(id);

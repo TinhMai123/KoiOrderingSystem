@@ -25,6 +25,16 @@ namespace KoiOrderingSystem_Repository.Repo
             return await KoiDAO.Instance.GetById(id);
         }
 
+        public async Task<List<Koi>> ReadAll()
+        {
+            return await KoiDAO.Instance.ReadAll();
+        }
+
+        public async Task<Koi?> ReadById(int id)
+        {
+            return await KoiDAO.Instance.ReadById(id);
+        }
+
         public async Task<bool> Remove(int id)
         {
             return await KoiDAO.Instance.Remove(id);

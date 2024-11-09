@@ -33,6 +33,16 @@ namespace KoiOrderingSystem_Repository.Repo
             return await UserDAO.Instance.GetUserByEmail(email);
         }
 
+        public async Task<List<User>> ReadAll()
+        {
+            return await UserDAO.Instance.ReadUsers();
+        }
+
+        public async Task<User?> ReadById(int id)
+        {
+            return await UserDAO.Instance.ReadById(id);
+        }
+
         public async Task<bool> Remove(int id)
         {
             return await UserDAO.Instance.Remove(id);
