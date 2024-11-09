@@ -25,6 +25,16 @@ namespace KoiOrderingSystem_Repository.Repo
             return await FarmDAO.Instance.GetById(id);
         }
 
+        public async Task<List<Farm>> ReadAll()
+        {
+            return await FarmDAO.Instance.ReadAll();
+        }
+
+        public async Task<Farm?> ReadById(int id)
+        {
+            return await FarmDAO.Instance.ReadById(id);
+        }
+
         public async Task<bool> Remove(int id)
         {
             return await FarmDAO.Instance.Remove(id);
