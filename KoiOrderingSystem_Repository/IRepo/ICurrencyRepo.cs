@@ -14,5 +14,7 @@ namespace KoiOrderingSystem_Repository.IRepo
         Task<bool> Add(Currency model);
         Task<bool> Remove(int id);
         Task<bool> Update(Currency model);
+        Task<Currency?> ReadById(int id);
+        Task<List<Currency>> ReadAll();
     }
 }

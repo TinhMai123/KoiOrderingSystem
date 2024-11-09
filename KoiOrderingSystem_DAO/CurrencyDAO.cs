@@ -40,7 +40,7 @@ namespace KoiOrderingSystem_DAO
         {
             return await _context.Currencies.ToListAsync();
         }
-        public async Task<Currency?> RedById(int id)
+        public async Task<Currency?> ReadById(int id)
         {
             return await _context.Currencies.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
         }

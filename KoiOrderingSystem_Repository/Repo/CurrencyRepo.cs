@@ -29,6 +29,16 @@ namespace KoiOrderingSystem_Repository.Repo
             return await CurrencyDAO.Instance.GetById(id);
         }
 
+        public async Task<List<Currency>> ReadAll()
+        {
+            return await CurrencyDAO.Instance.ReadAll();
+        }
+
+        public async Task<Currency?> ReadById(int id)
+        {
+            return await CurrencyDAO.Instance.ReadById(id);
+        }
+
         public async Task<bool> Remove(int id)
         {
             return await CurrencyDAO.Instance.Remove(id);
