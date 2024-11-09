@@ -13,29 +13,29 @@ namespace KoiOrderingSystem_Repository.Repo
 {
     public class OrderRepo : IOrderRepo
     {
-        public Task<bool> Add(Order model)
+        public async Task<bool> Add(Order model)
         {
-            return OrderDAO.Instance.Add(model);
+            return await OrderDAO.Instance.Add(model);
         }
 
-        public Task<List<Order>> GetAll()
+        public async Task<List<Order>> GetAll()
         {
-            return OrderDAO.Instance.GetAll();
+            return await OrderDAO.Instance.GetAll();
         }
 
-        public Task<Order?> GetById(int id)
+        public async Task<Order?> GetById(int id)
         {
-            return OrderDAO.Instance.GetById(id);
+            return await OrderDAO.Instance.GetById(id);
         }
 
-        public Task<bool> Remove(int id)
+        public async Task<bool> Remove(int id)
         {
-            return OrderDAO.Instance.Remove(id);
+            return await OrderDAO.Instance.Remove(id);
         }
 
-        public Task<bool> Update(Order model)
+        public async Task<bool> Update(Order model)
         {
-            return OrderDAO.Instance.Update(model);
+            return await OrderDAO.Instance.Update(model);
         }
     }
 }
