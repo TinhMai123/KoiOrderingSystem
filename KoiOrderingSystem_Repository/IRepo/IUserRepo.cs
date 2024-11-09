@@ -10,7 +10,7 @@ namespace KoiOrderingSystem_Repository.IRepo
 {
     public interface IUserRepo
     {
-        public User? GetUserByEmail(string email);
+        public Task<User?> GetUserByEmail(string email);
         Task<User?> GetById(int id);
         Task<List<User>> GetAll();
         Task<bool> Add(User model);
