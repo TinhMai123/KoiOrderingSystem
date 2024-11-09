@@ -14,5 +14,7 @@ namespace KoiOrderingSystem_Repository.IRepo
         Task<bool> Add(Feedback model);
         Task<bool> Remove(int id);
         Task<bool> Update(Feedback model);
+        Task<Feedback?> ReadById(int id);
+        Task<List<Feedback>> ReadAll();
     }
 }
