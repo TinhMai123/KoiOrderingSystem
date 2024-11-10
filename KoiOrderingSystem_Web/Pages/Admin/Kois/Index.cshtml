@@ -1,0 +1,114 @@
+﻿@page
+@model KoiOrderingSystem_Web.Pages.Admin.Kois.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Koi[0].Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Koi[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Koi[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Koi[0].HealthStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Koi[0].BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Koi[0].DateAdded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Koi[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Koi[0].Picture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Koi[0].OrderDetailKoiId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Koi[0].KoiType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Koi[0].CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Koi[0].DeletedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Koi[0].UpdatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Koi[0].IsDeleted)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Koi) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HealthStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateAdded)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Picture)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDetailKoiId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KoiType.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeletedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

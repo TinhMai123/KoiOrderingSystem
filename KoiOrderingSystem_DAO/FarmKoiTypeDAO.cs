@@ -1,5 +1,6 @@
 ﻿using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,64 +31,94 @@ namespace KoiOrderingSystem_DAO
                 }
                 return _instance;
             }
-        } 
+        }
+        public async Task<List<FarmKoiType>> GetAll()
+        {
+            return await _context.FarmKoiTypes.ToListAsync();
+        }
+
+        public async Task<FarmKoiType?> GetById(int id)
+        {
+            return await  _context.FarmKoiTypes.SingleOrDefaultAsync(x => x.Id == id) ;
+
+        }
+        public async Task<List<FarmKoiType>> ReadAll()
+        {
+            return await _context.FarmKoiTypes.AsNoTracking().ToListAsync();
+        }
+
+        public async Task<FarmKoiType?> ReadById(int id)
+        {
+            return await _context.FarmKoiTypes.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+        }
 
         // CREATE a new FarmKoiType record
-        public void AddFarmKoiType(FarmKoiType newFarmKoiType)
+        public async Task<bool> Add(FarmKoiType model)
         {
+            var isSuccess = false;
             try
             {
-                _context.FarmKoiTypes.Add(newFarmKoiType);
-                _context.SaveChanges();
+                var existingModel = await _context.FarmKoiTypes.SingleOrDefaultAsync(x => x.Id == model.Id);
+                if (existingModel == null)
+                {
+                    _context.FarmKoiTypes.Add(model);
+                    await _context.SaveChangesAsync();
+                    _context.Entry(model).State = EntityState.Detached;
+                    isSuccess = true;
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                LogError($"Error adding FarmKoiType: {ex.Message}");
+
+                throw;
             }
-        }
-
-        // READ all FarmKoiType records
-        public List<FarmKoiType> GetAllFarmKoiTypes()
-        {
-            return _context.FarmKoiTypes.ToList();
-        }
-
-        // READ a FarmKoiType by its ID
-        public FarmKoiType GetFarmKoiTypeById(int id)
-        {
-            return _context.FarmKoiTypes.Find(id);
+            return isSuccess;
         }
 
         // UPDATE a FarmKoiType record
-        public void UpdateFarmKoiType(FarmKoiType farmKoiTypeToUpdate)
+        public async Task<bool> Update(FarmKoiType model)
         {
+            var isSuccess = false;
             try
             {
-                _context.FarmKoiTypes.Update(farmKoiTypeToUpdate);
-                _context.SaveChanges();
+                var existingModel = await _context.FarmKoiTypes.SingleOrDefaultAsync(x => x.Id == model.Id);
+                if (existingModel != null)
+                {
+                    _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    await _context.SaveChangesAsync();
+                    _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+                    isSuccess = true;
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                LogError($"Error updating FarmKoiType: {ex.Message}");
+
+                throw;
             }
+            return isSuccess;
         }
 
         // DELETE a FarmKoiType by its ID
-        public void DeleteFarmKoiType(FarmKoiType farmKoiTypeToDelete)
+        public async Task<bool> Remove(int id)
         {
+            var isSuccess = false;
             try
             {
-                
-                if (farmKoiTypeToDelete != null)
+                var existingModel = await _context.FarmKoiTypes.SingleOrDefaultAsync(x => x.Id == id);
+                if (existingModel != null)
                 {
-                    _context.FarmKoiTypes.Remove(farmKoiTypeToDelete);
-                    _context.SaveChanges();
+                    _context.FarmKoiTypes.Remove(existingModel);
+                    await _context.SaveChangesAsync();
+                    _context.Entry(existingModel).State = EntityState.Detached;
+                    isSuccess = true;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                LogError($"Error deleting FarmKoiType: {ex.Message}");
+
+                throw;
             }
+            return isSuccess;
         }
 
         // Method for logging errors (placeholder for actual logging implementation)

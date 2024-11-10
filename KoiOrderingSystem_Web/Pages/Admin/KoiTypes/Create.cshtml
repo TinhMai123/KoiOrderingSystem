@@ -1,0 +1,69 @@
+﻿@page
+@model KoiOrderingSystem_Web.Pages.Admin.KoiTypes.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>KoiType</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="KoiType.Name" class="control-label"></label>
+                <input asp-for="KoiType.Name" class="form-control" />
+                <span asp-validation-for="KoiType.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KoiType.IsEndangered" class="control-label"></label>
+                <input asp-for="KoiType.IsEndangered" class="form-control" />
+                <span asp-validation-for="KoiType.IsEndangered" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KoiType.IsBatch" class="control-label"></label>
+                <input asp-for="KoiType.IsBatch" class="form-control" />
+                <span asp-validation-for="KoiType.IsBatch" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KoiType.Picture" class="control-label"></label>
+                <input asp-for="KoiType.Picture" class="form-control" />
+                <span asp-validation-for="KoiType.Picture" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KoiType.CreatedAt" class="control-label"></label>
+                <input asp-for="KoiType.CreatedAt" class="form-control" />
+                <span asp-validation-for="KoiType.CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KoiType.DeletedAt" class="control-label"></label>
+                <input asp-for="KoiType.DeletedAt" class="form-control" />
+                <span asp-validation-for="KoiType.DeletedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KoiType.UpdatedAt" class="control-label"></label>
+                <input asp-for="KoiType.UpdatedAt" class="form-control" />
+                <span asp-validation-for="KoiType.UpdatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="KoiType.IsDeleted" /> @Html.DisplayNameFor(model => model.KoiType.IsDeleted)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

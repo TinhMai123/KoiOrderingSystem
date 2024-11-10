@@ -1,4 +1,4 @@
-﻿using ClassBookingRoom_Repository;
+﻿
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_Repository.IRepo;
 using KoiOrderingSystem_Service.IService;
@@ -12,15 +12,10 @@ namespace KoiOrderingSystem_Service.Service
 {
     public class InsuranceService : IInsuranceService
     {
-        private readonly IBaseRepository<Insurance> _insuranceRepository;
         private readonly IInsuranceRepo _repo;
 
-
-
         // Constructor to initialize the repository
-        public InsuranceService(IBaseRepository<Insurance> insuaranceRepository, IInsuranceRepo repo)
-        {
-            _insuranceRepository = insuaranceRepository ?? throw new ArgumentNullException(nameof(insuaranceRepository));
+        public InsuranceService(IInsuranceRepo repo) { 
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
@@ -29,21 +24,25 @@ namespace KoiOrderingSystem_Service.Service
         {
             if (add == null)
             {
-                throw new ArgumentNullException(nameof(add), "InsuaranceService cannot be null.");
+                throw new ArgumentNullException(nameof(add), "Insuarance cannot be null.");
             }
-            return await _insuranceRepository.AddAsync(add);
+            if(add.Price < 0)
+            {
+                throw new Exception("We do not accept number under 0");
+            }
+            return await _repo.Add(add);
         }
 
         // Retrieve all InsuaranceService records
         public async Task<List<Insurance>> GetAlls()
         {
-            return await _insuranceRepository.GetAllAsync();
+            return await _repo.GetAll();
         }
 
         // Retrieve a InsuaranceService by ID
         public async Task<Insurance?> GetById(int id)
         {
-            return await _insuranceRepository.GetByIdAsync(id);
+            return await _repo.GetById(id);
         }
 
         // Update an existing InsuaranceService
@@ -53,13 +52,17 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(insurance), "InsuaranceService cannot be null.");
             }
-            return await _insuranceRepository.UpdateAsync(insurance);
+            if (insurance.Price < 0)
+            {
+                throw new Exception("We do not accept number under 0");
+            }
+            return await _repo.Update(insurance);
         }
 
         // Delete a InsuaranceService
         public async Task<bool> DeleteAsync(int id)
         {
-            return await _insuranceRepository.DeleteAsync(id);
+            return await _repo.Remove(id);
         }
     }
 }

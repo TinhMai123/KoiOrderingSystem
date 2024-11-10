@@ -1,4 +1,4 @@
-﻿using ClassBookingRoom_Repository;
+﻿
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
 using KoiOrderingSystem_DAO;
@@ -7,10 +7,41 @@ using System.Collections.Generic;
 
 namespace KoiOrderingSystem_Repository.Repo
 {
-    public class KoiTypeRepo : BaseRepository<KoiType>, IKoiTypeRepo
+    public class KoiTypeRepo : IKoiTypeRepo
     {
-        public KoiTypeRepo(KoiOrderingSystemContext context) : base(context)
+        public async Task<bool> Add(KoiType model)
         {
+            return await KoiTypeDAO.Instance.Add(model);
+        }
+
+        public async Task<List<KoiType>> GetAll()
+        {
+            return await KoiTypeDAO.Instance.GetAll();
+        }
+
+        public async Task<KoiType?> GetById(int id)
+        {
+            return await KoiTypeDAO.Instance.GetById(id);
+        }
+
+        public async Task<List<KoiType>> ReadAll()
+        {
+            return await KoiTypeDAO.Instance.ReadAll();
+        }
+
+        public async Task<KoiType?> ReadById(int id)
+        {
+            return await KoiTypeDAO.Instance.ReadById(id);
+        }
+
+        public async Task<bool> Remove(int id)
+        {
+            return await KoiTypeDAO.Instance.Remove(id);
+        }
+
+        public async Task<bool> Update(KoiType model)
+        {
+            return await KoiTypeDAO.Instance.Update(model);
         }
     }
 }

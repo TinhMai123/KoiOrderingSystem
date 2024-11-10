@@ -1,4 +1,4 @@
-﻿using ClassBookingRoom_Repository;
+﻿
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_Repository.IRepo;
 using KoiOrderingSystem_Service.IService;
@@ -13,13 +13,11 @@ namespace KoiOrderingSystem_Service.Service
 
     public class QuoteService : IQuoteService
     {
-        private readonly IBaseRepository<Quote> _quoteRepository;
         private readonly IQuoteRepo _repo;
 
         // Constructor to initialize the repository
-        public QuoteService(IBaseRepository<Quote> quoteRepository, IQuoteRepo repo)
+        public QuoteService( IQuoteRepo repo)
         {
-            _quoteRepository = quoteRepository ?? throw new ArgumentNullException(nameof(quoteRepository));
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
@@ -30,19 +28,19 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(add), "Quote cannot be null.");
             }
-            return await _quoteRepository.AddAsync(add);
+            return await _repo.Add(add);
         }
 
         // Retrieve all Quote records
         public async Task<List<Quote>> GetAlls()
         {
-            return await _quoteRepository.GetAllAsync();
+            return await _repo.GetAll();
         }
 
         // Retrieve a Quote by ID
         public async Task<Quote?> GetById(int id)
         {
-            return await _quoteRepository.GetByIdAsync(id);
+            return await _repo.GetById(id);
         }
 
         // Update an existing Quote
@@ -52,13 +50,13 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(quote), "Quote cannot be null.");
             }
-            return await _quoteRepository.UpdateAsync(quote);
+            return await _repo.Update(quote);
         }
 
         // Delete a Quote
         public async Task<bool> DeleteAsync(int id)
         {
-            return await _quoteRepository.DeleteAsync(id);
+            return await _repo.Remove(id);
         }
     }
 }

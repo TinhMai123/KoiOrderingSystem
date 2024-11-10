@@ -1,4 +1,4 @@
-﻿using ClassBookingRoom_Repository;
+﻿
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_Repository.IRepo;
 using KoiOrderingSystem_Service.IService;
@@ -13,15 +13,13 @@ namespace KoiOrderingSystem_Service.Service
 
     public class OrderTripService : IOrderTripService
     {
-        private readonly IBaseRepository<OrderTrip> _orderTripRepository;
         private readonly IOrderTripRepo _repo;
 
 
 
         // Constructor to initialize the repository
-        public OrderTripService(IBaseRepository<OrderTrip> orderTripRepository, IOrderTripRepo repo)
+        public OrderTripService( IOrderTripRepo repo)
         {
-            _orderTripRepository = orderTripRepository ?? throw new ArgumentNullException(nameof(orderTripRepository));
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));  
         }
 
@@ -32,19 +30,19 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(add), "OrderTrip cannot be null.");
             }
-            return await _orderTripRepository.AddAsync(add);
+            return await _repo.Add(add);
         }
 
         // Retrieve all OrderTrip records
         public async Task<List<OrderTrip>> GetAlls()
         {
-            return await _orderTripRepository.GetAllAsync();
+            return await _repo.GetAll();
         }
 
         // Retrieve a OrderTrip by ID
         public async Task<OrderTrip?> GetById(int id)
         {
-            return await _orderTripRepository.GetByIdAsync(id);
+            return await _repo.GetById(id);
         }
 
         // Update an existing OrderTrip
@@ -54,13 +52,13 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(orderTrip), "OrderTrip cannot be null.");
             }
-            return await _orderTripRepository.UpdateAsync(orderTrip);
+            return await _repo.Update(orderTrip);
         }
 
         // Delete a OrderTrip
         public async Task<bool> DeleteAsync(int id)
         {
-            return await _orderTripRepository.DeleteAsync(id);
+            return await _repo.Remove(id);
         }
     }
 }

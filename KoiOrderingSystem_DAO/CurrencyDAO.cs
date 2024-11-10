@@ -1,5 +1,6 @@
 ﻿using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,24 +32,33 @@ namespace KoiOrderingSystem_DAO
             }
         }
 
-        public Currency? GetById(int id)
+        public async Task<Currency?> GetById(int id)
         {
-            return _context.Currencies.SingleOrDefault(x => x.Id == id);
+            return await _context.Currencies.SingleOrDefaultAsync(x => x.Id == id);
         }
-        public List<Currency> GetAll()
+        public async Task<List<Currency>> GetAll()
         {
-            return _context.Currencies.ToList();
+            return await _context.Currencies.ToListAsync();
         }
-        public bool Add(Currency model)
+        public async Task<Currency?> ReadById(int id)
+        {
+            return await _context.Currencies.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+        }
+        public async Task<List<Currency>> ReadAll()
+        {
+            return await _context.Currencies.AsNoTracking().ToListAsync();
+        }
+        public async Task<bool> Add(Currency model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Currencies.SingleOrDefault(x => x.Name == model.Name);
+                var existingModel = await _context.Currencies.SingleOrDefaultAsync(x => x.Name == model.Name);
                 if (existingModel == null)
                 {
                     _context.Currencies.Add(model);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
+                    _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
                 }
             }
@@ -59,16 +69,17 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Remove(Currency model)
+        public async Task<bool> Remove(int id)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Currencies.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.Currencies.SingleOrDefaultAsync(x => x.Id == id);
                 if (existingModel != null)
                 {
                     _context.Currencies.Remove(existingModel);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
+                    _context.Entry(existingModel).State = EntityState.Detached;
                     isSuccess = true;
                 }
             }
@@ -79,16 +90,16 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Update(Currency model)
+        public async Task<bool> Update(Currency model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Currencies.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.Currencies.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
                     isSuccess = true;
                 }

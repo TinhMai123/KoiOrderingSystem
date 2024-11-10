@@ -8,7 +8,7 @@ namespace KoiOrderingSystem_BusinessObject
         public int Id { get; set; }
         public int? CustomerId { get; set; }
         public decimal? TotalAmount { get; set; }
-        public int? Status { get; set; }
+        public string? Status { get; set; }
         public string? ShippingAddress { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }

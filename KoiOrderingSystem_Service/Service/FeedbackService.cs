@@ -1,4 +1,4 @@
-﻿using ClassBookingRoom_Repository;
+﻿
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_Repository.IRepo;
 using KoiOrderingSystem_Service.IService;
@@ -12,15 +12,13 @@ namespace KoiOrderingSystem_Service.Service
 {
     public class FeedbackService : IFeedbackService
     {
-        private readonly IBaseRepository<Feedback> _feebackRepository;
         private readonly IFeedbackRepo _repo;
 
 
 
         // Constructor to initialize the repository
-        public FeedbackService(IBaseRepository<Feedback> feebackRepository, IFeedbackRepo repo)
+        public FeedbackService(IFeedbackRepo repo)
         {
-            _feebackRepository = feebackRepository ?? throw new ArgumentNullException(nameof(feebackRepository));
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
@@ -31,35 +29,44 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(add), "Feedback cannot be null.");
             }
-            return await _feebackRepository.AddAsync(add);
+            if(add.Rating<0 && add.Rating > 5)
+            {
+                throw new Exception($"We do not accept this number");
+            }
+
+            return await _repo.Add(add);
         }
 
         // Retrieve all Feedback records
         public async Task<List<Feedback>> GetAlls()
         {
-            return await _feebackRepository.GetAllAsync();
+            return await _repo.GetAll();
         }
 
         // Retrieve a Feedback by ID
         public async Task<Feedback?> GetById(int id)
         {
-            return await _feebackRepository.GetByIdAsync(id);
+            return await _repo.GetById(id);
         }
 
         // Update an existing Feedback
-        public async Task<bool> UpdateAsync(Feedback feeback)
+        public async Task<bool> UpdateAsync(Feedback feedback)
         {
-            if (feeback == null)
+            if (feedback == null)
             {
-                throw new ArgumentNullException(nameof(feeback), "Feedback cannot be null.");
+                throw new ArgumentNullException(nameof(feedback), "Feedback cannot be null.");
             }
-            return await _feebackRepository.UpdateAsync(feeback);
+            if (feedback.Rating < 0 && feedback.Rating > 5)
+            {
+                throw new Exception($"We do not accept this number");
+            }
+            return await _repo.Update(feedback);
         }
 
         // Delete a Feedback
         public async Task<bool> DeleteAsync(int id)
         {
-            return await _feebackRepository.DeleteAsync(id);
+            return await _repo.Remove(id);
         }
     }
 }

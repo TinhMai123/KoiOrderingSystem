@@ -1,5 +1,6 @@
 ﻿using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,24 +31,33 @@ namespace KoiOrderingSystem_DAO
                 return instance;
             }
         }
-        public OrderTrip? GetById(int id)
+        public async Task<OrderTrip?> GetById(int id)
         {
-            return _context.OrderTrips.SingleOrDefault(x => x.Id == id);
+            return await _context.OrderTrips.SingleOrDefaultAsync(x => x.Id == id);
         }
-        public List<OrderTrip> GetAll()
+        public async Task<List<OrderTrip>> ReadAll()
         {
-            return _context.OrderTrips.ToList();
+            return await _context.OrderTrips.AsNoTracking().ToListAsync();
         }
-        public bool Add(OrderTrip model)
+        public async Task<OrderTrip?> ReadById(int id)
+        {
+            return await _context.OrderTrips.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+        }
+        public async Task<List<OrderTrip>> GetAll()
+        {
+            return await _context.OrderTrips.ToListAsync();
+        }
+        public async Task<bool> Add(OrderTrip model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.OrderTrips.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.OrderTrips.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel == null)
                 {
                     _context.OrderTrips.Add(model);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
+                    _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
                 }
             } catch (Exception)
@@ -57,16 +67,17 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Remove(OrderTrip model)
+        public async Task<bool> Remove(int id)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.OrderTrips.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.OrderTrips.SingleOrDefaultAsync(x => x.Id == id);
                 if (existingModel != null)
                 {
                     _context.OrderTrips.Remove(existingModel);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
+                    _context.Entry(existingModel).State = EntityState.Detached;
                     isSuccess = true;
                 }
             } catch (Exception)
@@ -76,12 +87,12 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Update(OrderTrip model)
+        public async Task<bool> Update(OrderTrip model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.OrderTrips.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.OrderTrips.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;

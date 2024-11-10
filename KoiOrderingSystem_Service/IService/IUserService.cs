@@ -10,7 +10,11 @@ namespace KoiOrderingSystem_Service.IService
 {
     public interface IUserService
     {
-        public User?  GetUserByEmail(string email);
-        public List<User>  GetUsers();
+        Task<User?>  GetUserByEmail(string email);
+        Task<bool> AddAsync(User add);
+        Task<List<User>> GetAlls();
+        Task<User?> GetById(int id);
+        Task<bool> UpdateAsync(User update);
+        Task<bool> DeleteAsync(int id);
     }
 }

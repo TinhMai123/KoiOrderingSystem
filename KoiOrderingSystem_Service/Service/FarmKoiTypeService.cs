@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ClassBookingRoom_Repository;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_Repository;
 using KoiOrderingSystem_Repository.IRepo;
@@ -10,15 +9,13 @@ namespace KoiOrderingSystem_Service.Service
 {
     public class FarmKoiTypeService : IFarmKoiTypeService
     {
-        private readonly IBaseRepository<FarmKoiType> _farmKoiTypeRepository;
         private readonly IFarmKoiTypeRepo _repo;
 
 
 
         // Constructor to initialize the repository
-        public FarmKoiTypeService(IBaseRepository<FarmKoiType> farmKoiTypeRepository, IFarmKoiTypeRepo repo)
+        public FarmKoiTypeService( IFarmKoiTypeRepo repo)
         {
-            _farmKoiTypeRepository = farmKoiTypeRepository ?? throw new ArgumentNullException(nameof(farmKoiTypeRepository));
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
@@ -29,19 +26,23 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(newFarm), "FarmKoiType cannot be null.");
             }
-            return await _farmKoiTypeRepository.AddAsync(newFarm);
+            if (newFarm.Quantity < 0)
+            {
+                throw new Exception("Cannot have a quantity of 0");
+            }
+            return await _repo.Add(newFarm);
         }
 
         // Retrieve all FarmKoiType records
         public async Task<List<FarmKoiType>> GetAlls()
         {
-            return await _farmKoiTypeRepository.GetAllAsync();
+            return await _repo.GetAll();
         }
 
         // Retrieve a FarmKoiType by ID
         public async Task<FarmKoiType?> GetById(int id)
         {
-            return await _farmKoiTypeRepository.GetByIdAsync(id);
+            return await _repo.GetById(id);
         }
 
         // Update an existing FarmKoiType
@@ -51,13 +52,13 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(farmKoiType), "FarmKoiType cannot be null.");
             }
-            return await _farmKoiTypeRepository.UpdateAsync(farmKoiType);
+            return await _repo.Update(farmKoiType);
         }
 
         // Delete a FarmKoiType
         public  async Task<bool> DeleteAsync(int id)
         {
-            return await _farmKoiTypeRepository.DeleteAsync(id);
+            return await _repo.Remove(id);
         }
     }
 }

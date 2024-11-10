@@ -9,6 +9,12 @@ namespace KoiOrderingSystem_Repository.IRepo
 {
     public interface IFarmRepo
     {
-        
+        Task<Farm?> GetById(int id);
+        Task<List<Farm>> GetAll();
+        Task<bool> Add(Farm model);
+        Task<bool> Remove(int id);
+        Task<bool> Update(Farm model);
+        Task<Farm?> ReadById(int id);
+        Task<List<Farm>> ReadAll();
     }
 }

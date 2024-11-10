@@ -1,4 +1,4 @@
-﻿using ClassBookingRoom_Repository;
+﻿
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_Repository.IRepo;
 using KoiOrderingSystem_Service.IService;
@@ -12,15 +12,13 @@ namespace KoiOrderingSystem_Service.Service
 {
     public class KoiByBatchService : IKoiByBatchService
     {
-        private readonly IBaseRepository<KoiByBatch> _koiByBatchRepository;
         private readonly IKoiByBatchRepo _repo;
 
 
 
         // Constructor to initialize the repository
-        public KoiByBatchService(IBaseRepository<KoiByBatch> koiByBatchRepository, IKoiByBatchRepo repo)
+        public KoiByBatchService(IKoiByBatchRepo repo)
         {
-            _koiByBatchRepository = koiByBatchRepository ?? throw new ArgumentNullException(nameof(koiByBatchRepository));
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
         }
 
@@ -31,19 +29,31 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(add), "KoiByBatch cannot be null.");
             }
-            return await _koiByBatchRepository.AddAsync(add);
+            if(add.Quantity < 0)
+            {
+                throw new Exception("Quantity cannot be smaller than 0");
+            }
+            if(add.Size < 0)
+            {
+                throw new Exception("Size cannot be smaller than 0");
+            }
+            if(add.Price < 0)
+            {
+                throw new Exception("Price cannot be smaller than 0");
+            }
+            return await _repo.Add(add);
         }
 
         // Retrieve all KoiByBatch records
         public async Task<List<KoiByBatch>> GetAlls()
         {
-            return await _koiByBatchRepository.GetAllAsync();
+            return await _repo.GetAll();
         }
 
         // Retrieve a KoiByBatch by ID
         public async Task<KoiByBatch?> GetById(int id)
         {
-            return await _koiByBatchRepository.GetByIdAsync(id);
+            return await _repo.GetById(id);
         }
 
         // Update an existing KoiByBatch
@@ -53,13 +63,25 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(koiByBatch), "KoiByBatch cannot be null.");
             }
-            return await _koiByBatchRepository.UpdateAsync(koiByBatch);
+            if (koiByBatch.Quantity < 0)
+            {
+                throw new Exception("Quantity cannot be smaller than 0");
+            }
+            if (koiByBatch.Size < 0)
+            {
+                throw new Exception("Size cannot be smaller than 0");
+            }
+            if (koiByBatch.Price < 0)
+            {
+                throw new Exception("Price cannot be smaller than 0");
+            }
+            return await _repo.Update(koiByBatch);
         }
 
         // Delete a KoiByBatch
         public async Task<bool> DeleteAsync(int id)
         {
-            return await _koiByBatchRepository.DeleteAsync(id);
+            return await _repo.Remove(id);
         }
     }
 }

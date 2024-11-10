@@ -1,5 +1,6 @@
 ﻿using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,24 +31,33 @@ namespace KoiOrderingSystem_DAO
                 return instance;
             }
         }
-        public Insurance? GetById(int id)
+        public async Task<Insurance?> GetById(int id)
         {
-            return _context.Insurances.SingleOrDefault(x => x.Id == id);
+            return await _context.Insurances.SingleOrDefaultAsync(x => x.Id == id);
         }
-        public List<Insurance> GetAll()
+        public async Task<List<Insurance>> GetAll()
         {
-            return _context.Insurances.ToList();
+            return await _context.Insurances.ToListAsync();
         }
-        public bool Add(Insurance model)
+        public async Task<Insurance?> ReadById(int id)
+        {
+            return await _context.Insurances.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+        }
+        public async Task<List<Insurance>> ReadAll()
+        {
+            return await _context.Insurances.AsNoTracking().ToListAsync();
+        }
+        public async  Task<bool> Add(Insurance model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Insurances.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await  _context.Insurances.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel == null)
                 {
                     _context.Insurances.Add(model);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
+                    _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
                 }
             }
@@ -58,16 +68,17 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Remove(Insurance model)
+        public async Task<bool> Remove(int id)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Insurances.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.Insurances.SingleOrDefaultAsync(x => x.Id == id);
                 if (existingModel != null)
                 {
                     _context.Insurances.Remove(existingModel);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
+                    _context.Entry(existingModel).State = EntityState.Detached;
                     isSuccess = true;
                 }
             }
@@ -78,16 +89,16 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Update(Insurance model)
+        public async Task<bool> Update(Insurance model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Insurances.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.Insurances.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
                     isSuccess = true;
                 }

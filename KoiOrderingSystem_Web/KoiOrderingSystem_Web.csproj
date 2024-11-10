@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aa2fff0c-20f4-4f37-8787-ceb69b21c0ff</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -44,7 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Pages\Admin.cshtml" />
+    <None Include="Pages\Admin\Admin.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -1,3 +1,4 @@
+
 using KoiOrderingSystem_BusinessObject.Data;
 using KoiOrderingSystem_Repository.IRepo;
 using KoiOrderingSystem_Repository.Repo;
@@ -55,7 +56,6 @@ builder.Services.AddScoped<IQuoteService, QuoteService>();
 
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddScoped<IUserService, UserService>();
-
 
 
 

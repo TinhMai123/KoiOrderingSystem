@@ -1,0 +1,75 @@
+﻿@page
+@model KoiOrderingSystem_Web.Pages.Admin.Farms.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Farm</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Farm.Id" />
+            <div class="form-group">
+                <label asp-for="Farm.FarmName" class="control-label"></label>
+                <input asp-for="Farm.FarmName" class="form-control" />
+                <span asp-validation-for="Farm.FarmName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Farm.Location" class="control-label"></label>
+                <input asp-for="Farm.Location" class="form-control" />
+                <span asp-validation-for="Farm.Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Farm.Description" class="control-label"></label>
+                <input asp-for="Farm.Description" class="form-control" />
+                <span asp-validation-for="Farm.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Farm.ManagerId" class="control-label"></label>
+                <select asp-for="Farm.ManagerId" class="form-control" asp-items="ViewBag.ManagerId"></select>
+                <span asp-validation-for="Farm.ManagerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Farm.EstablishedYear" class="control-label"></label>
+                <input asp-for="Farm.EstablishedYear" class="form-control" />
+                <span asp-validation-for="Farm.EstablishedYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Farm.CreatedAt" class="control-label"></label>
+                <input asp-for="Farm.CreatedAt" class="form-control" />
+                <span asp-validation-for="Farm.CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Farm.DeletedAt" class="control-label"></label>
+                <input asp-for="Farm.DeletedAt" class="form-control" />
+                <span asp-validation-for="Farm.DeletedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Farm.UpdatedAt" class="control-label"></label>
+                <input asp-for="Farm.UpdatedAt" class="form-control" />
+                <span asp-validation-for="Farm.UpdatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Farm.IsDeleted" /> @Html.DisplayNameFor(model => model.Farm.IsDeleted)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

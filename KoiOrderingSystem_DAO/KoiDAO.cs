@@ -1,5 +1,6 @@
 ﻿using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,24 +30,33 @@ namespace KoiOrderingSystem_DAO
                 return instance;
             }
         }
-        public Koi? GetById(int id)
+        public async Task<Koi?> GetById(int id)
         {
-            return _context.Kois.SingleOrDefault(x => x.Id == id);
+            return await _context.Kois.SingleOrDefaultAsync(x => x.Id == id);
         }
-        public List<Koi> GetAll()
+        public async Task<List<Koi>> ReadAll()
         {
-            return _context.Kois.ToList();
+            return await _context.Kois.AsNoTracking().ToListAsync();
         }
-        public bool Add(Koi model)
+        public async Task<List<Koi>> GetAll()
+        {
+            return await _context.Kois.ToListAsync();
+        }
+        public async Task<Koi?> ReadById(int id)
+        {
+            return await _context.Kois.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+        }
+        public async Task<bool> Add(Koi model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Kois.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.Kois.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel == null)
                 {
                     _context.Kois.Add(model);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
+                    _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
                 }
             }
@@ -57,16 +67,17 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Remove(Koi model)
+        public async Task<bool> Remove(int id)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Kois.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.Kois.SingleOrDefaultAsync(x => x.Id == id);
                 if (existingModel != null)
                 {
                     _context.Kois.Remove(existingModel);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
+                    _context.Entry(existingModel).State = EntityState.Detached;
                     isSuccess = true;
                 }
             }
@@ -77,16 +88,16 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public bool Update(Koi model)
+        public async Task<bool> Update(Koi model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = _context.Kois.SingleOrDefault(x => x.Id == model.Id);
+                var existingModel = await _context.Kois.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel != null)
                 {
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
                     isSuccess = true;
                 }
