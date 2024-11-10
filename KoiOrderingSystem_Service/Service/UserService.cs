@@ -56,6 +56,16 @@ namespace KoiOrderingSystem_Service.Service
             return await _repo.GetAll();
         }
 
+        public async Task<List<User>> ReadAlls()
+        { 
+            return await _repo.ReadAll();
+        }
+
+        public async Task<User?> ReadById(int id)
+        {
+            return await _repo.ReadById(id);
+        }
+
         public async Task<bool> UpdateAsync(User update)
         {
             if (update == null)

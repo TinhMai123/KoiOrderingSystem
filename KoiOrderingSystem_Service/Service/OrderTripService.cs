@@ -60,5 +60,15 @@ namespace KoiOrderingSystem_Service.Service
         {
             return await _repo.Remove(id);
         }
+
+        public async Task<List<OrderTrip>> ReadAlls()
+        {
+            return await _repo.ReadAll();
+        }
+
+        public async Task<OrderTrip?> ReadById(int id)
+        {
+            return await _repo.ReadById(id);
+        }
     }
 }

@@ -11,9 +11,9 @@ namespace KoiOrderingSystem_Service.IService
     {
         Task<bool> AddAsync(Insurance add);
         Task<List<Insurance>> GetAlls();
-        Task<Insurance> GetById(int id);
+        Task<Insurance?> GetById(int id);
         Task<List<Insurance>> ReadAlls();
-        Task<Insurance> ReadById(int id);
+        Task<Insurance?> ReadById(int id);
         Task<bool> UpdateAsync(Insurance update);
         Task<bool> DeleteAsync(int id);
     }
