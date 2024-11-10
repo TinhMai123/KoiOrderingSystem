@@ -1,4 +1,4 @@
-﻿using ClassBookingRoom_Repository;
+﻿
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_Repository.IRepo;
 using KoiOrderingSystem_Service.IService;
@@ -56,7 +56,7 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new ArgumentNullException(nameof(orderDetailKoi), "OrderDetailKoi cannot be null.");
             }
-            if (add.Price < 0)
+            if (orderDetailKoi.Price < 0)
             {
                 throw new Exception("Price cannot be smaller than 0");
             }

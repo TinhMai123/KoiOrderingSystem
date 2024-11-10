@@ -25,9 +25,9 @@ namespace KoiOrderingSystem_Web.Pages
         {
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
-            var user = _userService.GetUserByEmail(Email);
+            var user = await _userService.GetUserByEmail(Email);
 
             if (user != null && Password == user.Password)
             {

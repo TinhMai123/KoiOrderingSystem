@@ -16,9 +16,9 @@ namespace KoiOrderingSystem_Web.Pages
             _koiService = koiService;
         }
 
-        public void OnGet()
+        public async void OnGet()
         {
-            Kois = _koiService.GetAllKois();
+            Kois = await _koiService.GetAlls();
         }
 
     }
