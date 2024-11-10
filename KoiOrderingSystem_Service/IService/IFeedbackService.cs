@@ -12,6 +12,8 @@ namespace KoiOrderingSystem_Service.IService
         Task<bool> AddAsync(Feedback add);
         Task<List<Feedback>> GetAlls();
         Task<Feedback?> GetById(int id);
+        Task<List<Feedback>> ReadAlls();
+        Task<Feedback?> ReadById(int id);
         Task<bool> UpdateAsync(Feedback update);
         Task<bool> DeleteAsync(int id);
     }

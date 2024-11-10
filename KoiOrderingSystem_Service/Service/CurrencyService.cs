@@ -54,6 +54,16 @@ namespace KoiOrderingSystem_Service.Service
             return await _repo.GetById(id);
         }
 
+        public async Task<List<Currency>> ReadAlls()
+        {
+            return await _repo.ReadAll();
+        }
+
+        public async Task<Currency?> ReadById(int id)
+        {
+            return await _repo.ReadById(id);
+        }
+
         public async Task<bool> UpdateAsync(Currency update)
         {
             if (update == null)

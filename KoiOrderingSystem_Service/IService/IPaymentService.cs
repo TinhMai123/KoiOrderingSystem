@@ -12,6 +12,8 @@ namespace KoiOrderingSystem_Service.IService
         Task<bool> AddAsync(Payment add);
         Task<List<Payment>> GetAlls();
         Task<Payment?> GetById(int id);
+        Task<List<Payment>> ReadAlls();
+        Task<Payment?> ReadById(int id);
         Task<bool> UpdateAsync(Payment update);
         Task<bool> DeleteAsync(int id);
     }
