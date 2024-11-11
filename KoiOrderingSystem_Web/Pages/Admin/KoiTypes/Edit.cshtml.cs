@@ -8,16 +8,17 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.KoiTypes
 {
     public class EditModel : PageModel
     {
-        private readonly KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext _context;
+        private readonly IKoiTypeService _service;
 
-        public EditModel(KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext context)
+        public EditModel(IKoiTypeService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [BindProperty]
@@ -25,12 +26,12 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiTypes
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.KoiTypes == null)
+            if (id == null || await _service.ReadAlls() == null)
             {
                 return NotFound();
             }
 
-            var koitype =  await _context.KoiTypes.FirstOrDefaultAsync(m => m.Id == id);
+            var koitype = await _service.GetById(id.Value);
             if (koitype == null)
             {
                 return NotFound();
@@ -48,15 +49,13 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiTypes
                 return Page();
             }
 
-            _context.Attach(KoiType).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _service.UpdateAsync(KoiType);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!KoiTypeExists(KoiType.Id))
+                if (await KoiTypeExists(KoiType.Id))
                 {
                     return NotFound();
                 }
@@ -69,9 +68,9 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiTypes
             return RedirectToPage("./Index");
         }
 
-        private bool KoiTypeExists(int id)
+        private async Task<bool> KoiTypeExists(int id)
         {
-          return (_context.KoiTypes?.Any(e => e.Id == id)).GetValueOrDefault();
+          return await _service.ReadById(id) == null;
         }
     }
 }

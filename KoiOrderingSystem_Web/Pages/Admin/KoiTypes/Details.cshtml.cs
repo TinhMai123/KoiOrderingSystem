@@ -12,7 +12,7 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiTypes
 {
     public class DetailsModel : PageModel
     {
-        private readonly KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext _context;
+        private readonly 
 
         public DetailsModel(KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext context)
         {
