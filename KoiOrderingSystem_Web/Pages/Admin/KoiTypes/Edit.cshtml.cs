@@ -31,7 +31,7 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiTypes
                 return NotFound();
             }
 
-            var koitype = await _service.GetById(id.Value);
+            var koitype = await _service.ReadById(id.Value);
             if (koitype == null)
             {
                 return NotFound();

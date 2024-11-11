@@ -31,7 +31,7 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Users
                 return NotFound();
             }
 
-            var user = await _service.GetById(id.Value);
+            var user = await _service.ReadById(id.Value);
             if (user == null)
             {
                 return NotFound();
