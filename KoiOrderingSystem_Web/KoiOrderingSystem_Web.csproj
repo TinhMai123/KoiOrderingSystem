@@ -44,8 +44,4 @@
     <_ContentIncludedByDefault Remove="Admin.cshtml" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="Pages\Admin\Admin.cshtml" />
-  </ItemGroup>
-
 </Project>

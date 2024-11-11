@@ -7,26 +7,27 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.Users
 {
     public class IndexModel : PageModel
     {
-        private readonly KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext _context;
+        private readonly IUserService _service;
 
-        public IndexModel(KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext context)
+        public IndexModel(IUserService service)
         {
-            _context = context;
+            _service = service;
         }
 
         public IList<User> User { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.Users != null)
+            var users = await _service.ReadAlls();
+            if (users !=null)
             {
-                User = await _context.Users
-                .Include(u => u.Farm).ToListAsync();
+                User = users;
             }
         }
     }
