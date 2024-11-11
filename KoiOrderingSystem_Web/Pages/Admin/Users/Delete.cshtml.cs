@@ -7,16 +7,17 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.Users
 {
     public class DeleteModel : PageModel
     {
-        private readonly KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext _context;
+        private readonly IUserService _service;
 
-        public DeleteModel(KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext context)
+        public DeleteModel(IUserService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [BindProperty]
@@ -24,12 +25,12 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Users
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Users == null)
+            if (id == null || await _service.ReadAlls() == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
+            var user = await _service.ReadById(id.Value);
 
             if (user == null)
             {
@@ -44,17 +45,16 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Users
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Users == null)
+            if (id == null || await _service.ReadAlls() == null)
             {
                 return NotFound();
             }
-            var user = await _context.Users.FindAsync(id);
+            var user = await _service.GetById(id.Value);
 
             if (user != null)
             {
                 User = user;
-                _context.Users.Remove(User);
-                await _context.SaveChangesAsync();
+                await _service.DeleteAsync(id.Value);
             }
 
             return RedirectToPage("./Index");
