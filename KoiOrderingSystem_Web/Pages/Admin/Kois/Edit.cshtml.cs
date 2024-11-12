@@ -8,16 +8,17 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.Kois
 {
     public class EditModel : PageModel
     {
-        private readonly KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext _context;
+        private readonly IKoiService _service;
 
-        public EditModel(KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext context)
+        public EditModel(IKoiService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [BindProperty]
@@ -25,18 +26,17 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Kois
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Kois == null)
+            if (id == null || await _service.ReadAlls() == null)
             {
                 return NotFound();
             }
 
-            var koi =  await _context.Kois.FirstOrDefaultAsync(m => m.Id == id);
+            var koi = await _service.ReadById(id.Value);
             if (koi == null)
             {
                 return NotFound();
             }
             Koi = koi;
-           ViewData["KoiTypeId"] = new SelectList(_context.KoiTypes, "Id", "Id");
             return Page();
         }
 
@@ -49,15 +49,15 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Kois
                 return Page();
             }
 
-            _context.Attach(Koi).State = EntityState.Modified;
+          
 
             try
-            {
-                await _context.SaveChangesAsync();
+            { 
+                await _service.UpdateAsync(Koi);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!KoiExists(Koi.Id))
+                if (await KoiExists(Koi.Id))
                 {
                     return NotFound();
                 }
@@ -70,9 +70,9 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Kois
             return RedirectToPage("./Index");
         }
 
-        private bool KoiExists(int id)
+        private async Task<bool> KoiExists(int id)
         {
-          return (_context.Kois?.Any(e => e.Id == id)).GetValueOrDefault();
+            return await _service.ReadById(id) == null;
         }
     }
 }
