@@ -7,21 +7,21 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
 {
     public class CreateModel : PageModel
     {
-        private readonly KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext _context;
+        private readonly IKoiByBatchService _service;
 
-        public CreateModel(KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext context)
+        public CreateModel(IKoiByBatchService service)
         {
-            _context = context;
+            _service = service;
         }
 
         public IActionResult OnGet()
         {
-        ViewData["KoiTypeId"] = new SelectList(_context.KoiTypes, "Id", "Id");
             return Page();
         }
 
@@ -32,13 +32,12 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.KoiByBatches == null || KoiByBatch == null)
+          if (!ModelState.IsValid || await _service.ReadAlls() == null || KoiByBatch == null)
             {
                 return Page();
             }
 
-            _context.KoiByBatches.Add(KoiByBatch);
-            await _context.SaveChangesAsync();
+            await _service.AddAsync(KoiByBatch);
 
             return RedirectToPage("./Index");
         }
