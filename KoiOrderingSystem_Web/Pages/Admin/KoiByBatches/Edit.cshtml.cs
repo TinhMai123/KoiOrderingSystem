@@ -8,16 +8,17 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
 {
     public class EditModel : PageModel
     {
-        private readonly KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext _context;
+        private readonly IKoiByBatchService _service;
 
-        public EditModel(KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext context)
+        public EditModel(IKoiByBatchService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [BindProperty]
@@ -25,18 +26,17 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.KoiByBatches == null)
+            if (id == null || await _service.ReadAlls() == null)
             {
                 return NotFound();
             }
 
-            var koibybatch =  await _context.KoiByBatches.FirstOrDefaultAsync(m => m.Id == id);
+            var koibybatch = await _service.ReadById(id.Value);
             if (koibybatch == null)
             {
                 return NotFound();
             }
             KoiByBatch = koibybatch;
-           ViewData["KoiTypeId"] = new SelectList(_context.KoiTypes, "Id", "Id");
             return Page();
         }
 
@@ -49,15 +49,14 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
                 return Page();
             }
 
-            _context.Attach(KoiByBatch).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _service.UpdateAsync(KoiByBatch);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!KoiByBatchExists(KoiByBatch.Id))
+                if (await KoiByBatchExists(KoiByBatch.Id))
                 {
                     return NotFound();
                 }
@@ -70,9 +69,9 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
             return RedirectToPage("./Index");
         }
 
-        private bool KoiByBatchExists(int id)
+        private async Task<bool> KoiByBatchExists(int id)
         {
-          return (_context.KoiByBatches?.Any(e => e.Id == id)).GetValueOrDefault();
+            return await _service.ReadById(id) == null;
         }
     }
 }
