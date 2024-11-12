@@ -7,28 +7,29 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.KoiTypes
 {
     public class DetailsModel : PageModel
     {
-        private readonly KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext _context;
+        private readonly IKoiTypeService _service;
 
-        public DetailsModel(KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext context)
+        public DetailsModel(IKoiTypeService service)
         {
-            _context = context;
+            _service = service;
         }
 
       public KoiType KoiType { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.KoiTypes == null)
+            if (id == null || await _service.ReadAlls() == null)
             {
                 return NotFound();
             }
 
-            var koitype = await _context.KoiTypes.FirstOrDefaultAsync(m => m.Id == id);
+            var koitype = await _service.ReadById(id.Value);
             if (koitype == null)
             {
                 return NotFound();

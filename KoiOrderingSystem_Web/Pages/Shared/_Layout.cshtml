@@ -49,13 +49,26 @@
                                 </ul>
                             </li>
                         </ul>
-                        <form class="d-flex">
+                        <form class="d-flex me-3">
                             <button class="btn btn-outline-dark" type="submit">
                                 <i class="bi-cart-fill me-1"></i>
                                 Cart
                                 <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                             </button>
                         </form>
+                        <!-- User Avatar Dropdown -->
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" id="userDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="path/to/avatar.jpg" alt="User Avatar" class="avatar-icon me-2" />
+                                <span>User Name</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="#!">Profile</a></li>
+                                <li><a class="dropdown-item" href="#!">Order History</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="#!">Logout</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -80,9 +93,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script>
-
-    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -7,16 +7,17 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.Kois
 {
     public class DeleteModel : PageModel
     {
-        private readonly KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext _context;
+        private readonly IKoiService _service;
 
-        public DeleteModel(KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext context)
+        public DeleteModel(IKoiService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [BindProperty]
@@ -24,12 +25,12 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Kois
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Kois == null)
+            if (id == null || await _service.ReadAlls() == null)
             {
                 return NotFound();
             }
 
-            var koi = await _context.Kois.FirstOrDefaultAsync(m => m.Id == id);
+            var koi = await _service.ReadById(id.Value);
 
             if (koi == null)
             {
@@ -44,17 +45,16 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Kois
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Kois == null)
+            if (id == null || _service.ReadAlls() == null)
             {
                 return NotFound();
             }
-            var koi = await _context.Kois.FindAsync(id);
+            var koi = await _service.ReadById(id.Value);
 
             if (koi != null)
             {
                 Koi = koi;
-                _context.Kois.Remove(Koi);
-                await _context.SaveChangesAsync();
+                await _service.DeleteAsync(id.Value);
             }
 
             return RedirectToPage("./Index");

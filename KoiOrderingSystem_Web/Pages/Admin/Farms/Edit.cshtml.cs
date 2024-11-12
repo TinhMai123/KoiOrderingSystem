@@ -8,16 +8,17 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.Farms
 {
     public class EditModel : PageModel
     {
-        private readonly KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext _context;
+        private readonly IFarmService _service;
 
-        public EditModel(KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext context)
+        public EditModel(IFarmService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [BindProperty]
@@ -25,18 +26,17 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Farms
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Farms == null)
+            if (id == null || await _service.ReadAlls() == null)
             {
                 return NotFound();
             }
 
-            var farm =  await _context.Farms.FirstOrDefaultAsync(m => m.Id == id);
+            var farm = await _service.ReadById(id.Value);
             if (farm == null)
             {
                 return NotFound();
             }
             Farm = farm;
-           ViewData["ManagerId"] = new SelectList(_context.Users, "Id", "Address");
             return Page();
         }
 
@@ -49,15 +49,13 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Farms
                 return Page();
             }
 
-            _context.Attach(Farm).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                await _service.UpdateAsync(Farm);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!FarmExists(Farm.Id))
+                if (await FarmExists(Farm.Id))
                 {
                     return NotFound();
                 }
@@ -70,9 +68,9 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Farms
             return RedirectToPage("./Index");
         }
 
-        private bool FarmExists(int id)
+        private async Task<bool> FarmExists(int id)
         {
-          return (_context.Farms?.Any(e => e.Id == id)).GetValueOrDefault();
+            return await _service.ReadById(id) == null;
         }
     }
 }

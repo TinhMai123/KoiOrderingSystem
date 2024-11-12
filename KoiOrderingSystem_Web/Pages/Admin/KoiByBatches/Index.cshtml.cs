@@ -7,26 +7,27 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
 {
     public class IndexModel : PageModel
     {
-        private readonly KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext _context;
+        private readonly IKoiByBatchService _service;
 
-        public IndexModel(KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext context)
+        public IndexModel(IKoiByBatchService service)
         {
-            _context = context;
+            _service = service;
         }
 
         public IList<KoiByBatch> KoiByBatch { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.KoiByBatches != null)
+            var list = await _service.ReadAlls();
+            if (list != null)
             {
-                KoiByBatch = await _context.KoiByBatches
-                .Include(k => k.KoiType).ToListAsync();
+                KoiByBatch = list;
             }
         }
     }

@@ -8,16 +8,17 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.Users
 {
     public class EditModel : PageModel
     {
-        private readonly KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext _context;
+        private readonly IUserService _service;
 
-        public EditModel(KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext context)
+        public EditModel(IUserService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [BindProperty]
@@ -25,18 +26,17 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Users
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Users == null)
+            if (id == null || _service.ReadAlls() == null)
             {
                 return NotFound();
             }
 
-            var user =  await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
+            var user = await _service.ReadById(id.Value);
             if (user == null)
             {
                 return NotFound();
             }
             User = user;
-           ViewData["FarmId"] = new SelectList(_context.Farms, "Id", "Id");
             return Page();
         }
 
@@ -49,15 +49,15 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Users
                 return Page();
             }
 
-            _context.Attach(User).State = EntityState.Modified;
+
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _service.UpdateAsync(User);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!UserExists(User.Id))
+                if (await UserExists(User.Id) == true)
                 {
                     return NotFound();
                 }
@@ -70,9 +70,9 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Users
             return RedirectToPage("./Index");
         }
 
-        private bool UserExists(int id)
+        private async Task<bool> UserExists(int id)
         {
-          return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (await _service.ReadById(id)) != null;
         }
     }
 }

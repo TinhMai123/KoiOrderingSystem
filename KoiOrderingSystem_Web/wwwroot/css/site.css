@@ -37,3 +37,9 @@ body {
     flex: 1;
     padding: 20px;
 }
+.avatar-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
