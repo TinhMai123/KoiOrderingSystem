@@ -79,12 +79,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseAuthorization();
+app.UseSession();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapRazorPages();
 });
 
-app.UseSession();
 app.MapRazorPages();
 
 app.Run();
