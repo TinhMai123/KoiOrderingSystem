@@ -7,16 +7,17 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
 {
     public class DeleteModel : PageModel
     {
-        private readonly KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext _context;
+        private readonly IKoiByBatchService _service;
 
-        public DeleteModel(KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext context)
+        public DeleteModel(IKoiByBatchService service)
         {
-            _context = context;
+            _service = service;
         }
 
         [BindProperty]
@@ -24,12 +25,12 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.KoiByBatches == null)
+            if (id == null ||await _service.ReadAlls() == null)
             {
                 return NotFound();
             }
 
-            var koibybatch = await _context.KoiByBatches.FirstOrDefaultAsync(m => m.Id == id);
+            var koibybatch = await _service.ReadById(id.Value);
 
             if (koibybatch == null)
             {
@@ -44,17 +45,16 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.KoiByBatches == null)
+            if (id == null || await _service.ReadAlls() == null)
             {
                 return NotFound();
             }
-            var koibybatch = await _context.KoiByBatches.FindAsync(id);
+            var koibybatch = await _service.ReadById(id.Value);
 
             if (koibybatch != null)
             {
                 KoiByBatch = koibybatch;
-                _context.KoiByBatches.Remove(KoiByBatch);
-                await _context.SaveChangesAsync();
+                await _service.DeleteAsync(id.Value);
             }
 
             return RedirectToPage("./Index");
