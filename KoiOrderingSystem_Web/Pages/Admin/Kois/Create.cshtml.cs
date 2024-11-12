@@ -7,21 +7,21 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.Kois
 {
     public class CreateModel : PageModel
     {
-        private readonly KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext _context;
+        private readonly IKoiService _service;
 
-        public CreateModel(KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext context)
+        public CreateModel(IKoiService service)
         {
-            _context = context;
+            _service = service;
         }
 
         public IActionResult OnGet()
         {
-        ViewData["KoiTypeId"] = new SelectList(_context.KoiTypes, "Id", "Id");
             return Page();
         }
 
@@ -32,13 +32,12 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Kois
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.Kois == null || Koi == null)
+          if (!ModelState.IsValid || await _service.ReadAlls() == null || Koi == null)
             {
                 return Page();
             }
 
-            _context.Kois.Add(Koi);
-            await _context.SaveChangesAsync();
+            await _service.AddAsync(Koi);
 
             return RedirectToPage("./Index");
         }
