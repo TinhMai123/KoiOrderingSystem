@@ -14,14 +14,18 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Farms
     public class CreateModel : PageModel
     {
         private readonly IFarmService _service;
+        private readonly IUserService _userService;
 
-        public CreateModel(IFarmService service)
+        public CreateModel(IFarmService service, IUserService userService)
         {
             _service = service;
+            _userService = userService;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
+            var users = await _userService.GetAlls();
+            ViewData["ManagerId"] = new SelectList(users.Where(m => m.Role == "Manager"), "Id", "FullName");
             return Page();
         }
 

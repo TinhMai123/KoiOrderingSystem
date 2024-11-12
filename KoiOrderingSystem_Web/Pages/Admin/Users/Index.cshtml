@@ -46,9 +46,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.User[0].UpdatedAt)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User[0].IsDeleted)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -87,9 +84,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UpdatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDeleted)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
