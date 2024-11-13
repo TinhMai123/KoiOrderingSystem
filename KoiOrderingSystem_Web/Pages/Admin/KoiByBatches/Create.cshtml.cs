@@ -27,12 +27,32 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
 
         [BindProperty]
         public KoiByBatch KoiByBatch { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || await _service.ReadAlls() == null || KoiByBatch == null)
+            if (KoiByBatch == null)
+            {
+                ModelState.AddModelError("KoiByBatch", "KoiByBatch data is required.");
+            }
+
+            if (KoiByBatch.Quantity < 0)
+            {
+                ModelState.AddModelError("KoiByBatch.Quantity", "Quantity cannot be less than 0.");
+            }
+
+            if (KoiByBatch.Size < 0)
+            {
+                ModelState.AddModelError("KoiByBatch.Size", "Size cannot be less than 0.");
+            }
+
+            if (KoiByBatch.Price < 0)
+            {
+                ModelState.AddModelError("KoiByBatch.Price", "Price cannot be less than 0.");
+            }
+
+            if (!ModelState.IsValid || await _service.ReadAlls() == null)
             {
                 return Page();
             }
@@ -41,5 +61,6 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
 
             return RedirectToPage("./Index");
         }
+
     }
 }

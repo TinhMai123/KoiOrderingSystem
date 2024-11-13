@@ -49,7 +49,6 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
                 return Page();
             }
 
-
             try
             {
                 await _service.UpdateAsync(KoiByBatch);
@@ -65,13 +64,19 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
                     throw;
                 }
             }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $"An error occurred while updating the KoiByBatch: {ex.Message}");
+                return Page();
+            }
 
             return RedirectToPage("./Index");
         }
 
         private async Task<bool> KoiByBatchExists(int id)
         {
-            return await _service.ReadById(id) == null;
+            return await _service.ReadById(id) != null;
         }
+
     }
 }
