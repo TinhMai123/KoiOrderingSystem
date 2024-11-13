@@ -49,6 +49,13 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiTypes
                 return Page();
             }
 
+            var check = await _service.ReadAlls();
+            if (check.Any(c => c.Name.ToLower() == KoiType.Name.ToLower() && c.Id != KoiType.Id))
+            {
+                ModelState.AddModelError("KoiType.Name", $"The name {KoiType.Name} is already taken.");
+                return Page();
+            }
+
             try
             {
                 await _service.UpdateAsync(KoiType);
@@ -70,7 +77,8 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiTypes
 
         private async Task<bool> KoiTypeExists(int id)
         {
-          return await _service.ReadById(id) == null;
+            return await _service.ReadById(id) == null;
         }
+
     }
 }

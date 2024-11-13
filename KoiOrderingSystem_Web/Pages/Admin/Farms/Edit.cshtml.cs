@@ -40,10 +40,34 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Farms
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
+        // Manual validation in OnPostAsync
         public async Task<IActionResult> OnPostAsync()
         {
+            // Manual validation checks
+            if (string.IsNullOrEmpty(Farm.FarmName))
+            {
+                ModelState.AddModelError("Farm.FarmName", "Farm name is required.");
+            }
+
+            if (string.IsNullOrEmpty(Farm.Location))
+            {
+                ModelState.AddModelError("Farm.Location", "Location is required.");
+            }
+
+            if (Farm.EstablishedYear < 1500 || Farm.EstablishedYear > DateTime.UtcNow.Year)
+            {
+                ModelState.AddModelError("Farm.EstablishedYear", "Established Year must be between 1500 and the current year.");
+            }
+
+            // Checking if the farm name already exists
+            var allFarms = await _service.ReadAlls();
+            var farmWithSameName = allFarms.FirstOrDefault(f => f.FarmName.Equals(Farm.FarmName, StringComparison.OrdinalIgnoreCase) && f.Id != Farm.Id);
+            if (farmWithSameName != null)
+            {
+                ModelState.AddModelError("Farm.FarmName", $"The farm name '{Farm.FarmName}' is already taken.");
+            }
+
+            // If model state is not valid, return to the page with validation errors
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -51,11 +75,11 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Farms
 
             try
             {
-                await _service.UpdateAsync(Farm);
+                await _service.UpdateAsync(Farm); 
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (await FarmExists(Farm.Id))
+                if (!await FarmExists(Farm.Id))
                 {
                     return NotFound();
                 }
@@ -68,9 +92,11 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Farms
             return RedirectToPage("./Index");
         }
 
+        // Check if the farm exists by its Id
         private async Task<bool> FarmExists(int id)
         {
             return await _service.ReadById(id) == null;
         }
     }
+
 }

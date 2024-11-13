@@ -14,7 +14,7 @@ namespace KoiOrderingSystem_BusinessObject
         public string Address { get; set; } = string.Empty;
         public string Role { get; set; } = string.Empty;
         public string Avatar { get; set; } = string.Empty;
-        public int FarmId { get; set; }
+        public int? FarmId { get; set; }
         public Farm? Farm { get; set; }
         public ICollection<Order>? Orders { get; set; }
         public ICollection<OrderTrip>? OrderTrips { get; set; }

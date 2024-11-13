@@ -37,9 +37,9 @@ namespace KoiOrderingSystem_Web.Pages
                 switch (user.Role)
                 {
                     case "Admin":
-                        return RedirectToPage("Admin/Dashboard");
+                        return Redirect("Admin/Dashboard");
                     default:
-                        return RedirectToPage("Index");
+                        return Redirect("Index");
                 }
             }
             else

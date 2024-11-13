@@ -47,13 +47,7 @@
                 @Html.DisplayNameFor(model => model.Koi[0].CreatedAt)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Koi[0].DeletedAt)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Koi[0].UpdatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Koi[0].IsDeleted)
             </th>
             <th></th>
         </tr>
@@ -95,13 +89,7 @@
                 @Html.DisplayFor(modelItem => item.CreatedAt)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DeletedAt)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.UpdatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDeleted)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

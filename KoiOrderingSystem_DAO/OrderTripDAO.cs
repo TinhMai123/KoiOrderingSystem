@@ -96,6 +96,7 @@ namespace KoiOrderingSystem_DAO
                 if (existingModel != null)
                 {
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    existingModel.UpdatedAt = DateTime.Now;
                     _context.SaveChanges();
                     _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
                     isSuccess = true;

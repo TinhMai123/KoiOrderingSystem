@@ -75,6 +75,7 @@ namespace KoiOrderingSystem_DAO
                 if (existingModel != null)
                 {
                     _context.Quotes.Remove(existingModel);
+                    existingModel.UpdatedAt = DateTime.Now;
                     await _context.SaveChangesAsync();
                     _context.Entry(existingModel).State = EntityState.Detached;
                     isSuccess = true;

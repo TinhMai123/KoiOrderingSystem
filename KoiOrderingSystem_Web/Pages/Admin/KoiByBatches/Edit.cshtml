@@ -40,26 +40,6 @@
                 <span asp-validation-for="KoiByBatch.OrderDetailKoiId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="KoiByBatch.CreatedAt" class="control-label"></label>
-                <input asp-for="KoiByBatch.CreatedAt" class="form-control" />
-                <span asp-validation-for="KoiByBatch.CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="KoiByBatch.DeletedAt" class="control-label"></label>
-                <input asp-for="KoiByBatch.DeletedAt" class="form-control" />
-                <span asp-validation-for="KoiByBatch.DeletedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="KoiByBatch.UpdatedAt" class="control-label"></label>
-                <input asp-for="KoiByBatch.UpdatedAt" class="form-control" />
-                <span asp-validation-for="KoiByBatch.UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="KoiByBatch.IsDeleted" /> @Html.DisplayNameFor(model => model.KoiByBatch.IsDeleted)
-                </label>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

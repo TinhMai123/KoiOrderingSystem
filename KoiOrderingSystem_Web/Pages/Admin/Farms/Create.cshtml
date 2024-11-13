@@ -29,33 +29,13 @@
                 <span asp-validation-for="Farm.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Farm.ManagerId" class="control-label"></label>
+                @* <label asp-for="Farm.ManagerId" class="control-label"></label> *@ Manager
                 <select asp-for="Farm.ManagerId" class ="form-control" asp-items="ViewBag.ManagerId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Farm.EstablishedYear" class="control-label"></label>
                 <input asp-for="Farm.EstablishedYear" class="form-control" />
                 <span asp-validation-for="Farm.EstablishedYear" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Farm.CreatedAt" class="control-label"></label>
-                <input asp-for="Farm.CreatedAt" class="form-control" />
-                <span asp-validation-for="Farm.CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Farm.DeletedAt" class="control-label"></label>
-                <input asp-for="Farm.DeletedAt" class="form-control" />
-                <span asp-validation-for="Farm.DeletedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Farm.UpdatedAt" class="control-label"></label>
-                <input asp-for="Farm.UpdatedAt" class="form-control" />
-                <span asp-validation-for="Farm.UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Farm.IsDeleted" /> @Html.DisplayNameFor(model => model.Farm.IsDeleted)
-                </label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

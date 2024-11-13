@@ -65,26 +65,6 @@
                 <span asp-validation-for="Koi.OrderDetailKoiId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Koi.CreatedAt" class="control-label"></label>
-                <input asp-for="Koi.CreatedAt" class="form-control" />
-                <span asp-validation-for="Koi.CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Koi.DeletedAt" class="control-label"></label>
-                <input asp-for="Koi.DeletedAt" class="form-control" />
-                <span asp-validation-for="Koi.DeletedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Koi.UpdatedAt" class="control-label"></label>
-                <input asp-for="Koi.UpdatedAt" class="form-control" />
-                <span asp-validation-for="Koi.UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Koi.IsDeleted" /> @Html.DisplayNameFor(model => model.Koi.IsDeleted)
-                </label>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
