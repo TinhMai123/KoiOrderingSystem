@@ -24,26 +24,59 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Farms
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var users = await _userService.GetAlls();
+            var users = await _userService.ReadAlls();
             ViewData["ManagerId"] = new SelectList(users.Where(m => m.Role == "Manager"), "Id", "FullName");
             return Page();
         }
 
         [BindProperty]
         public Farm Farm { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public class CreateModel : PageModel
         {
-          if (!ModelState.IsValid || await _service.ReadAlls() == null || Farm == null)
+            private readonly IFarmService _service;
+
+            public CreateModel(IFarmService service)
             {
-                return Page();
+                _service = service;
             }
 
-            await _service.AddAsync(Farm);
+            [BindProperty]
+            public Farm Farm { get; set; }
 
-            return RedirectToPage("./Index");
+            public async Task<IActionResult> OnPostAsync()
+            {
+                // Manual validation
+                if (string.IsNullOrEmpty(Farm.FarmName))
+                {
+                    ModelState.AddModelError("Farm.FarmName", "Farm name is required.");
+                }
+
+                if (string.IsNullOrEmpty(Farm.Location))
+                {
+                    ModelState.AddModelError("Farm.Location", "Location is required.");
+                }
+
+                if (Farm.EstablishedYear < 1500 || Farm.EstablishedYear > DateTime.UtcNow.Year)
+                {
+                    ModelState.AddModelError("Farm.EstablishedYear", "Established Year must be between 1500 and the current year.");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    // If validation failed, return to the page with error messages
+                    return Page();
+                }
+
+                // Proceed to service layer if validation passed
+                await _service.AddAsync(Farm);
+
+                return RedirectToPage("./Index");
+            }
         }
+
+
     }
 }
