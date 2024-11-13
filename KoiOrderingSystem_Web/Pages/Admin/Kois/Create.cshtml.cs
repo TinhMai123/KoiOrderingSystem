@@ -27,12 +27,38 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Kois
 
         [BindProperty]
         public Koi Koi { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || await _service.ReadAlls() == null || Koi == null)
+            if (Koi == null)
+            {
+                ModelState.AddModelError(string.Empty, "Koi cannot be null.");
+                return Page();
+            }
+
+            if (Koi.Weight <= 0)
+            {
+                ModelState.AddModelError("Koi.Weight", "A Koi cannot have a weight of 0 or smaller.");
+            }
+
+            if (Koi.Price < 0)
+            {
+                ModelState.AddModelError("Koi.Price", "Price cannot be smaller than 0.");
+            }
+
+            if (Koi.BirthDate > DateTime.UtcNow || Koi.BirthDate?.Year - 300 < 0)
+            {
+                ModelState.AddModelError("Koi.BirthDate", "A Koi Fish cannot have a Birth Date like that.");
+            }
+
+            if (Koi.DateAdded > DateTime.UtcNow || Koi.DateAdded.Year - 300 < 0)
+            {
+                ModelState.AddModelError("Koi.DateAdded", "A Koi Fish cannot have a Date like that.");
+            }
+
+            if (!ModelState.IsValid)
             {
                 return Page();
             }
@@ -41,5 +67,6 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Kois
 
             return RedirectToPage("./Index");
         }
+
     }
 }

@@ -27,19 +27,44 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiTypes
 
         [BindProperty]
         public KoiType KoiType { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || await _service.ReadAlls() == null || KoiType == null)
+            if (KoiType == null)
+            {
+                ModelState.AddModelError("KoiType", "KoiType is required.");
+            }
+
+            if (string.IsNullOrEmpty(KoiType.Name))
+            {
+                ModelState.AddModelError("KoiType.Name", "Name is required.");
+            }
+
+            var check = await _service.ReadAlls();
+            if (check.Any(c => c.Name.ToLower() == KoiType.Name.ToLower()))
+            {
+                ModelState.AddModelError("KoiType.Name", $"The name {KoiType.Name} is already taken.");
+            }
+
+            if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            await _service.AddAsync(KoiType);
+            try
+            {
+                await _service.AddAsync(KoiType);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return Page();
+            }
 
             return RedirectToPage("./Index");
         }
+
     }
 }
