@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using KoiOrderingSystem_BusinessObject;
+using KoiOrderingSystem_Service.IService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using KoiOrderingSystem_BusinessObject;
-using KoiOrderingSystem_BusinessObject.Data;
-using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.Farms
 {
@@ -34,49 +29,36 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Farms
 
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public class CreateModel : PageModel
+        public async Task<IActionResult> OnPostAsync()
         {
-            private readonly IFarmService _service;
-
-            public CreateModel(IFarmService service)
+            // Manual validation
+            if (string.IsNullOrEmpty(Farm.FarmName))
             {
-                _service = service;
+                ModelState.AddModelError("Farm.FarmName", "Farm name is required.");
             }
 
-            [BindProperty]
-            public Farm Farm { get; set; }
-
-            public async Task<IActionResult> OnPostAsync()
+            if (string.IsNullOrEmpty(Farm.Location))
             {
-                // Manual validation
-                if (string.IsNullOrEmpty(Farm.FarmName))
-                {
-                    ModelState.AddModelError("Farm.FarmName", "Farm name is required.");
-                }
-
-                if (string.IsNullOrEmpty(Farm.Location))
-                {
-                    ModelState.AddModelError("Farm.Location", "Location is required.");
-                }
-
-                if (Farm.EstablishedYear < 1500 || Farm.EstablishedYear > DateTime.UtcNow.Year)
-                {
-                    ModelState.AddModelError("Farm.EstablishedYear", "Established Year must be between 1500 and the current year.");
-                }
-
-                if (!ModelState.IsValid)
-                {
-                    // If validation failed, return to the page with error messages
-                    return Page();
-                }
-
-                // Proceed to service layer if validation passed
-                await _service.AddAsync(Farm);
-
-                return RedirectToPage("./Index");
+                ModelState.AddModelError("Farm.Location", "Location is required.");
             }
+
+            if (Farm.EstablishedYear < 1500 || Farm.EstablishedYear > DateTime.UtcNow.Year)
+            {
+                ModelState.AddModelError("Farm.EstablishedYear", "Established Year must be between 1500 and the current year.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                // If validation failed, return to the page with error messages
+                return Page();
+            }
+
+            // Proceed to service layer if validation passed
+            await _service.AddAsync(Farm);
+
+            return RedirectToPage("./Index");
         }
-
-
     }
+
+
 }
