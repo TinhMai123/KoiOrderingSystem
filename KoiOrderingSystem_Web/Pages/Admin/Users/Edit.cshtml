@@ -55,26 +55,6 @@
                 <span asp-validation-for="User.FarmId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="User.CreatedAt" class="control-label"></label>
-                <input asp-for="User.CreatedAt" class="form-control" />
-                <span asp-validation-for="User.CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.DeletedAt" class="control-label"></label>
-                <input asp-for="User.DeletedAt" class="form-control" />
-                <span asp-validation-for="User.DeletedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.UpdatedAt" class="control-label"></label>
-                <input asp-for="User.UpdatedAt" class="form-control" />
-                <span asp-validation-for="User.UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="User.IsDeleted" /> @Html.DisplayNameFor(model => model.User.IsDeleted)
-                </label>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
