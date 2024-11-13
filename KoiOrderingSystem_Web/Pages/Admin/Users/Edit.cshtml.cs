@@ -44,13 +44,44 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Users
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            if (User == null)
+            {
+                ModelState.AddModelError("User", "User data is required.");
+            }
+
+            if (string.IsNullOrEmpty(User.FullName))
+            {
+                ModelState.AddModelError("User.FullName", "Full name is required.");
+            }
+
+            if (string.IsNullOrEmpty(User.Email))
+            {
+                ModelState.AddModelError("User.Email", "Email is required.");
+            }
+
+            if (string.IsNullOrEmpty(User.PhoneNumber))
+            {
+                ModelState.AddModelError("User.PhoneNumber", "Phone number is required.");
+            }
+
+            if (string.IsNullOrEmpty(User.Password))
+            {
+                ModelState.AddModelError("User.Password", "Password is required.");
+            }
+            var UserList = await _service.ReadAlls();
+
+            if (UserList.Any(c=>c.Email == User.Email))
+            {
+                ModelState.AddModelError("User.Email", $"The email {User.Email} is already taken.");
+            }
+            if(UserList.Any(c=>c.PhoneNumber == User.PhoneNumber))
+            {
+                ModelState.AddModelError("User.PhoneNumber", $"The phone number {User.PhoneNumber} is already in use.");
+            }
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
-
-
             try
             {
                 await _service.UpdateAsync(User);

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
 using KoiOrderingSystem_Service.IService;
+using System.Text.RegularExpressions;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.Users
 {
@@ -31,12 +32,73 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Users
 
         [BindProperty]
         public User User { get; set; } = default!;
-        
+
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _service.ReadAlls() == null || User == null)
+            if (User == null)
+            {
+                ModelState.AddModelError("User", "User data is required.");
+            }
+
+            if (string.IsNullOrEmpty(User.FullName))
+            {
+                ModelState.AddModelError("User.FullName", "Full Name is required.");
+            }
+
+            if (string.IsNullOrEmpty(User.Email))
+            {
+                ModelState.AddModelError("User.Email", "Email is required.");
+            }
+            else if (!Regex.IsMatch(User.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                ModelState.AddModelError("User.Email", "Invalid email format.");
+            }
+
+            if (string.IsNullOrEmpty(User.PhoneNumber))
+            {
+                ModelState.AddModelError("User.PhoneNumber", "Phone Number is required.");
+            }
+            else if (!Regex.IsMatch(User.PhoneNumber, @"^\+?[1-9]\d{1,14}$"))
+            {
+                ModelState.AddModelError("User.PhoneNumber", "Invalid phone number format.");
+            }
+            if (string.IsNullOrEmpty(User.Password))
+            {
+                ModelState.AddModelError("User.Password", "Password is required.");
+            }
+            else if (User.Password.Length < 6)
+            {
+                ModelState.AddModelError("User.Password", "Password must be at least 6 characters long.");
+            }
+
+            if (string.IsNullOrEmpty(User.Address))
+            {
+                ModelState.AddModelError("User.Address", "Address is required.");
+            }
+
+            if (string.IsNullOrEmpty(User.Role))
+            {
+                ModelState.AddModelError("User.Role", "Role is required.");
+            }
+
+            if (User.FarmId == 0)
+            {
+                ModelState.AddModelError("User.FarmId", "Farm must be selected.");
+            }
+            var UserList = await _service.ReadAlls();
+
+            if (UserList.Any(c => c.Email == User.Email))
+            {
+                ModelState.AddModelError("User.Email", $"The email {User.Email} is already taken.");
+            }
+            if (UserList.Any(c => c.PhoneNumber == User.PhoneNumber))
+            {
+                ModelState.AddModelError("User.PhoneNumber", $"The phone number {User.PhoneNumber} is already in use.");
+            }
+            // Check if email already exists in the system
+            if (!ModelState.IsValid || await _service.ReadAlls() == null)
             {
                 return Page();
             }
@@ -45,5 +107,6 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Users
 
             return RedirectToPage("./Index");
         }
+
     }
 }
