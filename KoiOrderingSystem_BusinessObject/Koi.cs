@@ -17,6 +17,8 @@ namespace KoiOrderingSystem_BusinessObject
         public string Picture { get; set; } = string.Empty;
         public int KoiTypeId { get; set; }
         public KoiType? KoiType { get; set; }
+        public int FarmId { get; set; }
+        public Farm? Farm { get; set; }
         public ICollection<KoiOrderDetail> OrderDetailKois { get; set; } = new List<KoiOrderDetail>();
     }
 }

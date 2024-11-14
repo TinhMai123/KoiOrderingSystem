@@ -185,7 +185,6 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     FarmId = table.Column<int>(type: "int", nullable: false),
                     KoiTypeId = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -222,7 +221,7 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     Picture = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     KoiTypeId = table.Column<int>(type: "int", nullable: false),
-                    FarmId = table.Column<int>(type: "int", nullable: true),
+                    FarmId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -235,7 +234,8 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                         name: "FK_Kois_Farms_FarmId",
                         column: x => x.FarmId,
                         principalTable: "Farms",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Kois_KoiTypes_KoiTypeId",
                         column: x => x.KoiTypeId,
@@ -441,11 +441,11 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                 columns: new[] { "Id", "CreatedAt", "DeletedAt", "IsBatch", "IsDeleted", "IsEndangered", "Name", "Picture", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9671), null, true, false, false, "Kohaku", "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9672) },
-                    { 2, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9677), null, false, false, true, "Showa Sanshoku", "https://cakoibienhoa.com/public/userfiles/products/ca-koi-showa-sanshoku-thumb.jpg", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9677) },
-                    { 3, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9675), null, true, false, false, "Taisho Sanke", "https://thucancakoihikari.com/wp-content/uploads/2024/04/koi-taisho-sanke-1.jpg", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9675) },
-                    { 4, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9678), null, true, false, false, "Shusui", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2qwYKPpE9yJJKYJ_npVzr3WzWvybWZK8-fQ&s", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9679) },
-                    { 5, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9680), null, false, false, true, "Asagi", "https://hanoverkoifarms.com/wp-content/uploads/2017/01/best-asagi.jpg", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9680) }
+                    { 1, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9357), null, true, false, false, "Kohaku", "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg", new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9358) },
+                    { 2, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9362), null, false, false, true, "Showa Sanshoku", "https://cakoibienhoa.com/public/userfiles/products/ca-koi-showa-sanshoku-thumb.jpg", new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9363) },
+                    { 3, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9360), null, true, false, false, "Taisho Sanke", "https://thucancakoihikari.com/wp-content/uploads/2024/04/koi-taisho-sanke-1.jpg", new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9361) },
+                    { 4, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9364), null, true, false, false, "Shusui", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2qwYKPpE9yJJKYJ_npVzr3WzWvybWZK8-fQ&s", new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9364) },
+                    { 5, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9365), null, false, false, true, "Asagi", "https://hanoverkoifarms.com/wp-content/uploads/2017/01/best-asagi.jpg", new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9366) }
                 });
 
             migrationBuilder.InsertData(
@@ -453,11 +453,23 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                 columns: new[] { "Id", "Address", "Avatar", "CreatedAt", "DeletedAt", "Email", "FullName", "IsDeleted", "Password", "PhoneNumber", "Role", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, "123 Maple St, Springfield, IL", "avatars/alice.jpg", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9551), null, "admin@gmail.com", "Admin Johnson", false, "123456", "123-456-7890", "Admin", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9560) },
-                    { 2, "456 Oak St, Springfield, IL", "avatars/bob.jpg", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9564), null, "manager@gmail.com", "Manager Smith", false, "securepass", "234-567-8901", "Manager", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9564) },
-                    { 3, "789 Pine St, Springfield, IL", "avatars/charlie.jpg", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9566), null, "staff@gmail.com", "Staff Brown", false, "mypassword", "345-678-9012", "Staff", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9566) },
-                    { 4, "321 Cedar St, Springfield, IL", "avatars/diana.jpg", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9568), null, "customer@gmail.com", "Customer Prince", false, "123456", "456-789-0123", "Customer", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9568) },
-                    { 5, "654 Birch St, Springfield, IL", "avatars/ethan.jpg", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9570), null, "ethan.hunt@example.com", "Ethan Hunt", false, "missionimpossible", "567-890-1234", "Staff", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9570) }
+                    { 1, "123 Maple St, Springfield, IL", "avatars/alice.jpg", new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9255), null, "admin@gmail.com", "Admin Johnson", false, "123456", "123-456-7890", "Admin", new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9261) },
+                    { 2, "456 Oak St, Springfield, IL", "avatars/bob.jpg", new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9267), null, "manager@gmail.com", "Manager Smith", false, "securepass", "234-567-8901", "Manager", new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9267) },
+                    { 3, "789 Pine St, Springfield, IL", "avatars/charlie.jpg", new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9269), null, "staff@gmail.com", "Staff Brown", false, "mypassword", "345-678-9012", "Staff", new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9270) },
+                    { 4, "321 Cedar St, Springfield, IL", "avatars/diana.jpg", new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9271), null, "customer@gmail.com", "Customer Prince", false, "123456", "456-789-0123", "Customer", new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9272) },
+                    { 5, "654 Birch St, Springfield, IL", "avatars/ethan.jpg", new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9273), null, "ethan.hunt@example.com", "Ethan Hunt", false, "missionimpossible", "567-890-1234", "Staff", new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9274) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Farms",
+                columns: new[] { "Id", "CreatedAt", "DeletedAt", "Description", "EstablishedYear", "FarmName", "IsDeleted", "Location", "ManagerId", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9442), null, "A tranquil farm specializing in high-quality koi fish.", 2005, "Serenity Koi Farm", false, "Kyoto", 2, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9442) },
+                    { 2, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9445), null, "Known for its vibrant and colorful koi varieties.", 2010, "Golden Pond Koi Farm", false, "Osaka", 2, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9445) },
+                    { 3, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9447), null, "A family-owned farm with a rich history in koi breeding.", 2000, "Harmony Koi Farm", false, "Tokyo", 2, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9447) },
+                    { 4, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9449), null, "Specializes in rare koi breeds and sustainable farming practices.", 2015, "Lotus Koi Farm", false, "Hiroshima", 2, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9449) },
+                    { 5, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9450), null, "Offers a serene environment and expert koi care.", 2018, "Peaceful Waters Koi Farm", false, "Nara", 2, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9451) }
                 });
 
             migrationBuilder.InsertData(
@@ -465,11 +477,11 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                 columns: new[] { "Id", "CreatedAt", "DeletedAt", "IsDeleted", "KoiTypeId", "Price", "Quantity", "Size", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9722), null, false, 1, 100.00m, 10, 5, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9723) },
-                    { 2, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9726), null, false, 2, 150.00m, 15, 6, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9726) },
-                    { 3, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9727), null, false, 3, 80.00m, 8, 4, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9727) },
-                    { 4, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9728), null, false, 4, 120.00m, 12, 7, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9728) },
-                    { 5, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9729), null, false, 5, 200.00m, 20, 10, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9729) }
+                    { 1, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9423), null, false, 1, 100.00m, 10, 5, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9425) },
+                    { 2, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9429), null, false, 2, 150.00m, 15, 6, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9430) },
+                    { 3, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9431), null, false, 3, 80.00m, 8, 4, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9431) },
+                    { 4, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9432), null, false, 4, 120.00m, 12, 7, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9433) },
+                    { 5, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9433), null, false, 5, 200.00m, 20, 10, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9434) }
                 });
 
             migrationBuilder.InsertData(
@@ -477,11 +489,11 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                 columns: new[] { "Id", "BirthDate", "CreatedAt", "DateAdded", "DeletedAt", "Description", "FarmId", "HealthStatus", "IsDeleted", "KoiTypeId", "Picture", "Status", "UpdatedAt", "Weight" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2021, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9695), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9693), null, "Bright orange koi with white spots.", null, "Healthy", false, 1, "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg", true, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9696), 2.3f },
-                    { 2, new DateTime(2020, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9700), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9700), null, "Black and white koi with a smooth pattern.", null, "Healthy", false, 2, "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg", true, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9700), 3.1f },
-                    { 3, new DateTime(2021, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9703), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9702), null, "Golden koi with a shiny coat.", null, "Under observation", false, 3, "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg", true, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9703), 2.8f },
-                    { 4, new DateTime(2022, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9704), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9704), null, "Small blue and orange koi.", null, "Healthy", false, 4, "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg", true, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9705), 1.9f },
-                    { 5, new DateTime(2019, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9706), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9706), null, "Large white koi with orange spots.", null, "Healthy", false, 5, "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg", false, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9707), 4.2f }
+                    { 1, new DateTime(2021, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9379), new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9376), null, "Bright orange koi with white spots.", 1, "Healthy", false, 1, "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg", true, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9379), 2.3f },
+                    { 2, new DateTime(2020, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9384), new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9384), null, "Black and white koi with a smooth pattern.", 1, "Healthy", false, 2, "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg", true, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9385), 3.1f },
+                    { 3, new DateTime(2021, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9387), new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9387), null, "Golden koi with a shiny coat.", 1, "Under observation", false, 3, "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg", true, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9388), 2.8f },
+                    { 4, new DateTime(2022, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9389), new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9389), null, "Small blue and orange koi.", 1, "Healthy", false, 4, "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg", true, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9390), 1.9f },
+                    { 5, new DateTime(2019, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9392), new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9391), null, "Large white koi with orange spots.", 1, "Healthy", false, 5, "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg", false, new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9392), 4.2f }
                 });
 
             migrationBuilder.CreateIndex(

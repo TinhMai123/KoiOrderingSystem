@@ -11,8 +11,6 @@ namespace KoiOrderingSystem_Service.Service
     {
         private readonly IFarmKoiTypeRepo _repo;
 
-
-
         // Constructor to initialize the repository
         public FarmKoiTypeService( IFarmKoiTypeRepo repo)
         {
@@ -25,10 +23,6 @@ namespace KoiOrderingSystem_Service.Service
             if (newFarm == null)
             {
                 throw new ArgumentNullException(nameof(newFarm), "FarmKoiType cannot be null.");
-            }
-            if (newFarm.Quantity < 0)
-            {
-                throw new Exception("Cannot have a quantity of 0");
             }
             return await _repo.Add(newFarm);
         }

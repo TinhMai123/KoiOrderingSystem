@@ -139,7 +139,8 @@ namespace KoiOrderingSystem_BusinessObject.Data
                     BirthDate = new DateTime(2021, 3, 15),
                     Status = true,
                     Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
-                    KoiTypeId = 1
+                    KoiTypeId = 1,
+                    FarmId = 1
                 },
             new Koi
             {
@@ -150,7 +151,8 @@ namespace KoiOrderingSystem_BusinessObject.Data
                 BirthDate = new DateTime(2020, 7, 22),
                 Status = true,
                 Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
-                KoiTypeId = 2
+                KoiTypeId = 2,
+                FarmId = 1
             },
             new Koi
             {
@@ -161,7 +163,8 @@ namespace KoiOrderingSystem_BusinessObject.Data
                 BirthDate = new DateTime(2021, 1, 10),
                 Status = true,
                 Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
-                KoiTypeId = 3
+                KoiTypeId = 3,
+                FarmId = 1
             },
             new Koi
             {
@@ -172,7 +175,8 @@ namespace KoiOrderingSystem_BusinessObject.Data
                 BirthDate = new DateTime(2022, 5, 30),
                 Status = true,
                 Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
-                KoiTypeId = 4
+                KoiTypeId = 4,
+                FarmId = 1
             },
             new Koi
             {
@@ -183,7 +187,8 @@ namespace KoiOrderingSystem_BusinessObject.Data
                 BirthDate = new DateTime(2019, 11, 5),
                 Status = false,
                 Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
-                KoiTypeId = 5
+                KoiTypeId = 5,
+                FarmId = 1
             }
                 );
             modelBuilder.Entity<KoiByBatch>().HasData
@@ -194,6 +199,53 @@ namespace KoiOrderingSystem_BusinessObject.Data
             new KoiByBatch { Id = 4, Quantity = 12, Size = 7, Price = 120.00m, KoiTypeId = 4 },
             new KoiByBatch { Id = 5, Quantity = 20, Size = 10, Price = 200.00m, KoiTypeId = 5 }
                 );
+            modelBuilder.Entity<Farm>().HasData(
+                 new Farm
+                 {
+                     Id = 1,
+                     FarmName = "Serenity Koi Farm",
+                     Location = "Kyoto",
+                     Description = "A tranquil farm specializing in high-quality koi fish.",
+                     ManagerId = 2,
+                     EstablishedYear = 2005
+                 },
+            new Farm
+            {
+                Id = 2,
+                FarmName = "Golden Pond Koi Farm",
+                Location = "Osaka",
+                Description = "Known for its vibrant and colorful koi varieties.",
+                ManagerId = 2,
+                EstablishedYear = 2010
+            },
+            new Farm
+            {
+                Id = 3,
+                FarmName = "Harmony Koi Farm",
+                Location = "Tokyo",
+                Description = "A family-owned farm with a rich history in koi breeding.",
+                ManagerId = 2,
+                EstablishedYear = 2000
+            },
+            new Farm
+            {
+                Id = 4,
+                FarmName = "Lotus Koi Farm",
+                Location = "Hiroshima",
+                Description = "Specializes in rare koi breeds and sustainable farming practices.",
+                ManagerId = 2,
+                EstablishedYear = 2015
+            },
+            new Farm
+            {
+                Id = 5,
+                FarmName = "Peaceful Waters Koi Farm",
+                Location = "Nara",
+                Description = "Offers a serene environment and expert koi care.",
+                ManagerId = 2,
+                EstablishedYear = 2018
+            }
+            );
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
