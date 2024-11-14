@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KoiOrderingSystem_BusinessObject.Migrations
 {
     [DbContext(typeof(KoiOrderingSystemContext))]
-    [Migration("20241114131300_Migration_1")]
+    [Migration("20241114133725_Migration_1")]
     partial class Migration_1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -104,62 +104,62 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9442),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3466),
                             Description = "A tranquil farm specializing in high-quality koi fish.",
                             EstablishedYear = 2005,
                             FarmName = "Serenity Koi Farm",
                             IsDeleted = false,
                             Location = "Kyoto",
                             ManagerId = 2,
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9442)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3467)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9445),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3469),
                             Description = "Known for its vibrant and colorful koi varieties.",
                             EstablishedYear = 2010,
                             FarmName = "Golden Pond Koi Farm",
                             IsDeleted = false,
                             Location = "Osaka",
                             ManagerId = 2,
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9445)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3469)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9447),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3471),
                             Description = "A family-owned farm with a rich history in koi breeding.",
                             EstablishedYear = 2000,
                             FarmName = "Harmony Koi Farm",
                             IsDeleted = false,
                             Location = "Tokyo",
                             ManagerId = 2,
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9447)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3472)
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9449),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3473),
                             Description = "Specializes in rare koi breeds and sustainable farming practices.",
                             EstablishedYear = 2015,
                             FarmName = "Lotus Koi Farm",
                             IsDeleted = false,
                             Location = "Hiroshima",
                             ManagerId = 2,
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9449)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3473)
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9450),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3475),
                             Description = "Offers a serene environment and expert koi care.",
                             EstablishedYear = 2018,
                             FarmName = "Peaceful Waters Koi Farm",
                             IsDeleted = false,
                             Location = "Nara",
                             ManagerId = 2,
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9451)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3475)
                         });
                 });
 
@@ -199,6 +199,258 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     b.HasIndex("KoiTypeId");
 
                     b.ToTable("FarmKoiTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3485),
+                            FarmId = 1,
+                            IsDeleted = false,
+                            KoiTypeId = 1,
+                            Price = 20.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3486)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3488),
+                            FarmId = 1,
+                            IsDeleted = false,
+                            KoiTypeId = 2,
+                            Price = 25.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3489)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3490),
+                            FarmId = 1,
+                            IsDeleted = false,
+                            KoiTypeId = 3,
+                            Price = 30.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3490)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3491),
+                            FarmId = 1,
+                            IsDeleted = false,
+                            KoiTypeId = 4,
+                            Price = 35.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3491)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3492),
+                            FarmId = 1,
+                            IsDeleted = false,
+                            KoiTypeId = 5,
+                            Price = 40.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3492)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3493),
+                            FarmId = 2,
+                            IsDeleted = false,
+                            KoiTypeId = 1,
+                            Price = 22.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3493)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3494),
+                            FarmId = 2,
+                            IsDeleted = false,
+                            KoiTypeId = 2,
+                            Price = 27.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3494)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3495),
+                            FarmId = 2,
+                            IsDeleted = false,
+                            KoiTypeId = 3,
+                            Price = 32.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3495)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3496),
+                            FarmId = 2,
+                            IsDeleted = false,
+                            KoiTypeId = 4,
+                            Price = 37.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3496)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3497),
+                            FarmId = 2,
+                            IsDeleted = false,
+                            KoiTypeId = 5,
+                            Price = 42.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3497)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3498),
+                            FarmId = 3,
+                            IsDeleted = false,
+                            KoiTypeId = 1,
+                            Price = 24.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3498)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3519),
+                            FarmId = 3,
+                            IsDeleted = false,
+                            KoiTypeId = 2,
+                            Price = 29.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3521)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3522),
+                            FarmId = 3,
+                            IsDeleted = false,
+                            KoiTypeId = 3,
+                            Price = 34.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3522)
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3523),
+                            FarmId = 3,
+                            IsDeleted = false,
+                            KoiTypeId = 4,
+                            Price = 39.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3523)
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3524),
+                            FarmId = 3,
+                            IsDeleted = false,
+                            KoiTypeId = 5,
+                            Price = 44.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3524)
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3525),
+                            FarmId = 4,
+                            IsDeleted = false,
+                            KoiTypeId = 1,
+                            Price = 26.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3525)
+                        },
+                        new
+                        {
+                            Id = 17,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3526),
+                            FarmId = 4,
+                            IsDeleted = false,
+                            KoiTypeId = 2,
+                            Price = 31.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3526)
+                        },
+                        new
+                        {
+                            Id = 18,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3527),
+                            FarmId = 4,
+                            IsDeleted = false,
+                            KoiTypeId = 3,
+                            Price = 36.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3528)
+                        },
+                        new
+                        {
+                            Id = 19,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3528),
+                            FarmId = 4,
+                            IsDeleted = false,
+                            KoiTypeId = 4,
+                            Price = 41.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3529)
+                        },
+                        new
+                        {
+                            Id = 20,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3529),
+                            FarmId = 4,
+                            IsDeleted = false,
+                            KoiTypeId = 5,
+                            Price = 46.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3530)
+                        },
+                        new
+                        {
+                            Id = 21,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3530),
+                            FarmId = 5,
+                            IsDeleted = false,
+                            KoiTypeId = 1,
+                            Price = 28.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3531)
+                        },
+                        new
+                        {
+                            Id = 22,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3531),
+                            FarmId = 5,
+                            IsDeleted = false,
+                            KoiTypeId = 2,
+                            Price = 33.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3532)
+                        },
+                        new
+                        {
+                            Id = 23,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3532),
+                            FarmId = 5,
+                            IsDeleted = false,
+                            KoiTypeId = 3,
+                            Price = 38.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3533)
+                        },
+                        new
+                        {
+                            Id = 24,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3533),
+                            FarmId = 5,
+                            IsDeleted = false,
+                            KoiTypeId = 4,
+                            Price = 43.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3534)
+                        },
+                        new
+                        {
+                            Id = 25,
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3534),
+                            FarmId = 5,
+                            IsDeleted = false,
+                            KoiTypeId = 5,
+                            Price = 48.00m,
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3535)
+                        });
                 });
 
             modelBuilder.Entity("KoiOrderingSystem_BusinessObject.Feedback", b =>
@@ -337,8 +589,8 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                         {
                             Id = 1,
                             BirthDate = new DateTime(2021, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9379),
-                            DateAdded = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9376),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3427),
+                            DateAdded = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3425),
                             Description = "Bright orange koi with white spots.",
                             FarmId = 1,
                             HealthStatus = "Healthy",
@@ -346,15 +598,15 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                             KoiTypeId = 1,
                             Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
                             Status = true,
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9379),
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3427),
                             Weight = 2.3f
                         },
                         new
                         {
                             Id = 2,
                             BirthDate = new DateTime(2020, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9384),
-                            DateAdded = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9384),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3433),
+                            DateAdded = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3432),
                             Description = "Black and white koi with a smooth pattern.",
                             FarmId = 1,
                             HealthStatus = "Healthy",
@@ -362,15 +614,15 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                             KoiTypeId = 2,
                             Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
                             Status = true,
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9385),
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3433),
                             Weight = 3.1f
                         },
                         new
                         {
                             Id = 3,
                             BirthDate = new DateTime(2021, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9387),
-                            DateAdded = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9387),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3436),
+                            DateAdded = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3436),
                             Description = "Golden koi with a shiny coat.",
                             FarmId = 1,
                             HealthStatus = "Under observation",
@@ -378,15 +630,15 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                             KoiTypeId = 3,
                             Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
                             Status = true,
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9388),
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3436),
                             Weight = 2.8f
                         },
                         new
                         {
                             Id = 4,
                             BirthDate = new DateTime(2022, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9389),
-                            DateAdded = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9389),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3438),
+                            DateAdded = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3438),
                             Description = "Small blue and orange koi.",
                             FarmId = 1,
                             HealthStatus = "Healthy",
@@ -394,15 +646,15 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                             KoiTypeId = 4,
                             Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
                             Status = true,
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9390),
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3439),
                             Weight = 1.9f
                         },
                         new
                         {
                             Id = 5,
                             BirthDate = new DateTime(2019, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9392),
-                            DateAdded = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9391),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3440),
+                            DateAdded = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3440),
                             Description = "Large white koi with orange spots.",
                             FarmId = 1,
                             HealthStatus = "Healthy",
@@ -410,7 +662,7 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                             KoiTypeId = 5,
                             Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
                             Status = false,
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9392),
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3441),
                             Weight = 4.2f
                         });
                 });
@@ -457,57 +709,57 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9423),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3449),
                             IsDeleted = false,
                             KoiTypeId = 1,
                             Price = 100.00m,
                             Quantity = 10,
                             Size = 5,
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9425)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3450)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9429),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3453),
                             IsDeleted = false,
                             KoiTypeId = 2,
                             Price = 150.00m,
                             Quantity = 15,
                             Size = 6,
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9430)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3454)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9431),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3455),
                             IsDeleted = false,
                             KoiTypeId = 3,
                             Price = 80.00m,
                             Quantity = 8,
                             Size = 4,
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9431)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3455)
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9432),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3456),
                             IsDeleted = false,
                             KoiTypeId = 4,
                             Price = 120.00m,
                             Quantity = 12,
                             Size = 7,
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9433)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3457)
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9433),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3457),
                             IsDeleted = false,
                             KoiTypeId = 5,
                             Price = 200.00m,
                             Quantity = 20,
                             Size = 10,
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9434)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3458)
                         });
                 });
 
@@ -638,57 +890,57 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9357),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3407),
                             IsBatch = true,
                             IsDeleted = false,
                             IsEndangered = false,
                             Name = "Kohaku",
                             Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9358)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3407)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9360),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3410),
                             IsBatch = true,
                             IsDeleted = false,
                             IsEndangered = false,
                             Name = "Taisho Sanke",
                             Picture = "https://thucancakoihikari.com/wp-content/uploads/2024/04/koi-taisho-sanke-1.jpg",
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9361)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3411)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9362),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3412),
                             IsBatch = false,
                             IsDeleted = false,
                             IsEndangered = true,
                             Name = "Showa Sanshoku",
                             Picture = "https://cakoibienhoa.com/public/userfiles/products/ca-koi-showa-sanshoku-thumb.jpg",
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9363)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3413)
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9364),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3414),
                             IsBatch = true,
                             IsDeleted = false,
                             IsEndangered = false,
                             Name = "Shusui",
                             Picture = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2qwYKPpE9yJJKYJ_npVzr3WzWvybWZK8-fQ&s",
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9364)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3414)
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9365),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3415),
                             IsBatch = false,
                             IsDeleted = false,
                             IsEndangered = true,
                             Name = "Asagi",
                             Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/best-asagi.jpg",
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9366)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3415)
                         });
                 });
 
@@ -949,70 +1201,70 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                             Id = 1,
                             Address = "123 Maple St, Springfield, IL",
                             Avatar = "avatars/alice.jpg",
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9255),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3297),
                             Email = "admin@gmail.com",
                             FullName = "Admin Johnson",
                             IsDeleted = false,
                             Password = "123456",
                             PhoneNumber = "123-456-7890",
                             Role = "Admin",
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9261)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3304)
                         },
                         new
                         {
                             Id = 2,
                             Address = "456 Oak St, Springfield, IL",
                             Avatar = "avatars/bob.jpg",
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9267),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3309),
                             Email = "manager@gmail.com",
                             FullName = "Manager Smith",
                             IsDeleted = false,
                             Password = "securepass",
                             PhoneNumber = "234-567-8901",
                             Role = "Manager",
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9267)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3310)
                         },
                         new
                         {
                             Id = 3,
                             Address = "789 Pine St, Springfield, IL",
                             Avatar = "avatars/charlie.jpg",
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9269),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3312),
                             Email = "staff@gmail.com",
                             FullName = "Staff Brown",
                             IsDeleted = false,
                             Password = "mypassword",
                             PhoneNumber = "345-678-9012",
                             Role = "Staff",
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9270)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3312)
                         },
                         new
                         {
                             Id = 4,
                             Address = "321 Cedar St, Springfield, IL",
                             Avatar = "avatars/diana.jpg",
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9271),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3314),
                             Email = "customer@gmail.com",
                             FullName = "Customer Prince",
                             IsDeleted = false,
                             Password = "123456",
                             PhoneNumber = "456-789-0123",
                             Role = "Customer",
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9272)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3314)
                         },
                         new
                         {
                             Id = 5,
                             Address = "654 Birch St, Springfield, IL",
                             Avatar = "avatars/ethan.jpg",
-                            CreatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9273),
+                            CreatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3316),
                             Email = "ethan.hunt@example.com",
                             FullName = "Ethan Hunt",
                             IsDeleted = false,
                             Password = "missionimpossible",
                             PhoneNumber = "567-890-1234",
                             Role = "Staff",
-                            UpdatedAt = new DateTime(2024, 11, 14, 20, 13, 0, 197, DateTimeKind.Local).AddTicks(9274)
+                            UpdatedAt = new DateTime(2024, 11, 14, 20, 37, 25, 645, DateTimeKind.Local).AddTicks(3316)
                         });
                 });
 

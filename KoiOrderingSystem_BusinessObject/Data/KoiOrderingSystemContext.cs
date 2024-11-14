@@ -246,6 +246,33 @@ namespace KoiOrderingSystem_BusinessObject.Data
                 EstablishedYear = 2018
             }
             );
+            modelBuilder.Entity<FarmKoiType>().HasData(
+                 new FarmKoiType { Id = 1, FarmId = 1, KoiTypeId = 1, Price = 20.00m },
+            new FarmKoiType { Id = 2, FarmId = 1, KoiTypeId = 2, Price = 25.00m },
+            new FarmKoiType { Id = 3, FarmId = 1, KoiTypeId = 3, Price = 30.00m },
+            new FarmKoiType { Id = 4, FarmId = 1, KoiTypeId = 4, Price = 35.00m },
+            new FarmKoiType { Id = 5, FarmId = 1, KoiTypeId = 5, Price = 40.00m },
+            new FarmKoiType { Id = 6, FarmId = 2, KoiTypeId = 1, Price = 22.00m },
+            new FarmKoiType { Id = 7, FarmId = 2, KoiTypeId = 2, Price = 27.00m },
+            new FarmKoiType { Id = 8, FarmId = 2, KoiTypeId = 3, Price = 32.00m },
+            new FarmKoiType { Id = 9, FarmId = 2, KoiTypeId = 4, Price = 37.00m },
+            new FarmKoiType { Id = 10, FarmId = 2, KoiTypeId = 5, Price = 42.00m },
+            new FarmKoiType { Id = 11, FarmId = 3, KoiTypeId = 1, Price = 24.00m },
+            new FarmKoiType { Id = 12, FarmId = 3, KoiTypeId = 2, Price = 29.00m },
+            new FarmKoiType { Id = 13, FarmId = 3, KoiTypeId = 3, Price = 34.00m },
+            new FarmKoiType { Id = 14, FarmId = 3, KoiTypeId = 4, Price = 39.00m },
+            new FarmKoiType { Id = 15, FarmId = 3, KoiTypeId = 5, Price = 44.00m },
+            new FarmKoiType { Id = 16, FarmId = 4, KoiTypeId = 1, Price = 26.00m },
+            new FarmKoiType { Id = 17, FarmId = 4, KoiTypeId = 2, Price = 31.00m },
+            new FarmKoiType { Id = 18, FarmId = 4, KoiTypeId = 3, Price = 36.00m },
+            new FarmKoiType { Id = 19, FarmId = 4, KoiTypeId = 4, Price = 41.00m },
+            new FarmKoiType { Id = 20, FarmId = 4, KoiTypeId = 5, Price = 46.00m },
+            new FarmKoiType { Id = 21, FarmId = 5, KoiTypeId = 1, Price = 28.00m },
+            new FarmKoiType { Id = 22, FarmId = 5, KoiTypeId = 2, Price = 33.00m },
+            new FarmKoiType { Id = 23, FarmId = 5, KoiTypeId = 3, Price = 38.00m },
+            new FarmKoiType { Id = 24, FarmId = 5, KoiTypeId = 4, Price = 43.00m },
+            new FarmKoiType { Id = 25, FarmId = 5, KoiTypeId = 5, Price = 48.00m }
+                );
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
