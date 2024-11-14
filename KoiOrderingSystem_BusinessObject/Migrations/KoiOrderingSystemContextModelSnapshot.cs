@@ -250,9 +250,6 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     b.Property<int>("KoiTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OrderDetailKoiId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Picture")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -273,6 +270,83 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     b.HasIndex("KoiTypeId");
 
                     b.ToTable("Kois");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BirthDate = new DateTime(2021, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9695),
+                            DateAdded = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9693),
+                            Description = "Bright orange koi with white spots.",
+                            HealthStatus = "Healthy",
+                            IsDeleted = false,
+                            KoiTypeId = 1,
+                            Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
+                            Status = true,
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9696),
+                            Weight = 2.3f
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BirthDate = new DateTime(2020, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9700),
+                            DateAdded = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9700),
+                            Description = "Black and white koi with a smooth pattern.",
+                            HealthStatus = "Healthy",
+                            IsDeleted = false,
+                            KoiTypeId = 2,
+                            Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
+                            Status = true,
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9700),
+                            Weight = 3.1f
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BirthDate = new DateTime(2021, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9703),
+                            DateAdded = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9702),
+                            Description = "Golden koi with a shiny coat.",
+                            HealthStatus = "Under observation",
+                            IsDeleted = false,
+                            KoiTypeId = 3,
+                            Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
+                            Status = true,
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9703),
+                            Weight = 2.8f
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BirthDate = new DateTime(2022, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9704),
+                            DateAdded = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9704),
+                            Description = "Small blue and orange koi.",
+                            HealthStatus = "Healthy",
+                            IsDeleted = false,
+                            KoiTypeId = 4,
+                            Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
+                            Status = true,
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9705),
+                            Weight = 1.9f
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BirthDate = new DateTime(2019, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9706),
+                            DateAdded = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9706),
+                            Description = "Large white koi with orange spots.",
+                            HealthStatus = "Healthy",
+                            IsDeleted = false,
+                            KoiTypeId = 5,
+                            Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
+                            Status = false,
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9707),
+                            Weight = 4.2f
+                        });
                 });
 
             modelBuilder.Entity("KoiOrderingSystem_BusinessObject.KoiByBatch", b =>
@@ -295,9 +369,6 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     b.Property<int>("KoiTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("OrderDetailKoiId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -315,6 +386,148 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     b.HasIndex("KoiTypeId");
 
                     b.ToTable("KoiByBatches");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9722),
+                            IsDeleted = false,
+                            KoiTypeId = 1,
+                            Price = 100.00m,
+                            Quantity = 10,
+                            Size = 5,
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9723)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9726),
+                            IsDeleted = false,
+                            KoiTypeId = 2,
+                            Price = 150.00m,
+                            Quantity = 15,
+                            Size = 6,
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9726)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9727),
+                            IsDeleted = false,
+                            KoiTypeId = 3,
+                            Price = 80.00m,
+                            Quantity = 8,
+                            Size = 4,
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9727)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9728),
+                            IsDeleted = false,
+                            KoiTypeId = 4,
+                            Price = 120.00m,
+                            Quantity = 12,
+                            Size = 7,
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9728)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9729),
+                            IsDeleted = false,
+                            KoiTypeId = 5,
+                            Price = 200.00m,
+                            Quantity = 20,
+                            Size = 10,
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9729)
+                        });
+                });
+
+            modelBuilder.Entity("KoiOrderingSystem_BusinessObject.KoiOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ShippingType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("KoiOrders");
+                });
+
+            modelBuilder.Entity("KoiOrderingSystem_BusinessObject.KoiOrderDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("KoiByBatchId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("KoiId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("KoiOrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KoiByBatchId")
+                        .IsUnique()
+                        .HasFilter("[KoiByBatchId] IS NOT NULL");
+
+                    b.HasIndex("KoiId");
+
+                    b.HasIndex("KoiOrderId");
+
+                    b.ToTable("KoiOrderDetails");
                 });
 
             modelBuilder.Entity("KoiOrderingSystem_BusinessObject.KoiType", b =>
@@ -354,6 +567,63 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("KoiTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9671),
+                            IsBatch = true,
+                            IsDeleted = false,
+                            IsEndangered = false,
+                            Name = "Kohaku",
+                            Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9672)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9675),
+                            IsBatch = true,
+                            IsDeleted = false,
+                            IsEndangered = false,
+                            Name = "Taisho Sanke",
+                            Picture = "https://thucancakoihikari.com/wp-content/uploads/2024/04/koi-taisho-sanke-1.jpg",
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9675)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9677),
+                            IsBatch = false,
+                            IsDeleted = false,
+                            IsEndangered = true,
+                            Name = "Showa Sanshoku",
+                            Picture = "https://cakoibienhoa.com/public/userfiles/products/ca-koi-showa-sanshoku-thumb.jpg",
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9677)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9678),
+                            IsBatch = true,
+                            IsDeleted = false,
+                            IsEndangered = false,
+                            Name = "Shusui",
+                            Picture = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2qwYKPpE9yJJKYJ_npVzr3WzWvybWZK8-fQ&s",
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9679)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9680),
+                            IsBatch = false,
+                            IsDeleted = false,
+                            IsEndangered = true,
+                            Name = "Asagi",
+                            Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/best-asagi.jpg",
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9680)
+                        });
                 });
 
             modelBuilder.Entity("KoiOrderingSystem_BusinessObject.Order", b =>
@@ -382,11 +652,11 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("KoiOderId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int?>("OrderKoiId")
-                        .HasColumnType("int");
 
                     b.Property<string>("ShippingAddress")
                         .IsRequired()
@@ -412,93 +682,6 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     b.HasIndex("InsuranceId");
 
                     b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("KoiOrderingSystem_BusinessObject.OrderKoi", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("ShippingType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderKois");
-                });
-
-            modelBuilder.Entity("KoiOrderingSystem_BusinessObject.OrderKoiDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("KoiByBatchId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("KoiId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OrderKoiId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("KoiByBatchId")
-                        .IsUnique()
-                        .HasFilter("[KoiByBatchId] IS NOT NULL");
-
-                    b.HasIndex("KoiId")
-                        .IsUnique()
-                        .HasFilter("[KoiId] IS NOT NULL");
-
-                    b.HasIndex("OrderKoiId");
-
-                    b.ToTable("OrderDetailKois");
                 });
 
             modelBuilder.Entity("KoiOrderingSystem_BusinessObject.OrderTrip", b =>
@@ -700,70 +883,70 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                             Id = 1,
                             Address = "123 Maple St, Springfield, IL",
                             Avatar = "avatars/alice.jpg",
-                            CreatedAt = new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8043),
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9551),
                             Email = "admin@gmail.com",
                             FullName = "Admin Johnson",
                             IsDeleted = false,
                             Password = "123456",
                             PhoneNumber = "123-456-7890",
                             Role = "Admin",
-                            UpdatedAt = new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8057)
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9560)
                         },
                         new
                         {
                             Id = 2,
                             Address = "456 Oak St, Springfield, IL",
                             Avatar = "avatars/bob.jpg",
-                            CreatedAt = new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8063),
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9564),
                             Email = "manager@gmail.com",
                             FullName = "Manager Smith",
                             IsDeleted = false,
                             Password = "securepass",
                             PhoneNumber = "234-567-8901",
                             Role = "Manager",
-                            UpdatedAt = new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8063)
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9564)
                         },
                         new
                         {
                             Id = 3,
                             Address = "789 Pine St, Springfield, IL",
                             Avatar = "avatars/charlie.jpg",
-                            CreatedAt = new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8065),
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9566),
                             Email = "staff@gmail.com",
                             FullName = "Staff Brown",
                             IsDeleted = false,
                             Password = "mypassword",
                             PhoneNumber = "345-678-9012",
                             Role = "Staff",
-                            UpdatedAt = new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8066)
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9566)
                         },
                         new
                         {
                             Id = 4,
                             Address = "321 Cedar St, Springfield, IL",
                             Avatar = "avatars/diana.jpg",
-                            CreatedAt = new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8138),
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9568),
                             Email = "customer@gmail.com",
                             FullName = "Customer Prince",
                             IsDeleted = false,
                             Password = "123456",
                             PhoneNumber = "456-789-0123",
                             Role = "Customer",
-                            UpdatedAt = new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8139)
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9568)
                         },
                         new
                         {
                             Id = 5,
                             Address = "654 Birch St, Springfield, IL",
                             Avatar = "avatars/ethan.jpg",
-                            CreatedAt = new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8141),
+                            CreatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9570),
                             Email = "ethan.hunt@example.com",
                             FullName = "Ethan Hunt",
                             IsDeleted = false,
                             Password = "missionimpossible",
                             PhoneNumber = "567-890-1234",
                             Role = "Staff",
-                            UpdatedAt = new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8141)
+                            UpdatedAt = new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9570)
                         });
                 });
 
@@ -832,6 +1015,39 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     b.Navigation("KoiType");
                 });
 
+            modelBuilder.Entity("KoiOrderingSystem_BusinessObject.KoiOrder", b =>
+                {
+                    b.HasOne("KoiOrderingSystem_BusinessObject.Order", "Order")
+                        .WithMany("KoiOders")
+                        .HasForeignKey("OrderId");
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("KoiOrderingSystem_BusinessObject.KoiOrderDetail", b =>
+                {
+                    b.HasOne("KoiOrderingSystem_BusinessObject.KoiByBatch", "KoiByBatch")
+                        .WithOne("OrderDetailKoi")
+                        .HasForeignKey("KoiOrderingSystem_BusinessObject.KoiOrderDetail", "KoiByBatchId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("KoiOrderingSystem_BusinessObject.Koi", "Koi")
+                        .WithMany("OrderDetailKois")
+                        .HasForeignKey("KoiId");
+
+                    b.HasOne("KoiOrderingSystem_BusinessObject.KoiOrder", "KoiOrder")
+                        .WithMany("KoiOrderDetails")
+                        .HasForeignKey("KoiOrderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Koi");
+
+                    b.Navigation("KoiByBatch");
+
+                    b.Navigation("KoiOrder");
+                });
+
             modelBuilder.Entity("KoiOrderingSystem_BusinessObject.Order", b =>
                 {
                     b.HasOne("KoiOrderingSystem_BusinessObject.User", "Customer")
@@ -845,40 +1061,6 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                         .HasForeignKey("InsuranceId");
 
                     b.Navigation("Customer");
-                });
-
-            modelBuilder.Entity("KoiOrderingSystem_BusinessObject.OrderKoi", b =>
-                {
-                    b.HasOne("KoiOrderingSystem_BusinessObject.Order", "Order")
-                        .WithMany("OrderKois")
-                        .HasForeignKey("OrderId");
-
-                    b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("KoiOrderingSystem_BusinessObject.OrderKoiDetail", b =>
-                {
-                    b.HasOne("KoiOrderingSystem_BusinessObject.KoiByBatch", "KoiByBatch")
-                        .WithOne("OrderDetailKoi")
-                        .HasForeignKey("KoiOrderingSystem_BusinessObject.OrderKoiDetail", "KoiByBatchId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("KoiOrderingSystem_BusinessObject.Koi", "Koi")
-                        .WithOne("OrderDetailKoi")
-                        .HasForeignKey("KoiOrderingSystem_BusinessObject.OrderKoiDetail", "KoiId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("KoiOrderingSystem_BusinessObject.OrderKoi", "OrderKoi")
-                        .WithMany("OrderDetailKois")
-                        .HasForeignKey("OrderKoiId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Koi");
-
-                    b.Navigation("KoiByBatch");
-
-                    b.Navigation("OrderKoi");
                 });
 
             modelBuilder.Entity("KoiOrderingSystem_BusinessObject.OrderTrip", b =>
@@ -961,12 +1143,17 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
 
             modelBuilder.Entity("KoiOrderingSystem_BusinessObject.Koi", b =>
                 {
-                    b.Navigation("OrderDetailKoi");
+                    b.Navigation("OrderDetailKois");
                 });
 
             modelBuilder.Entity("KoiOrderingSystem_BusinessObject.KoiByBatch", b =>
                 {
                     b.Navigation("OrderDetailKoi");
+                });
+
+            modelBuilder.Entity("KoiOrderingSystem_BusinessObject.KoiOrder", b =>
+                {
+                    b.Navigation("KoiOrderDetails");
                 });
 
             modelBuilder.Entity("KoiOrderingSystem_BusinessObject.KoiType", b =>
@@ -978,18 +1165,13 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
 
             modelBuilder.Entity("KoiOrderingSystem_BusinessObject.Order", b =>
                 {
-                    b.Navigation("OrderKois");
+                    b.Navigation("KoiOders");
 
                     b.Navigation("Payments");
 
                     b.Navigation("Quotes");
 
                     b.Navigation("Trips");
-                });
-
-            modelBuilder.Entity("KoiOrderingSystem_BusinessObject.OrderKoi", b =>
-                {
-                    b.Navigation("OrderDetailKois");
                 });
 
             modelBuilder.Entity("KoiOrderingSystem_BusinessObject.User", b =>

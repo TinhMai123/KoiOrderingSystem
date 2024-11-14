@@ -13,9 +13,9 @@ namespace KoiOrderingSystem_BusinessObject
         public DateTime OrderDate { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public DateTime UpdatedDate { get; set; } = DateTime.Now;
-        public int? OrderKoiId { get; set; }
+        public int? KoiOderId { get; set; }
         public User? Customer { get; set; }
-        public ICollection<OrderKoi> OrderKois { get; set; } = new List<OrderKoi>();
+        public ICollection<KoiOrder> KoiOders { get; set; } = new List<KoiOrder>();
         public ICollection<OrderTrip> Trips { get; set; } = new List<OrderTrip>();
         public ICollection<Payment> Payments { get; set; } = new List<Payment>();
         public ICollection<Quote> Quotes { get; set; } = new List<Quote>();

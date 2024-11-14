@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace KoiOrderingSystem_BusinessObject
 {
-    public class OrderKoi : BaseModel
+    public class KoiOrder : BaseModel
     {
         public int Id { get; set; }
         public string ShippingType { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public int? OrderId { get; set; }
         public Order? Order { get; set; }
-        public ICollection<OrderKoiDetail> OrderDetailKois { get; set; } = new List<OrderKoiDetail>();
+        public ICollection<KoiOrderDetail> KoiOrderDetails { get; set; } = new List<KoiOrderDetail>();
 
     }
 }

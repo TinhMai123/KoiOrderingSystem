@@ -13,27 +13,27 @@ namespace KoiOrderingSystem_Repository.Repo
 {
     public class OrderDetailKoiRepo : IOrderDetailKoiRepo
     {
-        public async Task<bool> Add(OrderKoiDetail model)
+        public async Task<bool> Add(KoiOrderDetail model)
         {
             return await OrderDetailKoiDAO.Instance.Add(model);
         }
 
-        public async Task<List<OrderKoiDetail>> GetAll()
+        public async Task<List<KoiOrderDetail>> GetAll()
         {
             return await OrderDetailKoiDAO.Instance.GetAll();
         }
 
-        public async Task<OrderKoiDetail?> GetById(int id)
+        public async Task<KoiOrderDetail?> GetById(int id)
         {
             return await OrderDetailKoiDAO.Instance.GetById(id);
         }
 
-        public async Task<List<OrderKoiDetail>> ReadAll()
+        public async Task<List<KoiOrderDetail>> ReadAll()
         {
             return await OrderDetailKoiDAO.Instance.ReadAll();
         }
 
-        public async Task<OrderKoiDetail?> ReadById(int id)
+        public async Task<KoiOrderDetail?> ReadById(int id)
         {
             return await OrderDetailKoiDAO.Instance.ReadById(id);
         }
@@ -43,7 +43,7 @@ namespace KoiOrderingSystem_Repository.Repo
             return await OrderDetailKoiDAO.Instance.Remove(id);
         }
 
-        public async Task<bool> Update(OrderKoiDetail model)
+        public async Task<bool> Update(KoiOrderDetail model)
         {
             return await OrderDetailKoiDAO.Instance.Update(model);
         }

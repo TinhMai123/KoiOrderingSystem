@@ -9,12 +9,12 @@ namespace KoiOrderingSystem_Repository.IRepo
 {
     public interface IOrderDetailKoiRepo
     {
-        Task<OrderKoiDetail?> GetById(int id);
-        Task<List<OrderKoiDetail>> GetAll();
-        Task<bool> Add(OrderKoiDetail model);
+        Task<KoiOrderDetail?> GetById(int id);
+        Task<List<KoiOrderDetail>> GetAll();
+        Task<bool> Add(KoiOrderDetail model);
         Task<bool> Remove(int id);
-        Task<bool> Update(OrderKoiDetail model);
-        Task<OrderKoiDetail?> ReadById(int id);
-        Task<List<OrderKoiDetail>> ReadAll();
+        Task<bool> Update(KoiOrderDetail model);
+        Task<KoiOrderDetail?> ReadById(int id);
+        Task<List<KoiOrderDetail>> ReadAll();
     }
 }

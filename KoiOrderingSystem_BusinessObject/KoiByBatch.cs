@@ -13,8 +13,7 @@ namespace KoiOrderingSystem_BusinessObject
         public int Size {  get; set; }
         public decimal Price {  get; set; }
         public int KoiTypeId { get; set; }
-        public int? OrderDetailKoiId { get; set; }
         public KoiType? KoiType { get; set; }
-        public OrderKoiDetail? OrderDetailKoi { get; set; }
+        public KoiOrderDetail? OrderDetailKoi { get; set; }
     }
 }

@@ -16,10 +16,7 @@ namespace KoiOrderingSystem_BusinessObject
         public bool Status { get; set; }
         public string Picture { get; set; } = string.Empty;
         public int KoiTypeId { get; set; }
-        public int? OrderDetailKoiId { get; set; }
-
-        [Required]
         public KoiType? KoiType { get; set; }
-        public OrderKoiDetail? OrderDetailKoi { get; set; }
+        public ICollection<KoiOrderDetail> OrderDetailKois { get; set; } = new List<KoiOrderDetail>();
     }
 }

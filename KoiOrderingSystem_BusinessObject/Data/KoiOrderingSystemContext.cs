@@ -27,8 +27,8 @@ namespace KoiOrderingSystem_BusinessObject.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderKoiDetail> OrderDetailKois { get; set; }
-        public DbSet<OrderKoi> OrderKois { get; set; }
+        public DbSet<KoiOrderDetail> KoiOrderDetails { get; set; }
+        public DbSet<KoiOrder> KoiOrders { get; set; }
         public DbSet<OrderTrip> OrderTrips { get; set; }
         public DbSet<Quote> Quotes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -52,20 +52,15 @@ namespace KoiOrderingSystem_BusinessObject.Data
                 .WithMany(u => u.Kois)
                 .HasForeignKey(o => o.KoiTypeId)
                 .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<OrderKoiDetail>()
-                .HasOne(o => o.OrderKoi)
-                .WithMany(u => u.OrderDetailKois)
-                .HasForeignKey(o => o.OrderKoiId)
+            modelBuilder.Entity<KoiOrderDetail>()
+                .HasOne(o => o.KoiOrder)
+                .WithMany(u => u.KoiOrderDetails)
+                .HasForeignKey(o => o.KoiOrderId)
                 .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<OrderKoiDetail>()
-                .HasOne(o => o.Koi)
-                .WithOne(u => u.OrderDetailKoi)
-                .HasForeignKey<OrderKoiDetail>(o => o.KoiId)
-                .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<OrderKoiDetail>()
+            modelBuilder.Entity<KoiOrderDetail>()
                 .HasOne(o => o.KoiByBatch)
                 .WithOne(u => u.OrderDetailKoi)
-                .HasForeignKey<OrderKoiDetail>(o => o.KoiByBatchId)
+                .HasForeignKey<KoiOrderDetail>(o => o.KoiByBatchId)
                 .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<User>().HasData(
                  new User
@@ -123,6 +118,80 @@ namespace KoiOrderingSystem_BusinessObject.Data
                 Role = "Staff",
                 Avatar = "avatars/ethan.jpg"
             }
+                );
+            modelBuilder.Entity<KoiType>().HasData
+                (
+                new KoiType { Id = 1, Name = "Kohaku", IsEndangered = false, IsBatch = true, Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg" },
+            new KoiType { Id = 3, Name = "Taisho Sanke", IsEndangered = false, IsBatch = true, Picture = "https://thucancakoihikari.com/wp-content/uploads/2024/04/koi-taisho-sanke-1.jpg" },
+            new KoiType { Id = 2, Name = "Showa Sanshoku", IsEndangered = true, IsBatch = false, Picture = "https://cakoibienhoa.com/public/userfiles/products/ca-koi-showa-sanshoku-thumb.jpg" },
+            new KoiType { Id = 4, Name = "Shusui", IsEndangered = false, IsBatch = true, Picture = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2qwYKPpE9yJJKYJ_npVzr3WzWvybWZK8-fQ&s" },
+            new KoiType { Id = 5, Name = "Asagi", IsEndangered = true, IsBatch = false, Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/best-asagi.jpg" }
+                );
+            modelBuilder.Entity<Koi>().HasData
+                (
+                new Koi
+                {
+                    Id = 1,
+                    Weight = 2.3f,
+                    Description = "Bright orange koi with white spots.",
+                    HealthStatus = "Healthy",
+                    BirthDate = new DateTime(2021, 3, 15),
+                    Status = true,
+                    Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
+                    KoiTypeId = 1
+                },
+            new Koi
+            {
+                Id = 2,
+                Weight = 3.1f,
+                Description = "Black and white koi with a smooth pattern.",
+                HealthStatus = "Healthy",
+                BirthDate = new DateTime(2020, 7, 22),
+                Status = true,
+                Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
+                KoiTypeId = 2
+            },
+            new Koi
+            {
+                Id = 3,
+                Weight = 2.8f,
+                Description = "Golden koi with a shiny coat.",
+                HealthStatus = "Under observation",
+                BirthDate = new DateTime(2021, 1, 10),
+                Status = true,
+                Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
+                KoiTypeId = 3
+            },
+            new Koi
+            {
+                Id = 4,
+                Weight = 1.9f,
+                Description = "Small blue and orange koi.",
+                HealthStatus = "Healthy",
+                BirthDate = new DateTime(2022, 5, 30),
+                Status = true,
+                Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
+                KoiTypeId = 4
+            },
+            new Koi
+            {
+                Id = 5,
+                Weight = 4.2f,
+                Description = "Large white koi with orange spots.",
+                HealthStatus = "Healthy",
+                BirthDate = new DateTime(2019, 11, 5),
+                Status = false,
+                Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
+                KoiTypeId = 5
+            }
+                );
+            modelBuilder.Entity<KoiByBatch>().HasData
+                (
+                 new KoiByBatch { Id = 1, Quantity = 10, Size = 5, Price = 100.00m, KoiTypeId = 1 },
+            new KoiByBatch { Id = 2, Quantity = 15, Size = 6, Price = 150.00m, KoiTypeId = 2 },
+            new KoiByBatch { Id = 3, Quantity = 8, Size = 4, Price = 80.00m, KoiTypeId = 3 },
+            new KoiByBatch { Id = 4, Quantity = 12, Size = 7, Price = 120.00m, KoiTypeId = 4 },
+            new KoiByBatch { Id = 5, Quantity = 20, Size = 10, Price = 200.00m, KoiTypeId = 5 }
                 );
         }
 

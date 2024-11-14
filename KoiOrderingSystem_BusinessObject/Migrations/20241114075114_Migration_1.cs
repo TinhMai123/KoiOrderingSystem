@@ -98,7 +98,6 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     Size = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     KoiTypeId = table.Column<int>(type: "int", nullable: false),
-                    OrderDetailKoiId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -154,7 +153,7 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OrderKoiId = table.Column<int>(type: "int", nullable: true),
+                    KoiOderId = table.Column<int>(type: "int", nullable: true),
                     InsuranceId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -223,7 +222,6 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     Picture = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     KoiTypeId = table.Column<int>(type: "int", nullable: false),
-                    OrderDetailKoiId = table.Column<int>(type: "int", nullable: true),
                     FarmId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -273,7 +271,7 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderKois",
+                name: "KoiOrders",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -288,9 +286,9 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderKois", x => x.Id);
+                    table.PrimaryKey("PK_KoiOrders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderKois_Orders_OrderId",
+                        name: "FK_KoiOrders_Orders_OrderId",
                         column: x => x.OrderId,
                         principalTable: "Orders",
                         principalColumn: "Id");
@@ -401,7 +399,7 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderDetailKois",
+                name: "KoiOrderDetails",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -410,7 +408,7 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     KoiId = table.Column<int>(type: "int", nullable: true),
                     KoiByBatchId = table.Column<int>(type: "int", nullable: true),
-                    OrderKoiId = table.Column<int>(type: "int", nullable: false),
+                    KoiOrderId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -418,25 +416,36 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderDetailKois", x => x.Id);
+                    table.PrimaryKey("PK_KoiOrderDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderDetailKois_KoiByBatches_KoiByBatchId",
+                        name: "FK_KoiOrderDetails_KoiByBatches_KoiByBatchId",
                         column: x => x.KoiByBatchId,
                         principalTable: "KoiByBatches",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_OrderDetailKois_Kois_KoiId",
-                        column: x => x.KoiId,
-                        principalTable: "Kois",
+                        name: "FK_KoiOrderDetails_KoiOrders_KoiOrderId",
+                        column: x => x.KoiOrderId,
+                        principalTable: "KoiOrders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_OrderDetailKois_OrderKois_OrderKoiId",
-                        column: x => x.OrderKoiId,
-                        principalTable: "OrderKois",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        name: "FK_KoiOrderDetails_Kois_KoiId",
+                        column: x => x.KoiId,
+                        principalTable: "Kois",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "KoiTypes",
+                columns: new[] { "Id", "CreatedAt", "DeletedAt", "IsBatch", "IsDeleted", "IsEndangered", "Name", "Picture", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9671), null, true, false, false, "Kohaku", "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9672) },
+                    { 2, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9677), null, false, false, true, "Showa Sanshoku", "https://cakoibienhoa.com/public/userfiles/products/ca-koi-showa-sanshoku-thumb.jpg", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9677) },
+                    { 3, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9675), null, true, false, false, "Taisho Sanke", "https://thucancakoihikari.com/wp-content/uploads/2024/04/koi-taisho-sanke-1.jpg", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9675) },
+                    { 4, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9678), null, true, false, false, "Shusui", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2qwYKPpE9yJJKYJ_npVzr3WzWvybWZK8-fQ&s", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9679) },
+                    { 5, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9680), null, false, false, true, "Asagi", "https://hanoverkoifarms.com/wp-content/uploads/2017/01/best-asagi.jpg", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9680) }
                 });
 
             migrationBuilder.InsertData(
@@ -444,11 +453,35 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                 columns: new[] { "Id", "Address", "Avatar", "CreatedAt", "DeletedAt", "Email", "FullName", "IsDeleted", "Password", "PhoneNumber", "Role", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, "123 Maple St, Springfield, IL", "avatars/alice.jpg", new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8043), null, "admin@gmail.com", "Admin Johnson", false, "123456", "123-456-7890", "Admin", new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8057) },
-                    { 2, "456 Oak St, Springfield, IL", "avatars/bob.jpg", new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8063), null, "manager@gmail.com", "Manager Smith", false, "securepass", "234-567-8901", "Manager", new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8063) },
-                    { 3, "789 Pine St, Springfield, IL", "avatars/charlie.jpg", new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8065), null, "staff@gmail.com", "Staff Brown", false, "mypassword", "345-678-9012", "Staff", new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8066) },
-                    { 4, "321 Cedar St, Springfield, IL", "avatars/diana.jpg", new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8138), null, "customer@gmail.com", "Customer Prince", false, "123456", "456-789-0123", "Customer", new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8139) },
-                    { 5, "654 Birch St, Springfield, IL", "avatars/ethan.jpg", new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8141), null, "ethan.hunt@example.com", "Ethan Hunt", false, "missionimpossible", "567-890-1234", "Staff", new DateTime(2024, 11, 14, 14, 10, 17, 280, DateTimeKind.Local).AddTicks(8141) }
+                    { 1, "123 Maple St, Springfield, IL", "avatars/alice.jpg", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9551), null, "admin@gmail.com", "Admin Johnson", false, "123456", "123-456-7890", "Admin", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9560) },
+                    { 2, "456 Oak St, Springfield, IL", "avatars/bob.jpg", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9564), null, "manager@gmail.com", "Manager Smith", false, "securepass", "234-567-8901", "Manager", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9564) },
+                    { 3, "789 Pine St, Springfield, IL", "avatars/charlie.jpg", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9566), null, "staff@gmail.com", "Staff Brown", false, "mypassword", "345-678-9012", "Staff", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9566) },
+                    { 4, "321 Cedar St, Springfield, IL", "avatars/diana.jpg", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9568), null, "customer@gmail.com", "Customer Prince", false, "123456", "456-789-0123", "Customer", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9568) },
+                    { 5, "654 Birch St, Springfield, IL", "avatars/ethan.jpg", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9570), null, "ethan.hunt@example.com", "Ethan Hunt", false, "missionimpossible", "567-890-1234", "Staff", new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9570) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "KoiByBatches",
+                columns: new[] { "Id", "CreatedAt", "DeletedAt", "IsDeleted", "KoiTypeId", "Price", "Quantity", "Size", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9722), null, false, 1, 100.00m, 10, 5, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9723) },
+                    { 2, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9726), null, false, 2, 150.00m, 15, 6, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9726) },
+                    { 3, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9727), null, false, 3, 80.00m, 8, 4, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9727) },
+                    { 4, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9728), null, false, 4, 120.00m, 12, 7, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9728) },
+                    { 5, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9729), null, false, 5, 200.00m, 20, 10, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9729) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Kois",
+                columns: new[] { "Id", "BirthDate", "CreatedAt", "DateAdded", "DeletedAt", "Description", "FarmId", "HealthStatus", "IsDeleted", "KoiTypeId", "Picture", "Status", "UpdatedAt", "Weight" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2021, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9695), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9693), null, "Bright orange koi with white spots.", null, "Healthy", false, 1, "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg", true, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9696), 2.3f },
+                    { 2, new DateTime(2020, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9700), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9700), null, "Black and white koi with a smooth pattern.", null, "Healthy", false, 2, "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg", true, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9700), 3.1f },
+                    { 3, new DateTime(2021, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9703), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9702), null, "Golden koi with a shiny coat.", null, "Under observation", false, 3, "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg", true, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9703), 2.8f },
+                    { 4, new DateTime(2022, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9704), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9704), null, "Small blue and orange koi.", null, "Healthy", false, 4, "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg", true, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9705), 1.9f },
+                    { 5, new DateTime(2019, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9706), new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9706), null, "Large white koi with orange spots.", null, "Healthy", false, 5, "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg", false, new DateTime(2024, 11, 14, 14, 51, 14, 694, DateTimeKind.Local).AddTicks(9707), 4.2f }
                 });
 
             migrationBuilder.CreateIndex(
@@ -477,6 +510,28 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                 column: "KoiTypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_KoiOrderDetails_KoiByBatchId",
+                table: "KoiOrderDetails",
+                column: "KoiByBatchId",
+                unique: true,
+                filter: "[KoiByBatchId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_KoiOrderDetails_KoiId",
+                table: "KoiOrderDetails",
+                column: "KoiId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_KoiOrderDetails_KoiOrderId",
+                table: "KoiOrderDetails",
+                column: "KoiOrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_KoiOrders_OrderId",
+                table: "KoiOrders",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Kois_FarmId",
                 table: "Kois",
                 column: "FarmId");
@@ -485,30 +540,6 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                 name: "IX_Kois_KoiTypeId",
                 table: "Kois",
                 column: "KoiTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetailKois_KoiByBatchId",
-                table: "OrderDetailKois",
-                column: "KoiByBatchId",
-                unique: true,
-                filter: "[KoiByBatchId] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetailKois_KoiId",
-                table: "OrderDetailKois",
-                column: "KoiId",
-                unique: true,
-                filter: "[KoiId] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetailKois_OrderKoiId",
-                table: "OrderDetailKois",
-                column: "OrderKoiId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderKois_OrderId",
-                table: "OrderKois",
-                column: "OrderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerId",
@@ -565,7 +596,7 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                 name: "Feedbacks");
 
             migrationBuilder.DropTable(
-                name: "OrderDetailKois");
+                name: "KoiOrderDetails");
 
             migrationBuilder.DropTable(
                 name: "OrderTrips");
@@ -580,22 +611,22 @@ namespace KoiOrderingSystem_BusinessObject.Migrations
                 name: "KoiByBatches");
 
             migrationBuilder.DropTable(
+                name: "KoiOrders");
+
+            migrationBuilder.DropTable(
                 name: "Kois");
 
             migrationBuilder.DropTable(
-                name: "OrderKois");
+                name: "Currencies");
 
             migrationBuilder.DropTable(
-                name: "Currencies");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Farms");
 
             migrationBuilder.DropTable(
                 name: "KoiTypes");
-
-            migrationBuilder.DropTable(
-                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Insurances");

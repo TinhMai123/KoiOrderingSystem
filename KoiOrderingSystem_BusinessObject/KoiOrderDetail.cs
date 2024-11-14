@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace KoiOrderingSystem_BusinessObject
 {
-    public class OrderKoiDetail : BaseModel
+    public class KoiOrderDetail : BaseModel
     {
         public int Id { get; set; }
         public decimal Price { get; set; }
@@ -12,7 +12,7 @@ namespace KoiOrderingSystem_BusinessObject
         public Koi? Koi { get; set; }
         public int? KoiByBatchId { get; set; }
         public KoiByBatch? KoiByBatch { get; set; }
-        public int OrderKoiId { get; set; }
-        public OrderKoi? OrderKoi { get; set; }
+        public int KoiOrderId { get; set; }
+        public KoiOrder? KoiOrder { get; set; }
     }
 }
