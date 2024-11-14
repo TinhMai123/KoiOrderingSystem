@@ -45,7 +45,7 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiTypes
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _service.ReadAlls() == null)
+            if (id == null)
             {
                 return NotFound();
             }

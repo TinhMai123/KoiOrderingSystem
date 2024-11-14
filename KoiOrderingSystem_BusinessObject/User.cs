@@ -5,7 +5,6 @@ namespace KoiOrderingSystem_BusinessObject
 {
     public class User : BaseModel
     {
-
         public int Id { get; set; }
         public string FullName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
@@ -14,9 +13,8 @@ namespace KoiOrderingSystem_BusinessObject
         public string Address { get; set; } = string.Empty;
         public string Role { get; set; } = string.Empty;
         public string Avatar { get; set; } = string.Empty;
-        public int? FarmId { get; set; }
-        public Farm? Farm { get; set; }
-        public ICollection<Order>? Orders { get; set; }
-        public ICollection<OrderTrip>? OrderTrips { get; set; }
+        public ICollection<Farm> Farms { get; set; } = new List<Farm>();
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
+        public ICollection<OrderTrip> OrderTrips { get; set; } = new List<OrderTrip>();
     }
 }

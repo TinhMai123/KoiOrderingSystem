@@ -19,15 +19,15 @@
                 <input asp-for="KoiType.Name" class="form-control" />
                 <span asp-validation-for="KoiType.Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="KoiType.IsEndangered" class="control-label"></label>
-                <input asp-for="KoiType.IsEndangered" class="form-control" />
-                <span asp-validation-for="KoiType.IsEndangered" class="text-danger"></span>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="KoiType.IsEndangered" /> @Html.DisplayNameFor(model => model.KoiType.IsEndangered)
+                </label>
             </div>
-            <div class="form-group">
-                <label asp-for="KoiType.IsBatch" class="control-label"></label>
-                <input asp-for="KoiType.IsBatch" class="form-control" />
-                <span asp-validation-for="KoiType.IsBatch" class="text-danger"></span>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="KoiType.IsBatch" /> @Html.DisplayNameFor(model => model.KoiType.IsBatch)
+                </label>
             </div>
             <div class="form-group">
                 <label asp-for="KoiType.Picture" class="control-label"></label>

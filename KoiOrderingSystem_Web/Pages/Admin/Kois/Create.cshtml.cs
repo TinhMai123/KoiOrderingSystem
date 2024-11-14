@@ -42,13 +42,7 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Kois
             {
                 ModelState.AddModelError("Koi.Weight", "A Koi cannot have a weight of 0 or smaller.");
             }
-
-            if (Koi.Price < 0)
-            {
-                ModelState.AddModelError("Koi.Price", "Price cannot be smaller than 0.");
-            }
-
-            if (Koi.BirthDate > DateTime.UtcNow || Koi.BirthDate?.Year - 300 < 0)
+            if (Koi.BirthDate > DateTime.UtcNow || Koi.BirthDate.Year - 300 < 0)
             {
                 ModelState.AddModelError("Koi.BirthDate", "A Koi Fish cannot have a Birth Date like that.");
             }

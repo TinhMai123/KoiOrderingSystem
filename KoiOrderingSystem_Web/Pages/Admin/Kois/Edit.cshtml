@@ -25,11 +25,6 @@
                 <span asp-validation-for="Koi.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Koi.Price" class="control-label"></label>
-                <input asp-for="Koi.Price" class="form-control" />
-                <span asp-validation-for="Koi.Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Koi.HealthStatus" class="control-label"></label>
                 <input asp-for="Koi.HealthStatus" class="form-control" />
                 <span asp-validation-for="Koi.HealthStatus" class="text-danger"></span>
@@ -58,11 +53,6 @@
                 <label asp-for="Koi.KoiTypeId" class="control-label"></label>
                 <select asp-for="Koi.KoiTypeId" class="form-control" asp-items="ViewBag.KoiTypeId"></select>
                 <span asp-validation-for="Koi.KoiTypeId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Koi.OrderDetailKoiId" class="control-label"></label>
-                <input asp-for="Koi.OrderDetailKoiId" class="form-control" />
-                <span asp-validation-for="Koi.OrderDetailKoiId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

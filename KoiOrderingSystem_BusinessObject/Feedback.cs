@@ -7,10 +7,9 @@ namespace KoiOrderingSystem_BusinessObject
     {
         public int Id { get; set; }
         public int OrderId { get; set; }
-        public string? Title { get; set; }
+        public string Title { get; set; } = string.Empty;
         public int Rating { get; set; }
         public string Description { get; set; } = string.Empty;
         public Order? Order { get; set; }
-
     }
 }

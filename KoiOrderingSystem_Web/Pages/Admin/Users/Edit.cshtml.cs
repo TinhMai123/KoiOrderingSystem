@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
 using KoiOrderingSystem_Service.IService;
+using System.Text.RegularExpressions;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.Users
 {
@@ -26,7 +27,7 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Users
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _service.ReadAlls() == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -70,11 +71,19 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Users
             }
             var UserList = await _service.ReadAlls();
 
-            if (UserList.Any(c=>c.Email == User.Email))
+            if (UserList.Any(c=>c.Email == User.Email && c.Email != User.Email))
             {
                 ModelState.AddModelError("User.Email", $"The email {User.Email} is already taken.");
             }
-            if(UserList.Any(c=>c.PhoneNumber == User.PhoneNumber))
+            if (string.IsNullOrEmpty(User.PhoneNumber))
+            {
+                ModelState.AddModelError("User.PhoneNumber", "Phone Number is required.");
+            }
+            else if (!Regex.IsMatch(User.PhoneNumber, @"^(\+|0)?[1-9]\d{7,13}$"))
+            {
+                ModelState.AddModelError("User.PhoneNumber", "Invalid phone number format.");
+            }
+            if (UserList.Any(c=>c.PhoneNumber == User.PhoneNumber && c.PhoneNumber != User.PhoneNumber))
             {
                 ModelState.AddModelError("User.PhoneNumber", $"The phone number {User.PhoneNumber} is already in use.");
             }

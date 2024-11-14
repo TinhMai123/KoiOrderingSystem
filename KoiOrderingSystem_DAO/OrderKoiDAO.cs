@@ -31,31 +31,31 @@ namespace KoiOrderingSystem_DAO
                 return instance;
             }
         }
-        public async Task<OrderKoi?> GetById(int id)
+        public async Task<KoiOrder?> GetById(int id)
         {
-            return await _context.OrderKois.SingleOrDefaultAsync(x => x.Id == id);
+            return await _context.KoiOrders.SingleOrDefaultAsync(x => x.Id == id);
         }
-        public async Task<List<OrderKoi>> ReadAll()
+        public async Task<List<KoiOrder>> ReadAll()
         {
-            return await _context.OrderKois.AsNoTracking().ToListAsync();
+            return await _context.KoiOrders.AsNoTracking().ToListAsync();
         }
-        public async Task<OrderKoi?> ReadById(int id)
+        public async Task<KoiOrder?> ReadById(int id)
         {
-            return await _context.OrderKois.AsNoTracking().SingleOrDefaultAsync(x=>x.Id == id);
+            return await _context.KoiOrders.AsNoTracking().SingleOrDefaultAsync(x=>x.Id == id);
         }
-        public async Task<List<OrderKoi>> GetAll()
+        public async Task<List<KoiOrder>> GetAll()
         {
-            return await _context.OrderKois.ToListAsync();
+            return await _context.KoiOrders.ToListAsync();
         }
-        public async Task<bool> Add(OrderKoi model)
+        public async Task<bool> Add(KoiOrder model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = await _context.OrderKois.SingleOrDefaultAsync(x => x.Id == model.Id);
+                var existingModel = await _context.KoiOrders.SingleOrDefaultAsync(x => x.Id == model.Id);
                 if (existingModel == null)
                 {
-                    _context.OrderKois.Add(model);
+                    _context.KoiOrders.Add(model);
                     await _context.SaveChangesAsync();
                     _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
@@ -72,10 +72,10 @@ namespace KoiOrderingSystem_DAO
             var isSuccess = false;
             try
             {
-                var existingModel = await _context.OrderKois.SingleOrDefaultAsync(x => x.Id == id);
+                var existingModel = await _context.KoiOrders.SingleOrDefaultAsync(x => x.Id == id);
                 if (existingModel != null)
                 {
-                    _context.OrderKois.Remove(existingModel);
+                    _context.KoiOrders.Remove(existingModel);
                     await _context.SaveChangesAsync();
                     _context.Entry(existingModel).State = EntityState.Detached;
                     isSuccess = true;
@@ -87,18 +87,18 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public async Task<bool> Update(OrderKoi model)
+        public async Task<bool> Update(KoiOrder model)
         {
             var isSuccess = false;
             try
             {
-                var existingModel = await _context.OrderKois.SingleOrDefaultAsync(x => x.Id == model.Id);
+                var existingModel = await ReadById(model.Id);
                 if (existingModel != null)
                 {
-                    _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    existingModel.UpdatedAt = DateTime.Now;
+                    model.UpdatedAt = DateTime.Now;
+                    _context.Update(model);
                     await _context.SaveChangesAsync();
-                    _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+                    _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
                 }
             } catch (Exception)

@@ -51,10 +51,11 @@ namespace KoiOrderingSystem_DAO
             var isSuccess = false;
             try
             {
-                var existingModel = await _context.Quotes.SingleOrDefaultAsync(x => x.Id == model.Id);
+                var existingModel = await ReadById(model.Id);
                 if (existingModel == null)
                 {
-                    _context.Quotes.Add(model);
+                    model.UpdatedAt = DateTime.Now;
+                    _context.Update(model);
                     await _context.SaveChangesAsync();
                     _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;

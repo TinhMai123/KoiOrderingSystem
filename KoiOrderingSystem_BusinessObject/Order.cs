@@ -6,17 +6,18 @@ namespace KoiOrderingSystem_BusinessObject
     public class Order : BaseModel
     {
         public int Id { get; set; }
-        public int? CustomerId { get; set; }
-        public decimal? TotalAmount { get; set; }
-        public string? Status { get; set; }
-        public string? ShippingAddress { get; set; }
-        public DateTime? CreatedDate { get; set; }
-        public DateTime? UpdatedDate { get; set; }
-        public int? OrderKoiId { get; set; }
+        public int CustomerId { get; set; }
+        public decimal TotalAmount { get; set; }
+        public string Status { get; set; } = string.Empty;
+        public string ShippingAddress { get; set; } = string.Empty;
+        public DateTime OrderDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime UpdatedDate { get; set; } = DateTime.Now;
+        public int? KoiOderId { get; set; }
         public User? Customer { get; set; }
-        public ICollection<OrderKoi>? OrderKois { get; set; }
-        public  ICollection<OrderTrip>? Trips { get; set; }
-        public  ICollection<Payment>? Payments { get; set; }
-        public ICollection<Quote>? Quotes { get; set; }
+        public ICollection<KoiOrder> KoiOders { get; set; } = new List<KoiOrder>();
+        public ICollection<OrderTrip> Trips { get; set; } = new List<OrderTrip>();
+        public ICollection<Payment> Payments { get; set; } = new List<Payment>();
+        public ICollection<Quote> Quotes { get; set; } = new List<Quote>();
     }
 }
