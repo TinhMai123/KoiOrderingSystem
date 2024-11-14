@@ -24,12 +24,12 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Farms
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || await _service.ReadAlls() == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var farm = await _service.ReadById(id.Value);
+            var farm = await _service.GetById(id.Value);
             if (farm == null)
             {
                 return NotFound();

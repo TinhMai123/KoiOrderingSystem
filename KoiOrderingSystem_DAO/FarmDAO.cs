@@ -33,11 +33,11 @@ namespace KoiOrderingSystem_DAO
         }
         public async Task<Farm?> GetById(int id)
         {
-            return await _context.Farms.SingleOrDefaultAsync(x => x.Id == id);
+            return await _context.Farms.Include(f => f.Manager).SingleOrDefaultAsync(x => x.Id == id);
         }
         public async Task<List<Farm>> GetAll()
         {
-            return await _context.Farms.ToListAsync();
+            return await _context.Farms.Include(f => f.Manager).ToListAsync();
         }
         public async Task<Farm?> ReadById(int id)
         {
