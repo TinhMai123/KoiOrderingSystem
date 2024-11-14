@@ -1,0 +1,96 @@
+﻿@page
+@model KoiOrderingSystem_Web.Pages.Staff.Consultant.OrderTrips.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderTrip[0].TripStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderTrip[0].TripEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderTrip[0].MaxParticipants)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderTrip[0].IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderTrip[0].Order)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderTrip[0].Farm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderTrip[0].Consultant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderTrip[0].CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderTrip[0].DeletedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderTrip[0].UpdatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderTrip[0].IsDeleted)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.OrderTrip) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TripStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TripEndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxParticipants)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Farm.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Consultant.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeletedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
