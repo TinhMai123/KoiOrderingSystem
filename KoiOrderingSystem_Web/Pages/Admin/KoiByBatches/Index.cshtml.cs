@@ -24,7 +24,7 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
 
         public async Task OnGetAsync()
         {
-            var list = await _service.ReadAlls();
+            var list = await _service.GetAlls();
             if (list != null)
             {
                 KoiByBatch = list;

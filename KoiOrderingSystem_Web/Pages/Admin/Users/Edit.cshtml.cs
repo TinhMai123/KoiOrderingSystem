@@ -26,7 +26,7 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Users
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _service.ReadAlls() == null)
+            if (id == null)
             {
                 return NotFound();
             }

@@ -119,7 +119,8 @@ namespace KoiOrderingSystem_BusinessObject.Data
                 Avatar = "avatars/ethan.jpg"
             }
                 );
-            modelBuilder.Entity<KoiType>().HasData
+            modelBuilder.Entity<KoiType>()
+                .HasData
                 (
                 new KoiType { Id = 1, Name = "Kohaku", IsEndangered = false, IsBatch = true, Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg" },
             new KoiType { Id = 3, Name = "Taisho Sanke", IsEndangered = false, IsBatch = true, Picture = "https://thucancakoihikari.com/wp-content/uploads/2024/04/koi-taisho-sanke-1.jpg" },
