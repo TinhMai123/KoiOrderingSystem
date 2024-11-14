@@ -33,11 +33,11 @@ namespace KoiOrderingSystem_DAO
         }
         public async Task<KoiByBatch?> GetById(int id)
         {
-            return await _context.KoiByBatches.SingleOrDefaultAsync(x => x.Id == id);
+            return await _context.KoiByBatches.Include(k => k.KoiType).SingleOrDefaultAsync(x => x.Id == id);
         }
         public async Task<List<KoiByBatch>> GetAll()
         {
-            return await _context.KoiByBatches.ToListAsync();
+            return await _context.KoiByBatches.Include(k => k.KoiType).ToListAsync();
         }
         public async Task<KoiByBatch?> ReadById(int id)
         {

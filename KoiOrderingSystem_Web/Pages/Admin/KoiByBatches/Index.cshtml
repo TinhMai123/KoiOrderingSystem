@@ -23,9 +23,6 @@
                 @Html.DisplayNameFor(model => model.KoiByBatch[0].Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.KoiByBatch[0].OrderDetailKoiId)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.KoiByBatch[0].KoiType)
             </th>
             <th>
@@ -50,10 +47,7 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OrderDetailKoiId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KoiType.Id)
+                @Html.DisplayFor(modelItem => item.KoiType.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedAt)

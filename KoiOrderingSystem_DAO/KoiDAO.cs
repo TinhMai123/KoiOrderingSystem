@@ -32,7 +32,7 @@ namespace KoiOrderingSystem_DAO
         }
         public async Task<Koi?> GetById(int id)
         {
-            return await _context.Kois.SingleOrDefaultAsync(x => x.Id == id);
+            return await _context.Kois.Include(k => k.KoiType).SingleOrDefaultAsync(x => x.Id == id);
         }
         public async Task<List<Koi>> ReadAll()
         {
@@ -40,7 +40,7 @@ namespace KoiOrderingSystem_DAO
         }
         public async Task<List<Koi>> GetAll()
         {
-            return await _context.Kois.ToListAsync();
+            return await _context.Kois.Include(k => k.KoiType).ToListAsync();
         }
         public async Task<Koi?> ReadById(int id)
         {

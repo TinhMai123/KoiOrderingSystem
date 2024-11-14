@@ -29,11 +29,7 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new Exception("A Koi cannot have a weight of 0 or smaller");
             }
-            if(koi.Price < 0) 
-            {
-                throw new Exception("Price cannot be smaller than 0");
-            }
-            if(koi.BirthDate> DateTime.UtcNow || koi.BirthDate?.Year - 300 < 0)
+            if(koi.BirthDate> DateTime.UtcNow || koi.BirthDate.Year - 300 < 0)
             {
                 throw new Exception("A Koi Fish cannot have a Birth Date like that");
             }
@@ -70,11 +66,7 @@ namespace KoiOrderingSystem_Service.Service
             {
                 throw new Exception("A Koi cannot have a weight of 0 or smaller");
             }
-            if (update.Price < 0)
-            {
-                throw new Exception("Price cannot be smaller than 0");
-            }
-            if (update.BirthDate > DateTime.UtcNow || update.BirthDate?.Year - 300 < 0)
+            if (update.BirthDate > DateTime.UtcNow || update.BirthDate.Year - 300 < 0)
             {
                 throw new Exception("A Koi Fish cannot have a Birth Date like that");
             }

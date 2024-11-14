@@ -20,9 +20,6 @@
                 @Html.DisplayNameFor(model => model.Koi[0].Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Koi[0].Price)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Koi[0].HealthStatus)
             </th>
             <th>
@@ -38,9 +35,6 @@
                 @Html.DisplayNameFor(model => model.Koi[0].Picture)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Koi[0].OrderDetailKoiId)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Koi[0].KoiType)
             </th>
             <th>
@@ -53,50 +47,46 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Koi) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Weight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HealthStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BirthDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateAdded)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Picture)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDetailKoiId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KoiType.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedAt)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Koi)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HealthStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BirthDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateAdded)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.Picture)" style="width:150px;height:150px;object-fit:cover" />
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.KoiType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedAt)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -48,12 +48,6 @@
                 <label asp-for="User.Avatar" class="control-label"></label>
                 <input asp-for="User.Avatar" class="form-control" />
                 <span asp-validation-for="User.Avatar" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.FarmId" class="control-label"></label>
-                <select asp-for="User.FarmId" class="form-control" asp-items="ViewBag.FarmId"></select>
-                <span asp-validation-for="User.FarmId" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

@@ -54,13 +54,6 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.User.Avatar)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.User.Farm)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.User.Farm.Id)
-    </dl>
-    
     <form method="post">
         <input type="hidden" asp-for="User.Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |

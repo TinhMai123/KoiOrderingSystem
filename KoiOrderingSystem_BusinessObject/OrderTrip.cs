@@ -7,8 +7,8 @@ namespace KoiOrderingSystem_BusinessObject
     {
 
         public int Id { get; set; }
-        public DateTime? TripStartDate { get; set; }
-        public DateTime? TripEndDate { get; set; }
+        public DateTime TripStartDate { get; set; }
+        public DateTime TripEndDate { get; set; }
         public int? MaxParticipants { get; set; }
         public bool IsActive { get; set; } = true;
         public int OrderId { get; set; }
