@@ -24,7 +24,7 @@ namespace KoiOrderingSystem_Service.Service
         }
 
         // Add a new OrderDetailKoi
-        public async Task<bool> AddAsync(OrderDetailKoi add)
+        public async Task<bool> AddAsync(OrderKoiDetail add)
         {
             if (add == null)
             {
@@ -38,19 +38,19 @@ namespace KoiOrderingSystem_Service.Service
         }
 
         // Retrieve all OrderDetailKoi records
-        public async Task<List<OrderDetailKoi>> GetAlls()
+        public async Task<List<OrderKoiDetail>> GetAlls()
         {
             return await _repo.GetAll();
         }
 
         // Retrieve a OrderDetailKoi by ID
-        public async Task<OrderDetailKoi?> GetById(int id)
+        public async Task<OrderKoiDetail?> GetById(int id)
         {
             return await _repo.GetById(id);
         }
 
         // Update an existing OrderDetailKoi
-        public async Task<bool> UpdateAsync(OrderDetailKoi orderDetailKoi)
+        public async Task<bool> UpdateAsync(OrderKoiDetail orderDetailKoi)
         {
             if (orderDetailKoi == null)
             {
@@ -69,12 +69,12 @@ namespace KoiOrderingSystem_Service.Service
             return await _repo.Remove(id);
         }
 
-        public async Task<List<OrderDetailKoi>> ReadAlls()
+        public async Task<List<OrderKoiDetail>> ReadAlls()
         {
             return await _repo.ReadAll();
         }
 
-        public async Task<OrderDetailKoi?> ReadById(int id)
+        public async Task<OrderKoiDetail?> ReadById(int id)
         {
             return await _repo.ReadById(id);
         }

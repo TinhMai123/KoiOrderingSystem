@@ -23,11 +23,14 @@
                 <input asp-for="Koi.Description" class="form-control" />
                 <span asp-validation-for="Koi.Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <!--
+                 <div class="form-group">
                 <label asp-for="Koi.Price" class="control-label"></label>
                 <input asp-for="Koi.Price" class="form-control" />
                 <span asp-validation-for="Koi.Price" class="text-danger"></span>
             </div>
+            -->
+
             <div class="form-group">
                 <label asp-for="Koi.HealthStatus" class="control-label"></label>
                 <input asp-for="Koi.HealthStatus" class="form-control" />
@@ -55,7 +58,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Koi.KoiTypeId" class="control-label"></label>
-                <select asp-for="Koi.KoiTypeId" class ="form-control" asp-items="ViewBag.KoiTypeId"></select>
+                <select asp-for="Koi.KoiTypeId" class="form-control" asp-items="ViewBag.KoiTypeId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Koi.OrderDetailKoiId" class="control-label"></label>
@@ -74,5 +77,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

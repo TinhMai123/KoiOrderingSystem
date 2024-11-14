@@ -10,7 +10,7 @@ namespace KoiOrderingSystem_BusinessObject
     {
         public int Id { get; set; }
         public decimal Price { get; set; }
-        public string? Status {  get; set; }
-        public ICollection<Order>? Orders { get; set; }
+        public string Status { get; set; } = string.Empty;
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }

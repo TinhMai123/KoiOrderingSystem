@@ -9,12 +9,12 @@ namespace KoiOrderingSystem_Service.IService
 {
     public interface IOrderDetailKoiService
     {
-        Task<bool> AddAsync(OrderDetailKoi add);
-        Task<List<OrderDetailKoi>> GetAlls();
-        Task<OrderDetailKoi?> GetById(int id);
-        Task<List<OrderDetailKoi>> ReadAlls();
-        Task<OrderDetailKoi?> ReadById(int id);
-        Task<bool> UpdateAsync(OrderDetailKoi update);
+        Task<bool> AddAsync(OrderKoiDetail add);
+        Task<List<OrderKoiDetail>> GetAlls();
+        Task<OrderKoiDetail?> GetById(int id);
+        Task<List<OrderKoiDetail>> ReadAlls();
+        Task<OrderKoiDetail?> ReadById(int id);
+        Task<bool> UpdateAsync(OrderKoiDetail update);
         Task<bool> DeleteAsync(int id);
     }
 }

@@ -9,12 +9,11 @@ namespace KoiOrderingSystem_BusinessObject
     public class OrderKoi : BaseModel
     {
         public int Id { get; set; }
-        public DateTime OrderDate { get; set; }
         public string ShippingType { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public int? OrderId { get; set; }
         public Order? Order { get; set; }
-        public ICollection<OrderDetailKoi>? OrderDetailKois { get; set; }
+        public ICollection<OrderKoiDetail> OrderDetailKois { get; set; } = new List<OrderKoiDetail>();
 
     }
 }

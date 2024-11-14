@@ -31,23 +31,23 @@ namespace KoiOrderingSystem_DAO
                 return instance;
             }
         }
-        public async Task<OrderDetailKoi?> GetById(int id)
+        public async Task<OrderKoiDetail?> GetById(int id)
         {
             return await _context.OrderDetailKois.SingleOrDefaultAsync(x => x.Id == id);
         }
-        public async Task<List<OrderDetailKoi>> ReadAll()
+        public async Task<List<OrderKoiDetail>> ReadAll()
         {
             return await _context.OrderDetailKois.AsNoTracking().ToListAsync();
         }
-        public async Task<OrderDetailKoi?> ReadById(int id)
+        public async Task<OrderKoiDetail?> ReadById(int id)
         {
             return await _context.OrderDetailKois.SingleOrDefaultAsync(x => x.Id == id);
         }
-        public async Task<List<OrderDetailKoi>> GetAll()
+        public async Task<List<OrderKoiDetail>> GetAll()
         {
             return await _context.OrderDetailKois.ToListAsync();
         }
-        public async Task<bool> Add(OrderDetailKoi model)
+        public async Task<bool> Add(OrderKoiDetail model)
         {
             var isSuccess = false;
             try
@@ -87,7 +87,7 @@ namespace KoiOrderingSystem_DAO
             }
             return isSuccess;
         }
-        public async Task<bool> Update(OrderDetailKoi model)
+        public async Task<bool> Update(OrderKoiDetail model)
         {
             var isSuccess = false;
             try

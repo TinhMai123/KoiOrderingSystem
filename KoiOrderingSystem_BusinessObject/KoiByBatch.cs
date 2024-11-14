@@ -15,6 +15,6 @@ namespace KoiOrderingSystem_BusinessObject
         public int KoiTypeId { get; set; }
         public int? OrderDetailKoiId { get; set; }
         public KoiType? KoiType { get; set; }
-        public OrderDetailKoi? OrderDetailKoi { get; set; }
+        public OrderKoiDetail? OrderDetailKoi { get; set; }
     }
 }

@@ -82,11 +82,6 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Users
             {
                 ModelState.AddModelError("User.Role", "Role is required.");
             }
-
-            if (User.FarmId == 0)
-            {
-                ModelState.AddModelError("User.FarmId", "Farm must be selected.");
-            }
             var UserList = await _service.ReadAlls();
 
             if (UserList.Any(c => c.Email == User.Email))
