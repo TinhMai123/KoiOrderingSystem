@@ -1,6 +1,6 @@
 ﻿@{
     Layout = null;
-   
+
 }
 
 <!DOCTYPE html>
@@ -37,6 +37,11 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-page="/Admin/KoiByBatches/Index">KoiByBatches</a>
+                        </li>
+                        <li>
+                            <form method="post" asp-page="/Auth/Logout">
+                                <button type="submit" class="dropdown-item">Logout</button>
+                            </form>
                         </li>
                     </ul>
                 </div>
