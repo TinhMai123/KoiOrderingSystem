@@ -9,16 +9,20 @@ using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
 using KoiOrderingSystem_Service.IService;
+using KoiOrderingSystem_Service.Service;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.Kois
 {
     public class EditModel : PageModel
     {
         private readonly IKoiService _service;
-
-        public EditModel(IKoiService service)
+        private readonly IKoiTypeService _typeService;
+        private readonly IFarmService _farmService;
+        public EditModel(IKoiService service, IKoiTypeService typeService, IFarmService farmService)
         {
             _service = service;
+            _typeService = typeService;
+            _farmService = farmService;
         }
 
         [BindProperty]
@@ -30,7 +34,8 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Kois
             {
                 return NotFound();
             }
-
+            ViewData["KoiTypeId"] = new SelectList(await _typeService.GetAlls(), "Id", "Name");
+            ViewData["FarmId"] = new SelectList(await _farmService.GetAlls(), "Id", "FarmName");
             var koi = await _service.ReadById(id.Value);
             if (koi == null)
             {

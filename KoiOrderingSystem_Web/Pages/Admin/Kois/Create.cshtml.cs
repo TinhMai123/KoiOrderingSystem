@@ -14,14 +14,19 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Kois
     public class CreateModel : PageModel
     {
         private readonly IKoiService _service;
-
-        public CreateModel(IKoiService service)
+        private readonly IKoiTypeService _typeService;
+        private readonly IFarmService _farmService;
+        public CreateModel(IKoiService service, IKoiTypeService typeService, IFarmService farmService)
         {
             _service = service;
+            _typeService = typeService;
+            _farmService = farmService;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
+            ViewData["KoiTypeId"] = new SelectList(await _typeService.GetAlls(), "Id", "Name");
+            ViewData["FarmId"] = new SelectList(await _farmService.GetAlls(), "Id", "FarmName");
             return Page();
         }
 
