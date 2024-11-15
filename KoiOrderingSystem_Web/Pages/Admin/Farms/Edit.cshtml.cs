@@ -9,16 +9,19 @@ using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
 using KoiOrderingSystem_Service.IService;
+using KoiOrderingSystem_Service.Service;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.Farms
 {
     public class EditModel : PageModel
     {
         private readonly IFarmService _service;
+        private readonly IUserService _userService;
 
-        public EditModel(IFarmService service)
+        public EditModel(IFarmService service, IUserService userService)
         {
             _service = service;
+            _userService = userService;
         }
 
         [BindProperty]
@@ -30,7 +33,8 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Farms
             {
                 return NotFound();
             }
-
+            var users = await _userService.ReadAlls();
+            ViewData["ManagerId"] = new SelectList(users.Where(m => m.Role == "Manager"), "Id", "FullName");
             var farm = await _service.ReadById(id.Value);
             if (farm == null)
             {
