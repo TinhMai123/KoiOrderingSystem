@@ -46,26 +46,6 @@
                 <select asp-for="OrderTrip.ConsultantId" class ="form-control" asp-items="ViewBag.ConsultantId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="OrderTrip.CreatedAt" class="control-label"></label>
-                <input asp-for="OrderTrip.CreatedAt" class="form-control" />
-                <span asp-validation-for="OrderTrip.CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OrderTrip.DeletedAt" class="control-label"></label>
-                <input asp-for="OrderTrip.DeletedAt" class="form-control" />
-                <span asp-validation-for="OrderTrip.DeletedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OrderTrip.UpdatedAt" class="control-label"></label>
-                <input asp-for="OrderTrip.UpdatedAt" class="form-control" />
-                <span asp-validation-for="OrderTrip.UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="OrderTrip.IsDeleted" /> @Html.DisplayNameFor(model => model.OrderTrip.IsDeleted)
-                </label>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

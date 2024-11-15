@@ -30,27 +30,6 @@
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Quote.ApprovalStatus" /> @Html.DisplayNameFor(model => model.Quote.ApprovalStatus)
                 </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Quote.CreatedAt" class="control-label"></label>
-                <input asp-for="Quote.CreatedAt" class="form-control" />
-                <span asp-validation-for="Quote.CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Quote.DeletedAt" class="control-label"></label>
-                <input asp-for="Quote.DeletedAt" class="form-control" />
-                <span asp-validation-for="Quote.DeletedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Quote.UpdatedAt" class="control-label"></label>
-                <input asp-for="Quote.UpdatedAt" class="form-control" />
-                <span asp-validation-for="Quote.UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Quote.IsDeleted" /> @Html.DisplayNameFor(model => model.Quote.IsDeleted)
-                </label>
-            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
