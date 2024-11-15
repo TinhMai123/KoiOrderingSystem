@@ -9,7 +9,7 @@ namespace KoiOrderingSystem_Web.Pages.Auth
         public async Task<IActionResult> OnPostAsync()
         {
 
-            await HttpContext.SignOutAsync();
+            HttpContext.Session.Remove("User");
 
             return Redirect("/");
         }
