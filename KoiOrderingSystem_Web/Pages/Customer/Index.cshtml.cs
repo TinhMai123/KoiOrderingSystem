@@ -1,4 +1,5 @@
 ﻿using KoiOrderingSystem_BusinessObject;
+using KoiOrderingSystem_BusinessObject.ViewModels;
 using KoiOrderingSystem_Service.IService;
 using KoiOrderingSystem_Web.Pages.Customer;
 using KoiOrderingSystem_Web.Utils;
@@ -12,7 +13,7 @@ namespace KoiOrderingSystem_Web.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly IKoiService _koiService;
-        public List<Koi> Kois { get; set; }
+        public List<KoiViewModel> Kois { get; set; }
         public bool ItemAddedToCart { get; set; } = false;
         public IndexModel(ILogger<IndexModel> logger, IKoiService koiService)
         {
@@ -22,7 +23,7 @@ namespace KoiOrderingSystem_Web.Pages
 
         public async Task OnGet()
         {
-            Kois = await _koiService.GetAlls();
+            Kois = await _koiService.GetAllViewModel();
             var account = HttpContext.Session.GetString("User");
             if (!string.IsNullOrEmpty(account))
             {
