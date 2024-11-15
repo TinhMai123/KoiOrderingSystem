@@ -15,6 +15,7 @@ namespace KoiOrderingSystem_Web.Pages.Customer
                 // If no session, redirect to login
                 context.Result = Redirect("/Login");
             }
+            ViewData["User"] = user;
             base.OnPageHandlerExecuting(context);
         }
     }

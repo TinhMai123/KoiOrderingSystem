@@ -5,10 +5,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace KoiOrderingSystem_Web.Pages.Customer
 {
-    public class _layoutModel : PageModel
+    public class ProfileModel : AuthPageModel
     {
+        public User Profile { get; set; }  
         public void OnGet()
         {
+            var user = JsonUtils.FromJson<User>(HttpContext.Session.GetString("User"));
+            Profile = user;
         }
     }
 }

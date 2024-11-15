@@ -43,3 +43,17 @@ body {
     border-radius: 50%;
     object-fit: cover;
 }
+.card {
+    background-color: #f9f9f9;
+}
+
+h2, h5 {
+    font-family: 'Roboto', sans-serif;
+}
+
+.btn-lg {
+    padding: 12px 20px;
+}
+textarea {
+    resize: vertical;
+}

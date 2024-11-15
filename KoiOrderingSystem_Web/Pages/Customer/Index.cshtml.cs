@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace KoiOrderingSystem_Web.Pages
 {
-    public class IndexModel : AuthPageModel
+    public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly IKoiService _koiService;
@@ -20,12 +20,13 @@ namespace KoiOrderingSystem_Web.Pages
             _koiService = koiService;
         }
 
-        public async void OnGet()
+        public async Task OnGet()
         {
             Kois = await _koiService.GetAlls();
-            if (TempData["ItemAdded"] != null)
+            var account = HttpContext.Session.GetString("User");
+            if (!string.IsNullOrEmpty(account))
             {
-                ItemAddedToCart = true;
+                ViewData["User"] = JsonUtils.FromJson<User>(account);
             }
         }
         public async Task<IActionResult> OnPostAddToCart(int koiId)
@@ -41,12 +42,10 @@ namespace KoiOrderingSystem_Web.Pages
 
             // Save the updated cart back to session
             HttpContext.Session.SetString("Cart", JsonUtils.ToJson(cart));
-
-            // Set TempData for notification
-            TempData["ItemAdded"] = true;
+            ItemAddedToCart = true;
 
             // Redirect back to the main page
-            return RedirectToPage("Index");
+            return Redirect("/");
         }
     }
 }
