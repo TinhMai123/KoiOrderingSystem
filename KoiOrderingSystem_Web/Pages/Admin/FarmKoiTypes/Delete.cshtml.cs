@@ -9,36 +9,36 @@ using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
 using KoiOrderingSystem_Service.IService;
 
-namespace KoiOrderingSystem_Web.Pages.Admin.Kois
+namespace KoiOrderingSystem_Web.Pages.Admin.FarmKoiTypes
 {
     public class DeleteModel : PageModel
     {
-        private readonly IKoiService _service;
+        private readonly IFarmKoiTypeService _farmKoiTypeService;
 
-        public DeleteModel(IKoiService service)
+        public DeleteModel(IFarmKoiTypeService farmKoiTypeService)
         {
-            _service = service;
+            _farmKoiTypeService = farmKoiTypeService;
         }
 
         [BindProperty]
-      public Koi Koi { get; set; } = default!;
+      public FarmKoiType FarmKoiType { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || await _service.ReadAlls() == null)
+            if (id == null )
             {
                 return NotFound();
             }
 
-            var koi = await _service.ReadById(id.Value);
+            var farmkoitype = await _farmKoiTypeService.GetById((int)id);
 
-            if (koi == null)
+            if (farmkoitype == null)
             {
                 return NotFound();
             }
             else 
             {
-                Koi = koi;
+                FarmKoiType = farmkoitype;
             }
             return Page();
         }
@@ -49,12 +49,11 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Kois
             {
                 return NotFound();
             }
-            var koi = await _service.ReadById(id.Value);
+            var farmkoitype = await _farmKoiTypeService.GetById((int)id); ;
 
-            if (koi != null)
+            if (farmkoitype != null)
             {
-                Koi = koi;
-                await _service.DeleteAsync(id.Value);
+                _farmKoiTypeService.DeleteAsync((int)id);
             }
 
             return RedirectToPage("./Index");

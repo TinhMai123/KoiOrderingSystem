@@ -1,4 +1,5 @@
 ﻿using KoiOrderingSystem_BusinessObject;
+using KoiOrderingSystem_BusinessObject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace KoiOrderingSystem_Repository.IRepo
     {
         Task<Koi?> GetById(int id);
         Task<List<Koi>> GetAll();
+        Task<KoiViewModel?> GetViewModelById(int id);
+        Task<List<KoiViewModel>> GetAllViewModel();
         Task<bool> Add(Koi model);
         Task<bool> Remove(int id);
         Task<bool> Update(Koi model);

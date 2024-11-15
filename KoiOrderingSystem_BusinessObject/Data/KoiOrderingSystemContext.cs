@@ -139,7 +139,8 @@ namespace KoiOrderingSystem_BusinessObject.Data
                     BirthDate = new DateTime(2021, 3, 15),
                     Status = true,
                     Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
-                    KoiTypeId = 1
+                    KoiTypeId = 1,
+                    FarmId = 1
                 },
             new Koi
             {
@@ -150,7 +151,8 @@ namespace KoiOrderingSystem_BusinessObject.Data
                 BirthDate = new DateTime(2020, 7, 22),
                 Status = true,
                 Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
-                KoiTypeId = 2
+                KoiTypeId = 2,
+                FarmId = 1
             },
             new Koi
             {
@@ -161,7 +163,8 @@ namespace KoiOrderingSystem_BusinessObject.Data
                 BirthDate = new DateTime(2021, 1, 10),
                 Status = true,
                 Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
-                KoiTypeId = 3
+                KoiTypeId = 3,
+                FarmId = 1
             },
             new Koi
             {
@@ -172,7 +175,8 @@ namespace KoiOrderingSystem_BusinessObject.Data
                 BirthDate = new DateTime(2022, 5, 30),
                 Status = true,
                 Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
-                KoiTypeId = 4
+                KoiTypeId = 4,
+                FarmId = 1
             },
             new Koi
             {
@@ -183,7 +187,8 @@ namespace KoiOrderingSystem_BusinessObject.Data
                 BirthDate = new DateTime(2019, 11, 5),
                 Status = false,
                 Picture = "https://hanoverkoifarms.com/wp-content/uploads/2017/01/great-kohaku-739x1024.jpg",
-                KoiTypeId = 5
+                KoiTypeId = 5,
+                FarmId = 1
             }
                 );
             modelBuilder.Entity<KoiByBatch>().HasData
@@ -193,6 +198,80 @@ namespace KoiOrderingSystem_BusinessObject.Data
             new KoiByBatch { Id = 3, Quantity = 8, Size = 4, Price = 80.00m, KoiTypeId = 3 },
             new KoiByBatch { Id = 4, Quantity = 12, Size = 7, Price = 120.00m, KoiTypeId = 4 },
             new KoiByBatch { Id = 5, Quantity = 20, Size = 10, Price = 200.00m, KoiTypeId = 5 }
+                );
+            modelBuilder.Entity<Farm>().HasData(
+                 new Farm
+                 {
+                     Id = 1,
+                     FarmName = "Serenity Koi Farm",
+                     Location = "Kyoto",
+                     Description = "A tranquil farm specializing in high-quality koi fish.",
+                     ManagerId = 2,
+                     EstablishedYear = 2005
+                 },
+            new Farm
+            {
+                Id = 2,
+                FarmName = "Golden Pond Koi Farm",
+                Location = "Osaka",
+                Description = "Known for its vibrant and colorful koi varieties.",
+                ManagerId = 2,
+                EstablishedYear = 2010
+            },
+            new Farm
+            {
+                Id = 3,
+                FarmName = "Harmony Koi Farm",
+                Location = "Tokyo",
+                Description = "A family-owned farm with a rich history in koi breeding.",
+                ManagerId = 2,
+                EstablishedYear = 2000
+            },
+            new Farm
+            {
+                Id = 4,
+                FarmName = "Lotus Koi Farm",
+                Location = "Hiroshima",
+                Description = "Specializes in rare koi breeds and sustainable farming practices.",
+                ManagerId = 2,
+                EstablishedYear = 2015
+            },
+            new Farm
+            {
+                Id = 5,
+                FarmName = "Peaceful Waters Koi Farm",
+                Location = "Nara",
+                Description = "Offers a serene environment and expert koi care.",
+                ManagerId = 2,
+                EstablishedYear = 2018
+            }
+            );
+            modelBuilder.Entity<FarmKoiType>().HasData(
+                 new FarmKoiType { Id = 1, FarmId = 1, KoiTypeId = 1, Price = 20.00m },
+            new FarmKoiType { Id = 2, FarmId = 1, KoiTypeId = 2, Price = 25.00m },
+            new FarmKoiType { Id = 3, FarmId = 1, KoiTypeId = 3, Price = 30.00m },
+            new FarmKoiType { Id = 4, FarmId = 1, KoiTypeId = 4, Price = 35.00m },
+            new FarmKoiType { Id = 5, FarmId = 1, KoiTypeId = 5, Price = 40.00m },
+            new FarmKoiType { Id = 6, FarmId = 2, KoiTypeId = 1, Price = 22.00m },
+            new FarmKoiType { Id = 7, FarmId = 2, KoiTypeId = 2, Price = 27.00m },
+            new FarmKoiType { Id = 8, FarmId = 2, KoiTypeId = 3, Price = 32.00m },
+            new FarmKoiType { Id = 9, FarmId = 2, KoiTypeId = 4, Price = 37.00m },
+            new FarmKoiType { Id = 10, FarmId = 2, KoiTypeId = 5, Price = 42.00m },
+            new FarmKoiType { Id = 11, FarmId = 3, KoiTypeId = 1, Price = 24.00m },
+            new FarmKoiType { Id = 12, FarmId = 3, KoiTypeId = 2, Price = 29.00m },
+            new FarmKoiType { Id = 13, FarmId = 3, KoiTypeId = 3, Price = 34.00m },
+            new FarmKoiType { Id = 14, FarmId = 3, KoiTypeId = 4, Price = 39.00m },
+            new FarmKoiType { Id = 15, FarmId = 3, KoiTypeId = 5, Price = 44.00m },
+            new FarmKoiType { Id = 16, FarmId = 4, KoiTypeId = 1, Price = 26.00m },
+            new FarmKoiType { Id = 17, FarmId = 4, KoiTypeId = 2, Price = 31.00m },
+            new FarmKoiType { Id = 18, FarmId = 4, KoiTypeId = 3, Price = 36.00m },
+            new FarmKoiType { Id = 19, FarmId = 4, KoiTypeId = 4, Price = 41.00m },
+            new FarmKoiType { Id = 20, FarmId = 4, KoiTypeId = 5, Price = 46.00m },
+            new FarmKoiType { Id = 21, FarmId = 5, KoiTypeId = 1, Price = 28.00m },
+            new FarmKoiType { Id = 22, FarmId = 5, KoiTypeId = 2, Price = 33.00m },
+            new FarmKoiType { Id = 23, FarmId = 5, KoiTypeId = 3, Price = 38.00m },
+            new FarmKoiType { Id = 24, FarmId = 5, KoiTypeId = 4, Price = 43.00m },
+            new FarmKoiType { Id = 25, FarmId = 5, KoiTypeId = 5, Price = 48.00m }
                 );
         }
 

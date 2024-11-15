@@ -1,4 +1,5 @@
 ﻿@page
+@using System.Globalization
 @model KoiOrderingSystem_Web.Pages.Admin.Farms.DetailsModel
 
 @{
@@ -33,7 +34,7 @@
             @Html.DisplayNameFor(model => model.Farm.Manager)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Farm.Manager.Address)
+            @Html.DisplayFor(model => model.Farm.Manager.FullName)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Farm.EstablishedYear)
@@ -59,3 +60,152 @@
     <a asp-page="./Edit" asp-route-id="@Model.Farm?.Id">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>
+<h1>Koi type prices</h1>
+<p>
+    <a asp-page="/Admin/FarmKoiTypes/Create">Create New Price</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FarmKoiTypes[0].KoiType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FarmKoiTypes[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FarmKoiTypes[0].CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FarmKoiTypes[0].UpdatedAt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.FarmKoiTypes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KoiType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedAt)
+                </td>
+                <td>
+                    <a asp-page="/Admin/FarmKoiTypes/Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="/Admin/FarmKoiTypes/Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="/Admin/FarmKoiTypes/Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h1>Kois in this farm</h1>
+<p>
+    <a asp-page="/Admin/Kois/Create">Create New Koi</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.HealthStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.DateAdded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.Picture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.Farm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.KoiType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kois[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.UpdatedAt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Kois)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Koi.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Koi.Weight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Koi.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Koi.HealthStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Koi.BirthDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Koi.DateAdded)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Koi.Status)
+                </td>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.Koi.Picture)" style="width:150px;height:150px;object-fit:cover" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Koi.Farm.FarmName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Koi.KoiType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Koi.CreatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Koi.UpdatedAt)
+                </td>
+                <td>
+                    <a asp-page="/Admin/Kois/Edit" asp-route-id="@item.Koi.Id">Edit</a> |
+                    <a asp-page="/Admin/Kois/Details" asp-route-id="@item.Koi.Id">Details</a> |
+                    <a asp-page="/Admin/Kois/Delete" asp-route-id="@item.Koi.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -34,12 +34,18 @@ namespace KoiOrderingSystem_DAO
         }
         public async Task<List<FarmKoiType>> GetAll()
         {
-            return await _context.FarmKoiTypes.ToListAsync();
+            return await _context.FarmKoiTypes
+                .Include(fkt => fkt.KoiType)
+                .Include(fkt => fkt.Farm)
+                .ToListAsync();
         }
 
         public async Task<FarmKoiType?> GetById(int id)
         {
-            return await  _context.FarmKoiTypes.SingleOrDefaultAsync(x => x.Id == id) ;
+            return await  _context.FarmKoiTypes
+                .Include(fkt => fkt.KoiType)
+                .Include(fkt => fkt.Farm)
+                .SingleOrDefaultAsync(x => x.Id == id) ;
 
         }
         public async Task<List<FarmKoiType>> ReadAll()

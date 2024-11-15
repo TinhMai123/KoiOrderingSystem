@@ -9,39 +9,40 @@ using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
 using KoiOrderingSystem_Service.IService;
-using KoiOrderingSystem_Service.Service;
 
-namespace KoiOrderingSystem_Web.Pages.Admin.Kois
+namespace KoiOrderingSystem_Web.Pages.Admin.FarmKoiTypes
 {
     public class EditModel : PageModel
     {
-        private readonly IKoiService _service;
-        private readonly IKoiTypeService _typeService;
+        private readonly IFarmKoiTypeService _farmKoiTypeService;
         private readonly IFarmService _farmService;
-        public EditModel(IKoiService service, IKoiTypeService typeService, IFarmService farmService)
+        private readonly IKoiTypeService _koiTypeService;
+
+        public EditModel(IFarmKoiTypeService farmKoiTypeService, IFarmService farmService, IKoiTypeService koiTypeService)
         {
-            _service = service;
-            _typeService = typeService;
+            _farmKoiTypeService = farmKoiTypeService;
             _farmService = farmService;
+            _koiTypeService = koiTypeService;
         }
 
         [BindProperty]
-        public Koi Koi { get; set; } = default!;
+        public FarmKoiType FarmKoiType { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || await _service.ReadAlls() == null)
+            if (id == null)
             {
                 return NotFound();
             }
-            ViewData["KoiTypeId"] = new SelectList(await _typeService.GetAlls(), "Id", "Name");
-            ViewData["FarmId"] = new SelectList(await _farmService.GetAlls(), "Id", "FarmName");
-            var koi = await _service.ReadById(id.Value);
-            if (koi == null)
+
+            var farmkoitype =  await _farmKoiTypeService.GetById((int)id);
+            if (farmkoitype == null)
             {
                 return NotFound();
             }
-            Koi = koi;
+            FarmKoiType = farmkoitype;
+           ViewData["FarmId"] = new SelectList(await _farmService.GetAlls(), "Id", "Description");
+           ViewData["KoiTypeId"] = new SelectList(await _koiTypeService.GetAlls(), "Id", "Name");
             return Page();
         }
 
@@ -54,15 +55,14 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Kois
                 return Page();
             }
 
-          
 
             try
-            { 
-                await _service.UpdateAsync(Koi);
+            {
+                await _farmKoiTypeService.UpdateAsync(FarmKoiType);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (await KoiExists(Koi.Id))
+                if (!FarmKoiTypeExists(FarmKoiType.Id))
                 {
                     return NotFound();
                 }
@@ -75,9 +75,9 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Kois
             return RedirectToPage("./Index");
         }
 
-        private async Task<bool> KoiExists(int id)
+        private bool FarmKoiTypeExists(int id)
         {
-            return await _service.ReadById(id) == null;
+          return _farmKoiTypeService.GetById((int)id) != null;
         }
     }
 }

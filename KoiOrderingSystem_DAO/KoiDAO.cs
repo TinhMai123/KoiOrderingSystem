@@ -1,5 +1,6 @@
 ﻿using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using KoiOrderingSystem_BusinessObject.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,35 @@ namespace KoiOrderingSystem_DAO
         {
             return await _context.Kois.Include(k => k.KoiType).ToListAsync();
         }
+        public async Task<KoiViewModel?> GetViewModelById(int id)
+        {
+            return await _context.Kois
+            .Include(k => k.KoiType)
+            .Include(k => k.Farm)
+            .Select(k => new KoiViewModel
+            {
+                Koi = k,
+                Price = _context.FarmKoiTypes
+                    .Where(fkt => fkt.KoiTypeId == k.KoiTypeId && fkt.FarmId == k.FarmId)
+                    .Select(fkt => fkt.Price)
+                    .FirstOrDefault()
+            }).SingleOrDefaultAsync(k => k.Koi.Id == id);
+        }
+        public async Task<List<KoiViewModel>> GetAllViewModel()
+        {
+            return await _context.Kois
+            .Include(k => k.KoiType)
+            .Include(k => k.Farm)
+            .Select(k => new KoiViewModel
+            {
+                Koi = k,
+                Price = _context.FarmKoiTypes
+                    .Where(fkt => fkt.KoiTypeId == k.KoiTypeId && fkt.FarmId == k.FarmId)
+                    .Select(fkt => fkt.Price)
+                    .FirstOrDefault()
+            })
+            .ToListAsync();
+        }
         public async Task<Koi?> ReadById(int id)
         {
             return await _context.Kois.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
@@ -59,8 +89,7 @@ namespace KoiOrderingSystem_DAO
                     _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
                 }
-            }
-            catch (Exception)
+            } catch (Exception)
             {
 
                 throw;
@@ -80,8 +109,7 @@ namespace KoiOrderingSystem_DAO
                     _context.Entry(existingModel).State = EntityState.Detached;
                     isSuccess = true;
                 }
-            }
-            catch (Exception)
+            } catch (Exception)
             {
 
                 throw;
@@ -102,8 +130,7 @@ namespace KoiOrderingSystem_DAO
                     _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
                 }
-            }
-            catch (Exception)
+            } catch (Exception)
             {
 
                 throw;
