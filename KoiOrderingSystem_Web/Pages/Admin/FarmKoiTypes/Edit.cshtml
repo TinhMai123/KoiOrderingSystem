@@ -30,26 +30,6 @@
                 <span asp-validation-for="FarmKoiType.Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FarmKoiType.CreatedAt" class="control-label"></label>
-                <input asp-for="FarmKoiType.CreatedAt" class="form-control" />
-                <span asp-validation-for="FarmKoiType.CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FarmKoiType.DeletedAt" class="control-label"></label>
-                <input asp-for="FarmKoiType.DeletedAt" class="form-control" />
-                <span asp-validation-for="FarmKoiType.DeletedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FarmKoiType.UpdatedAt" class="control-label"></label>
-                <input asp-for="FarmKoiType.UpdatedAt" class="form-control" />
-                <span asp-validation-for="FarmKoiType.UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="FarmKoiType.IsDeleted" /> @Html.DisplayNameFor(model => model.FarmKoiType.IsDeleted)
-                </label>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

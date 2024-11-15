@@ -96,9 +96,9 @@
                     @Html.DisplayFor(modelItem => item.UpdatedAt)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-page="/Admin/FarmKoiTypes/Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="/Admin/FarmKoiTypes/Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="/Admin/FarmKoiTypes/Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }
@@ -196,9 +196,9 @@
                     @Html.DisplayFor(modelItem => item.Koi.UpdatedAt)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Koi.Id">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Koi.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Koi.Id">Delete</a>
+                    <a asp-page="/Admin/Kois/Edit" asp-route-id="@item.Koi.Id">Edit</a> |
+                    <a asp-page="/Admin/Kois/Details" asp-route-id="@item.Koi.Id">Details</a> |
+                    <a asp-page="/Admin/Kois/Delete" asp-route-id="@item.Koi.Id">Delete</a>
                 </td>
             </tr>
         }
