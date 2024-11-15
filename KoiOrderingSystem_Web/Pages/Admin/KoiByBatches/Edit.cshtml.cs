@@ -15,10 +15,11 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
     public class EditModel : PageModel
     {
         private readonly IKoiByBatchService _service;
-
-        public EditModel(IKoiByBatchService service)
+        private readonly IKoiTypeService _typeService;
+        public EditModel(IKoiByBatchService service, IKoiTypeService typeService)
         {
             _service = service;
+            _typeService = typeService;
         }
 
         [BindProperty]
@@ -26,6 +27,7 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            ViewData["KoiTypeId"] = new SelectList(await _typeService.GetAlls(), "Id", "Name");
             if (id == null || await _service.ReadAlls() == null)
             {
                 return NotFound();

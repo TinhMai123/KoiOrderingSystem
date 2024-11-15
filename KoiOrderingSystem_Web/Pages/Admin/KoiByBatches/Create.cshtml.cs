@@ -14,14 +14,17 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
     public class CreateModel : PageModel
     {
         private readonly IKoiByBatchService _service;
+        private readonly IKoiTypeService _typeService;
 
-        public CreateModel(IKoiByBatchService service)
+        public CreateModel(IKoiByBatchService service, IKoiTypeService typeService)
         {
             _service = service;
+            _typeService = typeService;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            ViewData["KoiTypeId"] = new SelectList(await _typeService.GetAlls(), "Id", "Name");
             return Page();
         }
 
