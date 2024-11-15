@@ -1,0 +1,42 @@
+﻿@page
+@model KoiOrderingSystem_Web.Pages.Customer.ProfileModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<h2>Your Profile</h2>
+
+<<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Profile.Id" />
+            <div class="form-group">
+                <label asp-for="Profile.FullName" class="control-label"></label>
+                <input asp-for="Profile.FullName" class="form-control" />
+                <span asp-validation-for="Profile.FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Profile.PhoneNumber" class="control-label"></label>
+                <input asp-for="Profile.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Profile.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Profile.Address" class="control-label"></label>
+                <input asp-for="Profile.Address" class="form-control" />
+                <span asp-validation-for="Profile.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Profile.Avatar" class="control-label"></label>
+                <input asp-for="Profile.Avatar" class="form-control" />
+                <span asp-validation-for="Profile.Avatar" class="text-danger"></span>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to Koi Shop</a>
+</div>

@@ -7,9 +7,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace KoiOrderingSystem_Web.Pages.Customer
 {
-    public class ItemModel : AuthPageModel
+    public class ItemModel : PageModel
     {
         private readonly IKoiService _service;
+
+        public ItemModel(IKoiService service)
+        {
+            _service = service;
+        }
+
         public List<Koi> Kois { get; set; } 
         public Koi Main { get; set; }
         public async Task<IActionResult> OnGet(int koiId)
@@ -20,6 +26,11 @@ namespace KoiOrderingSystem_Web.Pages.Customer
             {
                 return NotFound();
             }
+            var account = HttpContext.Session.GetString("User");
+            if(!string.IsNullOrEmpty(account)) {
+                ViewData["User"] = JsonUtils.FromJson<User>(account);
+            }
+            
             Main = koi;
             var list = await _service.ReadAlls();
             Kois = list.Where(c=>c.KoiTypeId == koi.KoiTypeId).Take(4).ToList();
@@ -44,7 +55,7 @@ namespace KoiOrderingSystem_Web.Pages.Customer
             TempData["ItemAdded"] = true;
 
             // Redirect back to the main page
-            return RedirectToPage("Index");
+            return Redirect("/");
         }
     }
 }
