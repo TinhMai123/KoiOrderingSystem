@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
 using KoiOrderingSystem_Service.IService;
+using KoiOrderingSystem_Web.Utils;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
 {
@@ -22,13 +23,24 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
 
         public IList<KoiByBatch> KoiByBatch { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            var userString = HttpContext.Session.GetString("User") ?? "";
+            if (string.IsNullOrEmpty(userString))
+            {
+                return Redirect("/Login");
+            }
+            var user = JsonUtils.FromJson<User>(userString);
+            if (user == null || user.Role != "Admin")
+            {
+                return Redirect("/Login");
+            }
             var list = await _service.GetAlls();
             if (list != null)
             {
                 KoiByBatch = list;
             }
+            return Page();
         }
     }
 }

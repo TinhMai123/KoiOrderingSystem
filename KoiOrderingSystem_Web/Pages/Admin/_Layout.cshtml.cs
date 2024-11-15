@@ -7,6 +7,7 @@ namespace KoiOrderingSystem_Web.Pages.Admin
     {
         public void OnGet()
         {
+          
         }
     }
 }
