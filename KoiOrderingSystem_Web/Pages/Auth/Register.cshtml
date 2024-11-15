@@ -1,4 +1,54 @@
 ﻿@page
 @model KoiOrderingSystem_Web.Pages.Auth.RegisterModel
 @{
+    ViewData["Title"] = "Register";
+}
+
+<div style="min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px;">
+    <div class="card shadow-lg" style="width: 100%; max-width: 500px; padding: 30px;">
+        <h2 class="text-center fw-bold mb-4">Register</h2>
+
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="User.Email" class="form-label fw-normal">Email</label>
+                <input asp-for="User.Email" class="form-control" />
+                <span asp-validation-for="User.Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="User.Password" class="form-label fw-normal">Password</label>
+                <input asp-for="User.Password" type="password" class="form-control" />
+                <span asp-validation-for="User.Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="User.FullName" class="form-label fw-normal">Full Name</label>
+                <input asp-for="User.FullName" class="form-control" />
+                <span asp-validation-for="User.FullName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="User.PhoneNumber" class="form-label fw-normal">Phone Number</label>
+                <input asp-for="User.PhoneNumber" class="form-control" />
+                <span asp-validation-for="User.PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="User.Address" class="form-label fw-normal">Address</label>
+                <input asp-for="User.Address" class="form-control" />
+                <span asp-validation-for="User.Address" class="text-danger"></span>
+            </div>
+            <div class="d-flex flex-column align-items-center">
+            <button type="submit" class="btn btn-primary w-100">Register</button>
+            <br />
+            <a asp-page="Login" class="btn btn-outline-secondary w-100">Back To Login</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }
