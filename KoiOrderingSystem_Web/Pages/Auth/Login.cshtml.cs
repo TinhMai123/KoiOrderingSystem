@@ -38,6 +38,8 @@ namespace KoiOrderingSystem_Web.Pages
                 {
                     case "Admin":
                         return Redirect("Admin/Dashboard");
+                    case "Staff":
+                        return Redirect("Staff/Sales/Index");
                     default:
                         return Redirect("/");
                 }

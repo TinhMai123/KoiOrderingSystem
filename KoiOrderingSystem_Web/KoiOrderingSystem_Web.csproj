@@ -11,6 +11,7 @@
     <Content Remove="Admin.cshtml" />
     <Content Remove="Pages\Customer\AuthPage.cshtml" />
     <Content Remove="Pages\Customer\Cart.cshtml" />
+    <Content Remove="Pages\Staff\AuthRole.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +46,7 @@
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Admin.cshtml" />
     <_ContentIncludedByDefault Remove="Pages\Customer\Cart.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Staff\AuthRole.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,6 +56,11 @@
   <ItemGroup>
     <None Include="Pages\Customer\AuthPage.cshtml" />
     <None Include="Pages\Customer\Cart.cshtml" />
+    <None Include="Pages\Staff\AuthRole.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Staff\AuthRole.cshtml" />
   </ItemGroup>
 
 </Project>
