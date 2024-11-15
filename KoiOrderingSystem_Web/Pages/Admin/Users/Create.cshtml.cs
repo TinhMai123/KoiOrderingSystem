@@ -60,7 +60,7 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Users
             {
                 ModelState.AddModelError("User.PhoneNumber", "Phone Number is required.");
             }
-            else if (!Regex.IsMatch(User.PhoneNumber, @"^\+?[1-9]\d{1,14}$"))
+            else if (!Regex.IsMatch(User.PhoneNumber, @"^(\+|0)?[1-9]\d{7,13}$"))
             {
                 ModelState.AddModelError("User.PhoneNumber", "Invalid phone number format.");
             }

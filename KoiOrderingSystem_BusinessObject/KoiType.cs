@@ -12,6 +12,7 @@ namespace KoiOrderingSystem_BusinessObject
         public bool IsBatch { get; set; }
         public string Picture { get; set; } = string.Empty;
         public ICollection<Koi> Kois { get; set; } = new List<Koi>();
+        public ICollection<KoiByBatch> KoiByBatches { get; set; } = new List<KoiByBatch>();
         public ICollection<FarmKoiType> FarmKoiTypes { get; set; } = new List<FarmKoiType>();
     }
 }

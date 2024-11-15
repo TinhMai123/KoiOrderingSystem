@@ -92,13 +92,13 @@ namespace KoiOrderingSystem_DAO
             var isSuccess = false;
             try
             {
-                var existingModel = await _context.KoiOrderDetails.SingleOrDefaultAsync(x => x.Id == model.Id);
+                var existingModel = await ReadById(model.Id);
                 if (existingModel != null)
                 {
-                    _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                    existingModel.UpdatedAt = DateTime.Now;
+                    model.UpdatedAt = DateTime.Now;
+                    _context.Update(model);
                     await _context.SaveChangesAsync();
-                    _context.Remove(existingModel).State = Microsoft.EntityFrameworkCore.EntityState.Detached;
+                    _context.Entry(model).State = EntityState.Detached;
                     isSuccess = true;
                 }
             } catch (Exception)

@@ -1,0 +1,59 @@
+﻿@page
+@model KoiOrderingSystem_Web.Pages.Admin.Insurances.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Insurance</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Insurance.Price" class="control-label"></label>
+                <input asp-for="Insurance.Price" class="form-control" />
+                <span asp-validation-for="Insurance.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Insurance.Status" class="control-label"></label>
+                <input asp-for="Insurance.Status" class="form-control" />
+                <span asp-validation-for="Insurance.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Insurance.CreatedAt" class="control-label"></label>
+                <input asp-for="Insurance.CreatedAt" class="form-control" />
+                <span asp-validation-for="Insurance.CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Insurance.DeletedAt" class="control-label"></label>
+                <input asp-for="Insurance.DeletedAt" class="form-control" />
+                <span asp-validation-for="Insurance.DeletedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Insurance.UpdatedAt" class="control-label"></label>
+                <input asp-for="Insurance.UpdatedAt" class="form-control" />
+                <span asp-validation-for="Insurance.UpdatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Insurance.IsDeleted" /> @Html.DisplayNameFor(model => model.Insurance.IsDeleted)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
