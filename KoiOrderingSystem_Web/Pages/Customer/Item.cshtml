@@ -20,7 +20,6 @@
                 <p><strong>Health Status:</strong> @koi?.HealthStatus</p>
                 <p><strong>Birth Date:</strong> @koi?.BirthDate.ToString("MMMM dd, yyyy")</p>
                 <div class="d-flex">
-                    <input class="form-control text-center me-3" id="inputQuantity" type="number" value="1" style="max-width: 3rem" />
                     <form method="post" asp-route-koiId="@koi.Id">
                         <button class="btn btn-outline-dark flex-shrink-0" type="submit">
                             <i class="bi-cart-fill me-1"></i>
