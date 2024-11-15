@@ -10,7 +10,6 @@
   <ItemGroup>
     <Content Remove="Admin.cshtml" />
     <Content Remove="Pages\Customer\AuthPage.cshtml" />
-    <Content Remove="Pages\Customer\Cart.cshtml" />
     <Content Remove="Pages\Staff\AuthRole.cshtml" />
   </ItemGroup>
 
@@ -45,17 +44,11 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Admin.cshtml" />
-    <_ContentIncludedByDefault Remove="Pages\Customer\Cart.cshtml" />
     <_ContentIncludedByDefault Remove="Pages\Staff\AuthRole.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\Customer\Cart.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Pages\Customer\AuthPage.cshtml" />
-    <None Include="Pages\Customer\Cart.cshtml" />
     <None Include="Pages\Staff\AuthRole.cshtml" />
   </ItemGroup>
 

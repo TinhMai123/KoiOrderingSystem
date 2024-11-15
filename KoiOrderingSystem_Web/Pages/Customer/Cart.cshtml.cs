@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace KoiOrderingSystem_Web.Pages.Customer
 {
-    public class CartModel : AuthPageModel
+    public class CartModel : PageModel
     {
         private readonly IKoiService _koiService;
 

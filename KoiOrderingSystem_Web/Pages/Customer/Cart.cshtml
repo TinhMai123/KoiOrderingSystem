@@ -2,13 +2,20 @@
 @model KoiOrderingSystem_Web.Pages.Customer.CartModel
 @{
     var cartItems = Model.CartItems;
+   
 }
 
 <div class="container mt-5">
     <h2 class="text-center fw-bold mb-4">Your Cart</h2>
 
-    @if (cartItems.Any())
+    @if (cartItems == null)
     {
+             <div class="text-center">
+            <p class="text-muted">Your cart is empty.</p>
+            <a asp-page="/Customer/Products" class="btn btn-primary mt-3">Continue Shopping</a>
+        </div>
+    }
+    else{
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card p-4 shadow-sm">
@@ -46,14 +53,7 @@
                 </div>
             </div>
         </div>
-    }
-    else
-    {
-        <div class="text-center">
-            <p class="text-muted">Your cart is empty.</p>
-            <a asp-page="/Customer/Products" class="btn btn-primary mt-3">Continue Shopping</a>
-        </div>
-    }
+    }   
 </div>
 
 @section Scripts {
