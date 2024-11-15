@@ -34,13 +34,12 @@ namespace KoiOrderingSystem_Web.Pages
             {
                 // Store user role in session
                 HttpContext.Session.SetString("User",JsonUtils.ToJson(user));
-
                 switch (user.Role)
                 {
                     case "Admin":
                         return Redirect("Admin/Dashboard");
                     default:
-                        return Redirect("Index");
+                        return Redirect("/");
                 }
             }
             else

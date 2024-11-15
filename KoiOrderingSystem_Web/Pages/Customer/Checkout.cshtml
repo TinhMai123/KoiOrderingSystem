@@ -1,4 +1,85 @@
 ﻿@page
 @model KoiOrderingSystem_Web.Pages.Customer.CheckoutModel
 @{
+    var cartItems = Model.CartItems;
+    var totalAmount = Model.CartTotal;
 }
+
+<div class="container mt-5">
+    <h2 class="text-center fw-bold mb-4 text-primary">Checkout</h2>
+
+    @if (cartItems.Any())
+    {
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card p-4 shadow-lg border-light rounded">
+                    <h5 class="mb-4">Order Summary</h5>
+
+                    <div class="list-group">
+                        @foreach (var item in cartItems)
+                        {
+                            <div class="list-group-item d-flex justify-content-between align-items-center border-0">
+                                <div class="d-flex align-items-center">
+                                    <img src="@item.Picture" alt="@item.Description" class="img-thumbnail me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                                    <div>
+                                        <strong>@item.Description</strong><br>
+                                        <span class="text-muted">@item.HealthStatus</span>
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    <span class="fw-bold">@item.Weight.ToString("C")</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <h5 class="fw-bold">Total Amount:</h5>
+                        <h5 class="text-primary fw-bold">@totalAmount.ToString("C")</h5>
+                    </div>
+
+                    <hr>
+
+                    <h5 class="mb-4">Billing Information</h5>
+
+                    <form method="post" class="row g-4">
+                        <div class="col-md-6">
+                            <label for="FullName" class="form-label">Full Name</label>
+                            <input type="text" id="FullName" name="FullName" class="form-control" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="Email" class="form-label">Email Address</label>
+                            <input type="email" id="Email" name="Email" class="form-control" placeholder="Enter your email address" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="PhoneNumber" class="form-label">Phone Number</label>
+                            <input type="tel" id="PhoneNumber" name="PhoneNumber" class="form-control" placeholder="Enter your phone number" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="Address" class="form-label">Shipping Address</label>
+                            <textarea id="Address" name="Address" class="form-control" rows="4" placeholder="Enter your shipping address" required></textarea>
+                        </div>
+
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-success btn-lg w-100 mt-3">Confirm Order</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center">
+            <p class="text-muted">Your cart is empty. Please add items to your cart before proceeding.</p>
+            <a asp-page="/Customer/Products" class="btn btn-primary mt-3">Continue Shopping</a>
+        </div>
+    }
+</div>
+
+

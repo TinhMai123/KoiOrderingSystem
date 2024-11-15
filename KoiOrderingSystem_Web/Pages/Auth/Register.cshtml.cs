@@ -79,7 +79,7 @@ namespace KoiOrderingSystem_Web.Pages.Auth
             User.Role = "Customer";
             await _service.AddAsync(User);
             HttpContext.Session.SetString("User", JsonUtils.ToJson(User));
-            return RedirectToPage("./Index");
+            return Redirect("/");
         }
     }
 }

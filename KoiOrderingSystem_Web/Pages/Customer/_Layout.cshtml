@@ -1,4 +1,8 @@
-﻿@{
+﻿@using KoiOrderingSystem_BusinessObject
+
+
+@{
+    var user = ViewData["User"] as User;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -13,36 +17,43 @@
     <div style="height:100vh;display:flex;flex-direction:column;">
         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
             <div class="container">
-                <a class="navbar-brand" href="#!">Koi Shop</a>
+                <a class="navbar-brand" asp-page="Index">Koi Shop</a>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" asp-page="Index">Home</a></li>
                     </ul>
                     <form class="d-flex me-3">
-                        <button class="btn btn-outline-dark" type="submit">
+                        <a asp-page="Cart" class="btn btn-outline-dark">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
+                            <!-- <span class="badge bg-dark text-white ms-1 rounded-pill">0</span> -->
+                        </a>
                     </form>
                     <!-- User Avatar Dropdown -->
-                    <div class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle d-flex align-items-center" id="userDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span>User Name</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="#!">Profile</a></li>
-                            <li><a class="dropdown-item" href="#!">Orders</a></li>
-                            <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="#!">Logout</a></li>
-                        </ul>
-                    </div>
-                    <button class="btn btn-primary">
-                        <a href="/Login" class="text-white">
-                            Login
-                        </a>
-                    </button>
+                    @if (user != null)
+                    {
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" id="userDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span>@user.FullName</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" asp-page="Profile">Profile</a></li>
+                                <li><a class="dropdown-item" asp-page="Order">Orders</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <form method="post" asp-page="/Auth/Logout">
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <button class="btn btn-primary">
+                            <a href="Login" class="text-white">
+                                Login
+                            </a>
+                        </button>
+                    }
                 </div>
             </div>
         </nav>

@@ -21,16 +21,6 @@
     </div>
 </header>
 
-<!-- Header-->
-<header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Koi Paradise</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Bring Serenity to Your Home</p>
-        </div>
-    </div>
-</header>
-
 <!-- Section-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
@@ -42,7 +32,7 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Link wrapping the image and details -->
-                            <a asp-page="/Item" asp-route-koiId="@koi.Id" class="text-decoration-none text-dark">
+                            <a asp-page="Item" asp-route-koiId="@koi.Id" class="text-decoration-none text-dark">
                                 <!-- Product image -->
                                 <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="@koi.KoiType.Name" />
                                 <!-- Product details-->
