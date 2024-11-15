@@ -31,7 +31,11 @@ namespace KoiOrderingSystem_Web.Pages
         }
         public async Task<IActionResult> OnPostAddToCart(int koiId)
         {
-            var cart = JsonUtils.FromJson<List<Koi>>(HttpContext.Session.GetString("Cart")) ?? new List<Koi>();
+            var json = HttpContext.Session.GetString("Cart");
+            var cart = new List<Koi>();
+            if(json != null) {
+                cart = JsonUtils.FromJson<List<Koi>>(json);
+            }
             var koi = await _koiService.ReadById(koiId);
             if(koi == null)
             {
