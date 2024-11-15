@@ -1,4 +1,5 @@
 using KoiOrderingSystem_Service.IService;
+using KoiOrderingSystem_Web.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
@@ -32,7 +33,7 @@ namespace KoiOrderingSystem_Web.Pages
             if (user != null && Password == user.Password)
             {
                 // Store user role in session
-                HttpContext.Session.SetString("UserRole", user.Role);
+                HttpContext.Session.SetString("User",JsonUtils.ToJson(user));
 
                 switch (user.Role)
                 {

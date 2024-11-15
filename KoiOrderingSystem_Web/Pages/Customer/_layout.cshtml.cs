@@ -5,8 +5,14 @@ namespace KoiOrderingSystem_Web.Pages.Customer
 {
     public class _layoutModel : PageModel
     {
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            var user = HttpContext.Session.GetString("User");
+            if (user == null)
+            {
+                return Redirect("/Login");
+            }
+            return Page();
         }
     }
 }
