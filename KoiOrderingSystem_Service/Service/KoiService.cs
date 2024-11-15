@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using KoiOrderingSystem_BusinessObject;
+using KoiOrderingSystem_BusinessObject.ViewModels;
 using KoiOrderingSystem_Repository;
 using KoiOrderingSystem_Repository.IRepo;
 using KoiOrderingSystem_Service.IService;
@@ -85,6 +86,16 @@ namespace KoiOrderingSystem_Service.Service
         public async Task<Koi?> ReadById(int id)
         {
             return await _repo.ReadById(id);
+        }
+
+        public Task<List<KoiViewModel>> GetAllViewModel()
+        {
+            return _repo.GetAllViewModel();
+        }
+
+        public Task<KoiViewModel?> GetViewModelById(int id)
+        {
+            return _repo.GetViewModelById(id);
         }
     }
 }

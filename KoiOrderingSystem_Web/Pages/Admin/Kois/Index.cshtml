@@ -14,77 +14,94 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Koi[0].Weight)
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Koi[0].Description)
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.Weight)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Koi[0].HealthStatus)
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Koi[0].BirthDate)
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.HealthStatus)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Koi[0].DateAdded)
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.BirthDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Koi[0].Status)
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.DateAdded)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Koi[0].Picture)
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Koi[0].KoiType)
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.Picture)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Koi[0].CreatedAt)
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.Farm)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Koi[0].UpdatedAt)
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.KoiType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kois[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kois[0].Koi.UpdatedAt)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Koi)
+        @foreach (var item in Model.Kois)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Weight)
+                    @Html.DisplayFor(modelItem => item.Koi.Id)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Description)
+                    @Html.DisplayFor(modelItem => item.Koi.Weight)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.HealthStatus)
+                    @Html.DisplayFor(modelItem => item.Koi.Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BirthDate)
+                    @Html.DisplayFor(modelItem => item.Koi.HealthStatus)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DateAdded)
+                    @Html.DisplayFor(modelItem => item.Koi.BirthDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Status)
+                    @Html.DisplayFor(modelItem => item.Koi.DateAdded)
                 </td>
                 <td>
-                    <img src="@Html.DisplayFor(modelItem => item.Picture)" style="width:150px;height:150px;object-fit:cover" />
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.KoiType.Name)
+                    @Html.DisplayFor(modelItem => item.Koi.Status)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CreatedAt)
+                    <img src="@Html.DisplayFor(modelItem => item.Koi.Picture)" style="width:150px;height:150px;object-fit:cover" />
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UpdatedAt)
+                    @Html.DisplayFor(modelItem => item.Koi.Farm.FarmName)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    @Html.DisplayFor(modelItem => item.Koi.KoiType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Koi.CreatedAt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Koi.UpdatedAt)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Koi.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Koi.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Koi.Id">Delete</a>
                 </td>
             </tr>
         }

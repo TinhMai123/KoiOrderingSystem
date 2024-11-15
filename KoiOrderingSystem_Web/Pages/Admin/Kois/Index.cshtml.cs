@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
 using KoiOrderingSystem_Service.IService;
+using KoiOrderingSystem_BusinessObject.ViewModels;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.Kois
 {
@@ -20,14 +21,14 @@ namespace KoiOrderingSystem_Web.Pages.Admin.Kois
            _service = service;
         }
 
-        public IList<Koi> Koi { get;set; } = default!;
+        public IList<KoiViewModel> Kois { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            var list = await _service.GetAlls();
+            var list = await _service.GetAllViewModel();
             if (list != null)
             {
-                Koi = list;
+                Kois = list;
             }
         }
     }

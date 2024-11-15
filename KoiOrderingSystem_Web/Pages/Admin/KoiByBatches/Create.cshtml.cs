@@ -37,10 +37,12 @@ namespace KoiOrderingSystem_Web.Pages.Admin.KoiByBatches
                 ModelState.AddModelError("KoiByBatch", "KoiByBatch data is required.");
             }
 
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
             if (KoiByBatch.Quantity < 0)
             {
                 ModelState.AddModelError("KoiByBatch.Quantity", "Quantity cannot be less than 0.");
             }
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
 
             if (KoiByBatch.Size < 0)
             {
