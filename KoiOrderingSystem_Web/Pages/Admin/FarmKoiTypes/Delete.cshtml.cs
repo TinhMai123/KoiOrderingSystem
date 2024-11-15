@@ -7,16 +7,17 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.FarmKoiTypes
 {
     public class DeleteModel : PageModel
     {
-        private readonly KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext _context;
+        private readonly IFarmKoiTypeService _farmKoiTypeService;
 
-        public DeleteModel(KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext context)
+        public DeleteModel(IFarmKoiTypeService farmKoiTypeService)
         {
-            _context = context;
+            _farmKoiTypeService = farmKoiTypeService;
         }
 
         [BindProperty]
@@ -24,12 +25,12 @@ namespace KoiOrderingSystem_Web.Pages.Admin.FarmKoiTypes
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.FarmKoiTypes == null)
+            if (id == null )
             {
                 return NotFound();
             }
 
-            var farmkoitype = await _context.FarmKoiTypes.FirstOrDefaultAsync(m => m.Id == id);
+            var farmkoitype = await _farmKoiTypeService.GetById((int)id);
 
             if (farmkoitype == null)
             {
@@ -44,17 +45,15 @@ namespace KoiOrderingSystem_Web.Pages.Admin.FarmKoiTypes
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.FarmKoiTypes == null)
+            if (id == null)
             {
                 return NotFound();
             }
-            var farmkoitype = await _context.FarmKoiTypes.FindAsync(id);
+            var farmkoitype = await _farmKoiTypeService.GetById((int)id); ;
 
             if (farmkoitype != null)
             {
-                FarmKoiType = farmkoitype;
-                _context.FarmKoiTypes.Remove(FarmKoiType);
-                await _context.SaveChangesAsync();
+                _farmKoiTypeService.DeleteAsync((int)id);
             }
 
             return RedirectToPage("./Index");
