@@ -6,10 +6,10 @@ namespace KoiOrderingSystem_Web.Pages.Auth
 {
     public class LogoutModel : PageModel
     {
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
 
-            await HttpContext.SignOutAsync();
+            HttpContext.Session.Remove("User");
 
             return Redirect("/");
         }

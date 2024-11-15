@@ -74,7 +74,7 @@ namespace KoiOrderingSystem_DAO
         }
         public async Task<Koi?> ReadById(int id)
         {
-            return await _context.Kois.Include(k => k.KoiType).AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
+            return await _context.Kois.AsNoTracking().SingleOrDefaultAsync(x => x.Id == id);
         }
         public async Task<bool> Add(Koi model)
         {

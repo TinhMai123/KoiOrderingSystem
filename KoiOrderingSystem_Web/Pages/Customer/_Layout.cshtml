@@ -23,7 +23,7 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" asp-page="Index">Home</a></li>
                     </ul>
                     <form class="d-flex me-3">
-                        <a asp-page="Cart" class="btn btn-outline-dark">
+                        <a asp-page="/Customer/Cart" class="btn btn-outline-dark">
                             <i class="bi-cart-fill me-1"></i>
                             Cart
                             <!-- <span class="badge bg-dark text-white ms-1 rounded-pill">0</span> -->
@@ -37,8 +37,8 @@
                                 <span>@user.FullName</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li><a class="dropdown-item" asp-page="Profile">Profile</a></li>
-                                <li><a class="dropdown-item" asp-page="Order">Orders</a></li>
+                                <li><a class="dropdown-item" asp-page="/Customer/Profile">Profile</a></li>
+                                <li><a class="dropdown-item" asp-page="/Customer/Order">Orders</a></li>
                                 <li><hr class="dropdown-divider" /></li>
                                 <form method="post" asp-page="/Auth/Logout">
                                     <button type="submit" class="dropdown-item">Logout</button>
