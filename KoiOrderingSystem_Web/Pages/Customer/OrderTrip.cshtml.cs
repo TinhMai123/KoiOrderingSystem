@@ -22,7 +22,7 @@ namespace KoiOrderingSystem_Web.Pages.Customer
             {
                 OrderTrips = list;
             }
-            ViewData["FarmName"] =
+            ViewData["FarmName"] = "a";
         }
     }
 }
