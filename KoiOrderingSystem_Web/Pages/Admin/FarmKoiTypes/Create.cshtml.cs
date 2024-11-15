@@ -7,22 +7,27 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.FarmKoiTypes
 {
     public class CreateModel : PageModel
     {
-        private readonly KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext _context;
+        private readonly IFarmKoiTypeService _farmKoiTypeService;
+        private readonly IFarmService _farmService;
+        private readonly IKoiTypeService _koiTypeService;
 
-        public CreateModel(KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext context)
+        public CreateModel(IFarmKoiTypeService farmKoiType, IFarmService farmService, IKoiTypeService koiTypeService)
         {
-            _context = context;
+            _farmKoiTypeService = farmKoiType;
+            _farmService = farmService;
+            _koiTypeService = koiTypeService;
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGet()
         {
-        ViewData["FarmId"] = new SelectList(_context.Farms, "Id", "Description");
-        ViewData["KoiTypeId"] = new SelectList(_context.KoiTypes, "Id", "Name");
+        ViewData["FarmId"] = new SelectList(await _farmService.GetAlls(), "Id", "Description");
+        ViewData["KoiTypeId"] = new SelectList(await _koiTypeService.GetAlls(), "Id", "Name");
             return Page();
         }
 
@@ -33,13 +38,12 @@ namespace KoiOrderingSystem_Web.Pages.Admin.FarmKoiTypes
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.FarmKoiTypes == null || FarmKoiType == null)
+          if (!ModelState.IsValid )
             {
                 return Page();
             }
 
-            _context.FarmKoiTypes.Add(FarmKoiType);
-            await _context.SaveChangesAsync();
+            await _farmKoiTypeService.AddAsync(FarmKoiType);
 
             return RedirectToPage("./Index");
         }

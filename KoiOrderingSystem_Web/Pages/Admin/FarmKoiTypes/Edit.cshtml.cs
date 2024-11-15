@@ -8,16 +8,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KoiOrderingSystem_BusinessObject;
 using KoiOrderingSystem_BusinessObject.Data;
+using KoiOrderingSystem_Service.IService;
 
 namespace KoiOrderingSystem_Web.Pages.Admin.FarmKoiTypes
 {
     public class EditModel : PageModel
     {
-        private readonly KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext _context;
+        private readonly IFarmKoiTypeService _farmKoiTypeService;
+        private readonly IFarmService _farmService;
 
-        public EditModel(KoiOrderingSystem_BusinessObject.Data.KoiOrderingSystemContext context)
+
+        public EditModel(IFarmKoiTypeService farmKoiTypeService)
         {
-            _context = context;
+            _farmKoiTypeService = farmKoiTypeService;
         }
 
         [BindProperty]
@@ -25,19 +28,19 @@ namespace KoiOrderingSystem_Web.Pages.Admin.FarmKoiTypes
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.FarmKoiTypes == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var farmkoitype =  await _context.FarmKoiTypes.FirstOrDefaultAsync(m => m.Id == id);
+            var farmkoitype =  await _farmKoiTypeService.GetById((int)id);
             if (farmkoitype == null)
             {
                 return NotFound();
             }
             FarmKoiType = farmkoitype;
-           ViewData["FarmId"] = new SelectList(_context.Farms, "Id", "Description");
-           ViewData["KoiTypeId"] = new SelectList(_context.KoiTypes, "Id", "Name");
+           ViewData["FarmId"] = new SelectList(await _farmService.GetAlls(), "Id", "Description");
+           ViewData["KoiTypeId"] = new SelectList(await _farmKoiTypeService.GetAlls(), "Id", "Name");
             return Page();
         }
 
@@ -50,11 +53,10 @@ namespace KoiOrderingSystem_Web.Pages.Admin.FarmKoiTypes
                 return Page();
             }
 
-            _context.Attach(FarmKoiType).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _farmKoiTypeService.UpdateAsync(FarmKoiType);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -73,7 +75,7 @@ namespace KoiOrderingSystem_Web.Pages.Admin.FarmKoiTypes
 
         private bool FarmKoiTypeExists(int id)
         {
-          return (_context.FarmKoiTypes?.Any(e => e.Id == id)).GetValueOrDefault();
+          return _farmKoiTypeService.GetById((int)id) != null;
         }
     }
 }
